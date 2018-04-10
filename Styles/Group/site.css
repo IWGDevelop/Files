@@ -372,11 +372,11 @@
 .control-label {
     text-align: left !important;
     padding-top: 0px !important;
-    font-weight: 400;
+    font-weight: 500;
 }
 .control-label-full {
     width: 100%;
-    font-weight: 400;
+    font-weight: 500;
 }
 
 .primary-button {
@@ -514,4 +514,9 @@
 }
 .k-multiselect-wrap .k-button{
     padding: 4px 4px !important;
+}
+
+.centered {
+    display: block;
+    margin: auto;
 }
