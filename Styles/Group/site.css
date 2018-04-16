@@ -372,11 +372,11 @@
 .control-label {
     text-align: left !important;
     padding-top: 0px !important;
-    font-weight: 500;
+    font-weight: 600;
 }
 .control-label-full {
     width: 100%;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .primary-button {
