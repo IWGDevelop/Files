@@ -424,26 +424,48 @@
 }
 
 .warning-button {
-    color:black;
-    background-color:white;
-    border-color:#000000;
-    border-radius:0px;
-    line-height:1;
-    border-width:1px;
-    font-weight:300;
-    padding:8px 16px 8px 16px;
+    color: black;
+    background-color: white;
+    border-color: #000000;
+    border-radius: 0px;
+    line-height: 1;
+    border-width: 1px;
+    font-weight: 300;
+    padding: 8px 16px 8px 16px;
 }
 
-.warning-button:hover {
-    color:black;
-    background-color:#e2e2e2;
-    border-color:#000000;
-    border-radius:0px;
-    line-height:1;
-    font-weight:300;
-    border-width:1px;
-    padding:8px 16px 8px 16px;
+    .warning-button:hover {
+        color: black;
+        background-color: #e2e2e2;
+        border-color: #000000;
+        border-radius: 0px;
+        line-height: 1;
+        font-weight: 300;
+        border-width: 1px;
+        padding: 8px 16px 8px 16px;
+    }
+
+.danger-button {
+    color: black;
+    background-color: red;
+    border-color: #000000;
+    border-radius: 0px;
+    line-height: 1;
+    border-width: 1px;
+    font-weight: 300;
+    padding: 8px 16px 8px 16px;
 }
+
+    .danger-button:hover {
+        color: white;
+        background-color: darkred;
+        border-color: #000000;
+        border-radius: 0px;
+        line-height: 1;
+        font-weight: 300;
+        border-width: 1px;
+        padding: 8px 16px 8px 16px;
+    }
 
 .toolbar-title {
     padding-left:12px;
@@ -485,27 +507,27 @@
 }
 .k-grid {
     border-width: thin !important;
-    border-color: darkgray !important;
+    border-color: black !important;
     opacity: 0.8 !important;
 }
 .k-header {
     border-bottom-width: thin !important;
-    border-color: darkgray !important;
+    border-color: black !important;
     background-color: #eee !important;
 }
 .k-grid-header-wrap {
     border-bottom-width: thin !important;
-    border-color: darkgray !important;
+    border-color: black !important;
 }
 .k-button {
     border-bottom-width: thin !important;
-    border-color: darkgray !important;
+    border-color: black !important;
     border-radius: 0px !important;
 }
 
 .k-dropdown {
     border-width: thin !important;
-    border-color: darkgray !important;
+    border-color: black !important;
     border-radius: 0px !important;
 }
 
