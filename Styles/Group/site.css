@@ -360,13 +360,13 @@
 }
 .form-control {
     border-width: thin !important;
-    border-color: darkgray !important;
+    border-color: black !important;
 }
 .kendo-control {
     min-height: 34px;
     width: 100%;
     border-radius: 0px;
-    border-color: darkgray;
+    border-color: black;
     border-width: thin;
 }
 .control-label {
