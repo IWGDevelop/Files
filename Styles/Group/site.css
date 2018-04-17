@@ -387,7 +387,7 @@
     border-color:#000000;
     border-radius:0px;
     line-height:1;
-    border-width:1px;
+    border-width: 2px;
     font-weight:300;
     padding:8px 16px 8px 16px;
 }
@@ -398,7 +398,7 @@
     border-color:#000000;
     border-radius:0px;
     line-height:1;
-    border-width:1px;
+    border-width: 2px;
     font-weight:300;
     padding:8px 16px 8px 16px;
 }
@@ -406,10 +406,10 @@
 .secundary-button {
     color:black;
     background-color:#e7e7e7;
-    border-color:#000000;
-    border-radius:0px;
+    border-color: #000000;
+    border-radius: 0px;
     line-height:1;
-    border-width:1px;
+    border-width: 2px;
     font-weight:300;
     padding:8px 16px 8px 16px;
 }
@@ -420,7 +420,7 @@
     border-color:#000000;
     border-radius:0px;
     line-height:1;
-    border-width:1px;
+    border-width:2px;
     font-weight:300;
     padding:8px 16px 8px 16px;
 }
@@ -431,7 +431,7 @@
     border-color: #000000;
     border-radius: 0px;
     line-height: 1;
-    border-width: 1px;
+    border-width: 2px;
     font-weight: 300;
     padding: 8px 16px 8px 16px;
 }
@@ -443,7 +443,7 @@
         border-radius: 0px;
         line-height: 1;
         font-weight: 300;
-        border-width: 1px;
+        border-width: 2px;
         padding: 8px 16px 8px 16px;
     }
 
@@ -453,7 +453,7 @@
     border-color: #000000;
     border-radius: 0px;
     line-height: 1;
-    border-width: 1px;
+    border-width: 2px;
     font-weight: 300;
     padding: 8px 16px 8px 16px;
 }
@@ -465,7 +465,7 @@
         border-radius: 0px;
         line-height: 1;
         font-weight: 300;
-        border-width: 1px;
+        border-width: 2px;
         padding: 8px 16px 8px 16px;
     }
 
