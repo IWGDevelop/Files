@@ -1,0 +1,16 @@
+﻿.col-md-15 {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+@media (min-width: 992px) {
+    .col-md-15 {
+        float: left;
+    }
+
+    .col-md-15 {
+        width: 12.49999995%;
+    }
+}
