@@ -359,7 +359,7 @@
     margin-bottom: 7px !important;
 }
 .form-control {
-    border-width: thin !important;
+    border-width: 2px !important;
     border-color: black !important;
 }
 .kendo-control {
@@ -367,7 +367,7 @@
     width: 100%;
     border-radius: 0px;
     border-color: black;
-    border-width: thin;
+    border-width: 2px !important;
 }
 .control-label {
     text-align: left !important;
@@ -506,27 +506,27 @@
     border: none !important;
 }
 .k-grid {
-    border-width: thin !important;
+    border-width: 2px !important;
     border-color: black !important;
     opacity: 0.8 !important;
 }
 .k-header {
-    border-bottom-width: thin !important;
+    border-bottom-width: 2px !important;
     border-color: black !important;
     background-color: #eee !important;
 }
 .k-grid-header-wrap {
-    border-bottom-width: thin !important;
+    border-bottom-width: 2px !important;
     border-color: black !important;
 }
 .k-button {
-    border-bottom-width: thin !important;
+    border-bottom-width: 2px !important;
     border-color: black !important;
     border-radius: 0px !important;
 }
 
 .k-dropdown {
-    border-width: thin !important;
+    border-width: 2px !important;
     border-color: black !important;
     border-radius: 0px !important;
 }
