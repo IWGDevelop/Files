@@ -518,7 +518,8 @@
     color: black !important;
 }
 .k-grid-header-wrap {
-    border-width: 2px !important;
+    border-bottom-width: 2px !important;
+    border-top-width: 1px !important;
     border-color: black !important;
     font-weight: 600;
 }
