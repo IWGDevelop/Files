@@ -552,7 +552,9 @@
     border: none;
     border-radius: 0px;
 }
-
+.k-datepicker{
+    border-radius: 0px !important;
+}
 .k-dropdown {
     border-width: 2px !important;
     border-color: black !important;
