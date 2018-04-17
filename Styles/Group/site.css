@@ -488,7 +488,23 @@
     float: right;
     background-color: #fff;
     background-image: none;
-    border: 2px solid black;
+    border: solid black;
+    border-width: 2px 2px 2px 0px;
+    position: absolute;
+    border-radius: 0px;
+}
+
+.search-button:hover {
+    width: 6%;
+    height: calc(100% - (19px));
+    padding: 1.5% 0% 0% 1.4%;
+    font-size: 14px;
+    line-height: 1;
+    float: right;
+    background-color: #dddddd;
+    background-image: none;
+    border: solid black;
+    border-width: 2px 2px 2px 0px;
     position: absolute;
     border-radius: 0px;
 }
