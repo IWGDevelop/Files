@@ -560,7 +560,11 @@
     border-color: black !important;
     border-radius: 0px !important;
 }
-
+.k-tabstrip{
+    border: solid;
+    border-width: 2px;
+    border-color: black;
+}
 .bootstrap-switch, .bootstrap-switch .bootstrap-switch-handle-on {
     border-radius: 0px;
 }
