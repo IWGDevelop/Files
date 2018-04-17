@@ -548,6 +548,11 @@
 .k-pager-wrap {
     color: black !important;
 }
+.k-picker-wrap{
+    border: none;
+    border-radius: 0px;
+}
+
 .k-dropdown {
     border-width: 2px !important;
     border-color: black !important;
