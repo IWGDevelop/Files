@@ -510,11 +510,14 @@
     border-width: 2px !important;
     border-color: black !important;
     opacity: 0.8 !important;
+    color:black !important;
 }
 .k-header {
     border-bottom-width: 2px !important;
     border-color: black !important;
     background-color: #eee !important;
+    color: black !important;
+    font-weight: 600;
 }
 .k-grid-header-wrap {
     border-bottom-width: 2px !important;
@@ -524,6 +527,10 @@
     border-bottom-width: 2px !important;
     border-color: black !important;
     border-radius: 0px !important;
+    color: black !important;
+}
+.k-pager-wrap {
+    color: black !important;
 }
 
 .k-dropdown {
