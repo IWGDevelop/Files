@@ -517,6 +517,10 @@
     background-position: right bottom;
     background-repeat: no-repeat;
     background-size: 40%;
+	padding-top:80px;
+	padding-bottom:80px;
+	overflow: auto;
+	display: block;
 }
 
 .bootstrap-switch, .bootstrap-switch .bootstrap-switch-handle-on {
