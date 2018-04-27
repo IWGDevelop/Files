@@ -519,63 +519,17 @@
     background-size: 40%;
 }
 
-.k-disabled, .k-state-disabled{
-    opacity: 0.8 !important;
-}
-.k-multiselect-wrap{
-    border: none !important;
-}
-.k-grid {
-    border-width: 2px !important;
-    border-color: black !important;
-    opacity: 0.8 !important;
-    color:black !important;
-}
-.k-header {
-    border-color: black !important;
-    background-color: #dddddd !important;
-    color: black !important;
-}
-.k-grid-header-wrap {
-    border-bottom-width: 2px !important;
-    border-top-width: 1px !important;
-    border-color: black !important;
-    font-weight: 600;
-}
-.k-button {
-    border-width: 2px !important;
-    border-color: black !important;
-    border-radius: 0px !important;
-    color: black !important;
-}
-.k-pager-wrap {
-    color: black !important;
-}
-.k-picker-wrap{
-    border: none;
-    border-radius: 0px;
-}
-.k-datepicker{
-    border-radius: 0px !important;
-}
-.k-dropdown {
-    border-width: 2px !important;
-    border-color: black !important;
-    border-radius: 0px !important;
-}
-.k-tabstrip{
-    border: solid;
-    border-width: 2px;
-    border-color: black;
-}
 .bootstrap-switch, .bootstrap-switch .bootstrap-switch-handle-on {
     border-radius: 0px;
-}
-.k-multiselect-wrap .k-button{
-    padding: 4px 4px !important;
+	border-color: black !important;
+	border-width: 2px !important;
 }
 
 .centered {
     display: block;
     margin: auto;
+}
+
+.textarea {
+  resize: vertical;
 }
