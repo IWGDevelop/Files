@@ -28,6 +28,7 @@
     border-color: black !important;
     border-radius: 0px !important;
     color: black !important;
+	font-weight: 600 !important;
 }
 .k-pager-wrap {
     color: black !important;
@@ -51,4 +52,11 @@
 }
 .k-multiselect-wrap .k-button{
     padding: 4px 4px !important;
+}
+.k-spreadsheet {
+	border-color: black;
+	border-width: 2px;
+}
+.k-spreadsheet-view {
+	border-color: lightgray;
 }
