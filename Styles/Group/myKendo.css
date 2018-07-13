@@ -7,8 +7,8 @@
     border: none !important;
 }
 .k-grid {
-    border-width: 2px !important;
-    border-color: black !important;
+    border-width: 1px !important;
+    border-color: lightgray !important;
     opacity: 0.8 !important;
     color:black !important;
 }
@@ -18,7 +18,7 @@
     color: black !important;
 }
 .k-grid-header-wrap {
-    border-bottom-width: 2px !important;
+    border-bottom-width: 1px !important;
     border-top-width: 1px !important;
     border-color: black !important;
     font-weight: 600;
@@ -41,21 +41,21 @@
     border-radius: 0px !important;
 }
 .k-dropdown {
-    border-width: 2px !important;
+    border-width: 1px !important;
     border-color: black !important;
     border-radius: 0px !important;
 }
 .k-tabstrip{
     border: solid;
-    border-width: 2px;
-    border-color: black;
+    border-width: 1px;
+    border-color: lightgray;
 }
 .k-multiselect-wrap .k-button{
     padding: 3px 3px !important;
 }
 .k-spreadsheet {
-	border-color: black;
-	border-width: 2px;
+	border-color: lightgray;
+	border-width: 1px;
 }
 .k-spreadsheet-view {
 	border-color: lightgray;
