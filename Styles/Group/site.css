@@ -135,13 +135,23 @@
 }
 
 .panel {
-    background-color: transparent;
+    background-color: #ebebeb;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, .04);
-    border-width: 0;
+    border-width: 1px !important;
     border-radius: 0px;
-    padding: 0px 7% 0px 7%;
+    padding: 0px !important;
+	margin: 0px 9% !important;
+	border-color: darkgray !important;
 }
 
+.panel-header {
+	background-color: #4b4b4b;
+	padding: 0px !important;
+	margin: 0px !important;
+	display: flow-root;
+	position: relative;
+}
+	
 .panel-body{
     margin: 0px;
 }
@@ -361,15 +371,15 @@
     margin-bottom: 7px !important;
 }
 .form-control {
-    border-width: 2px !important;
-    border-color: black !important;
+	border-width: 1px !important;
+	border-color: lightgray !important;
 }
 .kendo-control {
     min-height: 34px;
     width: 100%;
     border-radius: 0px;
-    border-color: black;
-    border-width: 2px !important;
+	border-width: 1px !important;
+	border-color: lightgray !important;
 }
 .control-label {
     text-align: left !important;
@@ -491,8 +501,8 @@
     float: right;
     background-color: #fff;
     background-image: none;
-    border: solid black;
-    border-width: 2px 2px 2px 0px;
+	border: solid lightgray !important;
+	border-width: 1px 1px 1px 0px !important;
     position: absolute;
     border-radius: 0px;
 }
@@ -525,8 +535,8 @@
 
 .bootstrap-switch, .bootstrap-switch .bootstrap-switch-handle-on {
     border-radius: 0px;
-	border-color: black !important;
-	border-width: 2px !important;
+	border-color: lightgray !important;
+	border-width: 1px !important;
 }
 
 .centered {
@@ -537,3 +547,27 @@
 .textarea {
   resize: vertical;
 }
+
+.btn-save {
+	margin-top: 4px;
+	margin-bottom: 4px;
+	margin-right: 16px;
+	padding: 4px;
+	width: 36px;
+	height: 36px;
+	content: url(../Content/baseline_save_white_18dp.png);
+	background-size: contain;
+	border: none !important;
+	cursor: pointer;
+	background-position: center;
+	transition: background 0.5s;
+	border-radius: 16px;
+}
+	.btn-save:hover {
+		background: #767676 radial-gradient(circle, transparent 1%, #232323 1%) center/15000%;
+	}
+	.btn-save:active {
+		background-color: #232323;
+		background-size: 100%;
+		transition: background 0s;
+	}
