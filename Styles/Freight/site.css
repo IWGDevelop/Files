@@ -530,7 +530,8 @@
 	padding: 4px;
 	width: 36px;
 	height: 36px;
-	content: url(https://raw.githubusercontent.com/IWGDevelop/Images/master/Images/icons/ic_save_white.png);
+	background-image: url(https://raw.githubusercontent.com/IWGDevelop/Images/master/Images/icons/ic_save_white.png);
+	background-color: transparent !important;
 	background-size: contain;
 	border: none !important;
 	cursor: pointer;
@@ -540,11 +541,13 @@
 }
 
 	.btn-save:hover {
+		background-image: url(https://raw.githubusercontent.com/IWGDevelop/Images/master/Images/icons/ic_save_white.png);
 		background: #767676 radial-gradient(circle, transparent 1%, #232323 1%) center/15000%;
 	}
 
 	.btn-save:active {
 		background-color: #232323;
+		background-image: url(https://raw.githubusercontent.com/IWGDevelop/Images/master/Images/icons/ic_save_white.png);
 		background-size: 100%;
 		transition: background 0s;
 	}
