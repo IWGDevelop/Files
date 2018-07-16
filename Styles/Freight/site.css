@@ -406,3 +406,145 @@
     height: 30px;
     float: left;
 }
+
+.btn-search {
+	border-radius: 0 4px 4px 0;
+	padding: 6px;
+	border-color: lightgray;
+	border-width: 1px 1px 1px 0px;
+	box-sizing: border-box;
+	border-style: solid;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	cursor: pointer;
+	position: initial !important;
+	background-color: white;
+}
+
+	.btn-search:hover {
+		background-color: gray;
+	}
+
+	.btn-search:hover:disabled {
+		cursor: not-allowed;
+	}
+
+.div-search {
+	display: flex;
+	flex-direction: row;
+	padding: 0px;
+	width: 100%;
+	box-sizing: border-box;
+	position: relative;
+}
+
+.panel-header-accordion {
+	color: #8caf37;
+	border-color: #21566f;
+	border-width: 1px;
+	border-style: solid;
+	background-color: #0096DC;
+	border-radius: 8px 8px 0px 0px;
+	-o-transition: .3s;
+	-moz-transition: .3s;
+	-webkit-transition: .3s;
+	transition: .3s;
+}
+
+	.panel-header-accordion:hover {
+		color: #8caf37;
+		border-color: gray;
+		border-width: 1px;
+		border-style: solid;
+		background-color: lightgray;
+	}
+
+.title-accordion {
+	color: white !important;
+	margin-bottom: 0px;
+	margin-top: 0px;
+	padding: 1%;
+	-o-transition: .3s;
+	-moz-transition: .3s;
+	-webkit-transition: .3s;
+	transition: .3s;
+}
+
+	.title-accordion:hover {
+		color: black !important;
+		margin-bottom: 0px;
+		margin-top: 0px;
+		padding: 1%;
+	}
+
+.body-accordion {
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-right-style: solid;
+	border-width: thin;
+}
+
+.panel {
+	background-color: #ebebeb;
+	padding: 0px !important;
+	margin: 0px 9% !important;
+	border-color: darkgray !important;
+	border-width: 1px !important;
+	border-style: solid !important;
+}
+
+.panel-header {
+	background-color: #5b7d0a;
+	padding: 0px !important;
+	margin: 0px !important;
+	display: flow-root;
+	position: relative;
+}
+
+.form-control {
+	border-width: 1px !important;
+	border-color: lightgray !important;
+}
+
+.kendo-control {
+	border-width: 1px !important;
+	border-color: lightgray !important;
+}
+
+.search-button {
+	border: solid lightgray !important;
+	border-width: 1px 1px 1px 0px !important;
+}
+
+.bootstrap-switch {
+	border-color: lightgray !important;
+	border-width: 1px !important;
+}
+
+.btn-save {
+	margin-top: 4px;
+	margin-bottom: 4px;
+	margin-right: 16px;
+	padding: 4px;
+	width: 36px;
+	height: 36px;
+	content: url(https://raw.githubusercontent.com/IWGDevelop/Images/master/Images/icons/ic_save_white.png);
+	background-size: contain;
+	border: none !important;
+	cursor: pointer;
+	background-position: center;
+	transition: background 0.5s;
+	border-radius: 16px;
+}
+
+	.btn-save:hover {
+		background: #767676 radial-gradient(circle, transparent 1%, #232323 1%) center/15000%;
+	}
+
+	.btn-save:active {
+		background-color: #232323;
+		background-size: 100%;
+		transition: background 0s;
+	}
