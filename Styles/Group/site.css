@@ -555,7 +555,7 @@
 	padding: 4px;
 	width: 36px;
 	height: 36px;
-	content: url(../Content/baseline_save_white_18dp.png);
+	content: url(https://raw.githubusercontent.com/IWGDevelop/Images/master/Images/icons/ic_save_white.png);
 	background-size: contain;
 	border: none !important;
 	cursor: pointer;
