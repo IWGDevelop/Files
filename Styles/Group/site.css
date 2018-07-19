@@ -548,6 +548,39 @@
   resize: vertical;
 }
 
+.btn-search {
+	border-radius: 0 4px 4px 0;
+	padding: 6px;
+	border-color: lightgray;
+	border-width: 1px 1px 1px 0px;
+	box-sizing: border-box;
+	border-style: solid;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	cursor: pointer;
+	position: initial !important;
+	background-color: white;
+}
+
+	.btn-search:hover {
+		background-color: gray;
+	}
+
+	.btn-search:hover:disabled {
+		cursor: not-allowed;
+	}
+
+.div-search {
+	display: flex;
+	flex-direction: row;
+	padding: 0px;
+	width: 100%;
+	box-sizing: border-box;
+	position: relative;
+}
+
 .btn-save {
 	margin-top: 4px;
 	margin-bottom: 4px;
