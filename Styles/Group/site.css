@@ -151,6 +151,12 @@
 	display: flow-root;
 	position: relative;
 }
+
+.panel-header-text {
+	color: white;
+	font-family: 'roboto';
+	font-size: small;
+}
 	
 .panel-body{
     margin: 0px;
