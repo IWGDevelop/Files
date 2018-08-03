@@ -1,5 +1,3 @@
-
-
 .k-disabled, .k-state-disabled{
     opacity: 0.8 !important;
 }
@@ -8,24 +6,24 @@
 }
 .k-grid {
     border-width: 1px !important;
-    border-color: lightgray !important;
+    border-color: gray !important;
     opacity: 0.8 !important;
     color:black !important;
 }
 .k-header {
-    border-color: lightgray !important;
+    border-color: gray !important;
     background-color: #dddddd !important;
     color: black !important;
 }
 .k-grid-header-wrap {
     border-bottom-width: 1px !important;
     border-top-width: 1px !important;
-    border-color: black !important;
+    border-color: gray !important;
     font-weight: 600;
 }
 .k-button {
     border-width: 1px !important;
-    border-color: lightgray !important;
+    border-color: gray !important;
     border-radius: 0px !important;
     color: black !important;
 	font-weight: 600 !important;
@@ -59,4 +57,8 @@
 }
 .k-spreadsheet-view {
 	border-color: lightgray;
+}
+.k-grid td {
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
