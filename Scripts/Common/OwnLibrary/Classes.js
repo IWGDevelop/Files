@@ -26,4 +26,3 @@ var defaultsGenerateBootbox = {
     bootboxCallback: function () { },
     big: false
 };
-//# sourceMappingURL=Classes.js.map

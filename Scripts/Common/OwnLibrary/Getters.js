@@ -133,7 +133,14 @@ function getJsonForMultiselect(url) {
         off();
     });
 }
-function getProperty(url, editor, property, errorMessage) {
+function getCode(url, editor) {
+    getProperty(url, editor, "Code");
+}
+function getDescription(url, editor) {
+    getProperty(url, editor, "Description");
+}
+function getProperty(url, editor, property) {
+    var _this = this;
     on();
     $.getJSON(url)
         .done(function (data) {
@@ -143,20 +150,10 @@ function getProperty(url, editor, property, errorMessage) {
         off();
     })
         .fail(function (jqxhr, textStatus, error) {
-        if (errorMessage == undefined || errorMessage == null) {
-            swal("Error", "Ha ocurrido un error al hacer la solicitud.\n\n" + error, "error");
-        }
-        else {
-            swal("Error", "Ha ocurrido un error al hacer la solicitud.\n\n" + errorMessage, "error");
-        }
+        var err = textStatus + ", " + error + ", " + jqxhr.responseJSON != null ? '' : jqxhr.responseJSON.MessageDetail;
+        _this.objCommon.showNotification("ERROR", "Respuesta fallida <br> Servicio: " + url + "<br>" + err, "Web API");
         off();
     });
-}
-function getCode(url, editor) {
-    getProperty(url, editor, "Code");
-}
-function getDescription(url, editor) {
-    getProperty(url, editor, "Description");
 }
 function getObject(url) {
     var object;
@@ -217,20 +214,4 @@ function getConsecutive(field, idDocumentId, businessUnitId, serviceTypeId, comp
             off();
         })
     });
-}
-//Classes
-var OptionsBootstrapSelect = /** @class */ (function () {
-    function OptionsBootstrapSelect() {
-    }
-    return OptionsBootstrapSelect;
-}());
-var defaultsBootstrapSelect = {
-    text: "Description",
-    extraOption: "",
-    enable: false,
-    subTextOption: "",
-    limitSubTextOption: 0
-};
-function setDefaults(options, defaults) {
-    return Object.assign({}, defaults, options);
 }
