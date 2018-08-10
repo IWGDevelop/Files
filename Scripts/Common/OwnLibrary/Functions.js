@@ -105,4 +105,24 @@ function generateBootbox(options) {
         });
     });
 }
-//# sourceMappingURL=Functions.js.map
+//Función para convertir los datos de un formulario a un objeto
+function objectifyForm(form) {
+    var returnArray = {};
+    var array = form.serializeArray();
+    for (var i = 0; i < array.length; i++) {
+        returnArray[array[i]['name']] = array[i]['value'];
+    }
+    return returnArray;
+}
+//Función para agregar una animación a un objeto SVG
+function animationSVG() {
+    var arrow = $(this).find('#arrow');
+    if (arrow.hasClass("play")) {
+        arrow.addClass("reverse");
+        arrow.removeClass("play");
+    }
+    else {
+        arrow.addClass("play");
+        arrow.removeClass("reverse");
+    }
+}
