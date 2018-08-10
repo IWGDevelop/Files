@@ -129,9 +129,27 @@
 }
 
 .panel {
-    background-color: transparent;
-    border: none;
-    padding: 0px 7% 0px 7%;
+    background-color: #ebebeb;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, .04);
+    border-width: 1px !important;
+    border-radius: 0px;
+    padding: 0px !important;
+	margin: 0px 9% !important;
+	border-color: darkgray !important;
+}
+
+.panel-header {
+	background-color: #4b4b4b;
+	padding: 0px !important;
+	margin: 0px !important;
+	display: flow-root;
+	position: relative;
+}
+
+.panel-header-text {
+	color: white;
+	font-family: 'roboto';
+	font-size: small;
 }
 
 .panel-title {
@@ -146,6 +164,10 @@
     font-size: 16px;
     color: #707070;
     margin-bottom: 6px
+}
+	
+.panel-body{
+    margin: 0px;
 }
 
 .panel-full-color .panel-heading .icon, .panel-full-color .panel-heading .panel-subtitle, .panel-full-primary, .panel-full-primary .tools .icon {
