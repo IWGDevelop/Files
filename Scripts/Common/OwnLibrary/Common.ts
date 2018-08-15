@@ -1,42 +1,51 @@
-var apiTransverse = localStorage.getItem("apiTransverse");
-var urlTransverse = localStorage.getItem("urlTransverse");
-var apiGroup = localStorage.getItem("apiGroup");
-var apiFreight = localStorage.getItem("apiFreight");
-var localApiTransverse = localStorage.getItem("localApiTransverse");
-var localUrlTransverse = localStorage.getItem("localUrlTransverse");
-var localApiGroup = localStorage.getItem("localApiGroup");
-var localApiFreight = localStorage.getItem("localApiFreight");
-var rootPath = localStorage.getItem("rootPath");
-var onQuantity = 0;
-var CommonModule;
-(function (CommonModule) {
-    var CommonMessage = /** @class */ (function () {
-        function CommonMessage(fieldId, outputId, validationId) {
-            var _this = this;
+﻿const apiTransverse: string = localStorage.getItem("apiTransverse");
+const urlTransverse: string = localStorage.getItem("urlTransverse");
+const apiGroup: string = localStorage.getItem("apiGroup");
+const apiFreight: string = localStorage.getItem("apiFreight");
+const localApiTransverse: string = localStorage.getItem("localApiTransverse");
+const localUrlTransverse: string = localStorage.getItem("localUrlTransverse");
+const localApiGroup: string = localStorage.getItem("localApiGroup");
+const localApiFreight: string = localStorage.getItem("localApiFreight");
+const rootPath: string = localStorage.getItem("rootPath");
+
+var onQuantity: number = 0;
+
+module CommonModule {
+
+    export class CommonMessage {
+        private field: JQuery;
+        private output: JQuery;
+        private validation: JQuery;
+        private typeError: JQuery;
+        private messageError: JQuery;
+        private titleError: JQuery;
+
+        constructor(fieldId?: string, outputId?: string, validationId?: string) {
             this.field = $('#' + fieldId);
             this.output = $('#' + outputId);
             this.validation = $('#' + validationId);
             this.messageError = $("#messageErrorH");
             this.typeError = $("#typeErrorH");
             this.titleError = $("#titleErrorH");
-            var self = this;
-            this.validation.click(function (event) {
-                if (_this.field.val() == "") {
-                    _this.output.html("El campo no puede estar vacío.");
-                }
-                else {
-                    _this.output.html("");
+
+            let self = this;
+            this.validation.click(event => {
+                if (this.field.val() == "") {
+                    this.output.html("El campo no puede estar vacío.");
+
+                } else {
+                    this.output.html("");
                 }
             });
-            this.field.focusout(function (event) {
-                if (_this.field.val() == "") {
-                    _this.output.html("El campo no puede estar vacío. ");
+            this.field.focusout(event => {
+                if (this.field.val() == "") {
+                    this.output.html("El campo no puede estar vacío. ");
                     event.preventDefault();
-                }
-                else {
-                    _this.output.html("");
+                } else {
+                    this.output.html("");
                 }
             });
+
             toastr.options = {
                 "closeButton": false,
                 "debug": false,
@@ -53,48 +62,52 @@ var CommonModule;
                 "hideEasing": "linear",
                 "showMethod": "fadeIn",
                 "hideMethod": "fadeOut"
-            };
+            }
+
             if (this.messageError.val() != '' && this.messageError.val() != undefined) {
                 this.showNotification(this.typeError.val(), this.messageError.val(), this.titleError.val());
             }
         }
-        CommonMessage.prototype.showNotification = function (type, message, title) {
+
+        public showNotification(type: string, message: string, title: string) {
             switch (type) {
                 case "OK":
-                    toastr.success(message, title);
+                    toastr.success(message, title)
                     break;
                 case "INFO":
-                    toastr.info(message, title);
+                    toastr.info(message, title)
                     break;
                 case "WARNING":
-                    toastr.warning(message, title);
+                    toastr.warning(message, title)
                     break;
                 case "ERROR":
-                    toastr.error(message, title);
+                    toastr.error(message, title)
                     break;
                 default:
-                    toastr.info(message, title);
+                    toastr.info(message, title)
                     break;
             }
-        };
+        }
+
         //Método de consulta Origenes y destinos con ventana modal
         //title: Titulo de la ventana //param: Tipo de consulta (Puertos o Ciudades)
         //output: 
         //        
-        CommonMessage.prototype.ModalOrigDest = function (title, param, output, output2, partialView) {
-            var err = "errores: ";
+        public ModalOrigDest(title, param, output, output2: JQuery, partialView) {
+            let err = "errores: ";
             bootbox.confirm({
                 title: "Filtro " + title + " " + param,
                 message: "<div class='contentAlert'></div>",
                 callback: function (result) {
                     if (result) {
-                        var dataD = $("#" + output).data("kendoMultiSelect").dataItems();
+                        let dataD = $("#" + output).data("kendoMultiSelect").dataItems();
+
                         if (output == "CityId") {
-                            for (var _i = 0, dataD_1 = dataD; _i < dataD_1.length; _i++) {
-                                var item = dataD_1[_i];
+                            for (let item of dataD) {
                                 item.DescriptionPort = item.CityName;
                             }
                         }
+
                         output2.data("kendoMultiSelect").setDataSource(dataD);
                         output2.data("kendoMultiSelect").value($("#" + output).data("kendoMultiSelect").value());
                     }
@@ -103,27 +116,30 @@ var CommonModule;
                     }
                 }
             });
+
             $(".contentAlert").load("../Common/" + partialView, function (response, status, xhr) {
                 //let form = $("#trafficForm");
                 //form.data('validator', null);
                 //$.validator.unobtrusive.parse(form);
+
                 if (status == "error") {
                     //alert("Error al cargar data");
                     err += xhr.statusText;
                     objCommon.showNotification("ERROR", "Respuesta fallida: <br> Servicio: " + err, "View Modal" + title);
                 }
             });
-        };
-        return CommonMessage;
-    }());
-    CommonModule.CommonMessage = CommonMessage;
-})(CommonModule || (CommonModule = {}));
-var objCommon = new CommonModule.CommonMessage();
+        }
+    }
+}
+
+var objCommon: CommonModule.CommonMessage = new CommonModule.CommonMessage();
+
 function rowIndexGrid(dataItem, name) {
     var data = $("#" + name).data("kendoGrid").dataSource.data();
     return data.indexOf(dataItem);
 }
-function SetListOrder(output) {
+
+function SetListOrder(output: JQuery) {
     output.append('<option value="' + 1 + '">' + "1 - Gastos en Origen" + '</option>');
     output.append('<option value="' + 2 + '">' + "2 - Flete" + '</option>');
     output.append('<option value="' + 3 + '">' + "3 - Recargos" + '</option>');

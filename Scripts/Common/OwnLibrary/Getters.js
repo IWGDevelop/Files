@@ -155,10 +155,11 @@ function getProperty(url, editor, property) {
         off();
     });
 }
-function getObject(url) {
+function getObject(url, params) {
     var object;
     $.ajax({
         url: url,
+        data: params,
         dataType: 'json',
         async: false,
         success: function (data) {
