@@ -208,3 +208,17 @@ function getConsecutive(field: JQuery, idDocumentId, businessUnitId, serviceType
         })
     });
 }
+
+function getTextSelectedFields(dropDown: JQuery, attribute?: string) {
+    var fields = '';
+    dropDown.find('option:selected').each(function () {
+        fields += ',' + $(this).text();
+        if (attribute != undefined && $(this).attr(attribute) != undefined) {
+            fields += '|' + $(this).attr(attribute);
+        }
+    });
+    if (fields != '') {
+        fields = fields.substr(1);
+    }
+    return fields;
+}
