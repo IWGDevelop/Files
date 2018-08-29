@@ -1,4 +1,5 @@
-﻿
+﻿//Version 2
+
 function on() {
     document.getElementById("overlay").style.display = "block";
     onQuantity++;
@@ -20,11 +21,11 @@ function saveObject(url: string, object, callback?) {
         url: url,
         data: object,
         dataType: "json",
-        success: function (response) {
+        success: (response) => {
             callback(response);
             off();
         },
-        error: function (xhr, status, error) {
+        error: (xhr, status, error) => {
             off();
             swal(
                 "Error",
@@ -82,14 +83,37 @@ function generateBootbox(options: OptionsGenerateBootbox) {
 
     options = setDefaults(options, defaultsGenerateBootbox);
 
-    var className = options.big ? 'IWG_Modal' : '';
-    var dialog = bootbox.confirm({
-        title: options.title,
-        message: "<div id='bootboxWindow' style='display:none;'></div>",
-        callback: options.bootboxCallback,
-        size: 'large',
-        className: className
-    });
+    let className = options.big ? 'IWG_Modal' : '';
+    let dialog;
+    switch (options.type) {
+        case 'alert':
+            dialog = bootbox.alert({
+                title: options.title,
+                message: "<div id='bootboxWindow' style='display:none;'></div>",
+                callback: options.bootboxCallback,
+                size: 'large',
+                className: className
+            });
+            break;
+        case 'confirm':
+            dialog = bootbox.confirm({
+                title: options.title,
+                message: "<div id='bootboxWindow' style='display:none;'></div>",
+                callback: options.bootboxCallback,
+                size: 'large',
+                className: className
+            });
+            break;
+        case 'dialog':
+            dialog = bootbox.dialog({
+                title: options.title,
+                message: "<div id='bootboxWindow' style='display:none;'></div>",
+                callback: options.bootboxCallback,
+                size: 'large',
+                className: className
+            });
+            break;
+    }
 
     dialog.init(function () {
         $("#bootboxWindow").load(options.loadUrl, options.loadData, function (response, status, xhr) {

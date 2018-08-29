@@ -1,4 +1,6 @@
-﻿function setDefaults(options, defaults) {
+﻿//Version 2
+
+function setDefaults(options, defaults) {
     return (<any>Object).assign({}, defaults, options);
 }
 
@@ -25,6 +27,7 @@ class OptionsGenerateBootbox {
     loadCallback?: Function;
     bootboxCallback?: any;
     big?: boolean;
+    type?: 'alert' | 'confirm' | 'dialog';
 }
 
 var defaultsGenerateBootbox = {
@@ -33,5 +36,6 @@ var defaultsGenerateBootbox = {
     loadData: {},
     loadCallback: (response) => { },
     bootboxCallback: () => { },
-    big: false
+    big: false,
+    type: 'alert'
 };

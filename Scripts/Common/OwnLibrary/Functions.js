@@ -1,3 +1,4 @@
+//Version 2
 function on() {
     document.getElementById("overlay").style.display = "block";
     onQuantity++;
@@ -81,13 +82,36 @@ function generateBootbox(options) {
     on();
     options = setDefaults(options, defaultsGenerateBootbox);
     var className = options.big ? 'IWG_Modal' : '';
-    var dialog = bootbox.confirm({
-        title: options.title,
-        message: "<div id='bootboxWindow' style='display:none;'></div>",
-        callback: options.bootboxCallback,
-        size: 'large',
-        className: className
-    });
+    var dialog;
+    switch (options.type) {
+        case 'alert':
+            dialog = bootbox.alert({
+                title: options.title,
+                message: "<div id='bootboxWindow' style='display:none;'></div>",
+                callback: options.bootboxCallback,
+                size: 'large',
+                className: className
+            });
+            break;
+        case 'confirm':
+            dialog = bootbox.confirm({
+                title: options.title,
+                message: "<div id='bootboxWindow' style='display:none;'></div>",
+                callback: options.bootboxCallback,
+                size: 'large',
+                className: className
+            });
+            break;
+        case 'dialog':
+            dialog = bootbox.dialog({
+                title: options.title,
+                message: "<div id='bootboxWindow' style='display:none;'></div>",
+                callback: options.bootboxCallback,
+                size: 'large',
+                className: className
+            });
+            break;
+    }
     dialog.init(function () {
         $("#bootboxWindow").load(options.loadUrl, options.loadData, function (response, status, xhr) {
             if (status == "success") {
