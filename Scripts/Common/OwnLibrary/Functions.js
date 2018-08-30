@@ -1,4 +1,4 @@
-//Version 2
+//Version 3
 function on() {
     document.getElementById("overlay").style.display = "block";
     onQuantity++;

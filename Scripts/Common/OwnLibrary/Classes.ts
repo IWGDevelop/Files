@@ -1,4 +1,4 @@
-﻿//Version 2
+﻿//Version 3
 
 function setDefaults(options, defaults) {
     return (<any>Object).assign({}, defaults, options);
@@ -37,5 +37,5 @@ var defaultsGenerateBootbox = {
     loadCallback: (response) => { },
     bootboxCallback: () => { },
     big: false,
-    type: 'alert'
+    type: 'confirm'
 };
