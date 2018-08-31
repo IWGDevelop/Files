@@ -1,4 +1,6 @@
-﻿const textComplete: string = "1";
+﻿//Version 2
+
+const textComplete: string = "1";
 const onlyCode: string = "Code";
 const onlyDescription: string = "Description";
 const onlyName: string = "Name";
@@ -186,21 +188,23 @@ function getCurrentDate(): string {
 }
 
 //Función para generar un consecutivo usando el servicio publicado de generación de consecutivos para un documento específico
-function getConsecutive(field: JQuery, idDocumentId, businessUnitId, serviceTypeId, companyId, saveOp: boolean) {
+function getConsecutive(field: JQuery, options: OptionsConsecutive) {
     on();
+    options = setDefaults(options, defaultsConsecutive);
     $.ajax({
         url: apiTransverse + "DocumentTypes/GetConsecutive",
         dataType: 'json',
         data: {
-            idDocument: idDocumentId,
-            businessUnit: businessUnitId,
-            serviceType: serviceTypeId,
-            company: companyId,
-            save: saveOp
+            idDocument: options.documentId,
+            businessUnit: options.businessUnitId,
+            serviceType: options.serviceTypeId,
+            company: options.companyId,
+            save: options.saveOp
         },
         success: (data => {
             field.val(data);
             off();
+            options.successEvent(data);
         }),
         error: ((jqXHR, textStatus, error) => {
             swal("Error", "No hemos logrado conseguir un consecutivo para este documento.\n\nPor favor, inténtalo de nuevo en un momento y si el problema persiste contacta con el administrador", "error");

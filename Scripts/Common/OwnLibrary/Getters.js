@@ -1,3 +1,4 @@
+//Version 2
 var textComplete = "1";
 var onlyCode = "Code";
 var onlyDescription = "Description";
@@ -194,21 +195,23 @@ function getCurrentDate() {
     return year + "-" + tMonth + "-" + tDay;
 }
 //Función para generar un consecutivo usando el servicio publicado de generación de consecutivos para un documento específico
-function getConsecutive(field, idDocumentId, businessUnitId, serviceTypeId, companyId, saveOp) {
+function getConsecutive(field, options) {
     on();
+    options = setDefaults(options, defaultsConsecutive);
     $.ajax({
         url: apiTransverse + "DocumentTypes/GetConsecutive",
         dataType: 'json',
         data: {
-            idDocument: idDocumentId,
-            businessUnit: businessUnitId,
-            serviceType: serviceTypeId,
-            company: companyId,
-            save: saveOp
+            idDocument: options.documentId,
+            businessUnit: options.businessUnitId,
+            serviceType: options.serviceTypeId,
+            company: options.companyId,
+            save: options.saveOp
         },
         success: (function (data) {
             field.val(data);
             off();
+            options.successEvent(data);
         }),
         error: (function (jqXHR, textStatus, error) {
             swal("Error", "No hemos logrado conseguir un consecutivo para este documento.\n\nPor favor, inténtalo de nuevo en un momento y si el problema persiste contacta con el administrador", "error");

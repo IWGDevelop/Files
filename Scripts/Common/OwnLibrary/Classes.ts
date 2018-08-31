@@ -1,4 +1,4 @@
-﻿//Version 3
+﻿//Version 4
 
 function setDefaults(options, defaults) {
     return (<any>Object).assign({}, defaults, options);
@@ -38,4 +38,23 @@ var defaultsGenerateBootbox = {
     bootboxCallback: () => { },
     big: false,
     type: 'confirm'
+};
+
+
+class OptionsConsecutive {
+    documentId: number;
+    businessUnitId?: number;
+    serviceTypeId?: number;
+    companyId?: number;
+    saveOp?: boolean;
+    successEvent?: Function;
+}
+
+var defaultsConsecutive = {
+    documentId: 0,
+    businessUnitId: 0,
+    serviceTypeId: 0,
+    companyId: 1,
+    saveOp: false,
+    successEvent: (data) => { }
 };
