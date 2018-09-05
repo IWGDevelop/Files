@@ -1,4 +1,4 @@
-﻿//Version 4
+﻿//Version 5
 
 function setDefaults(options, defaults) {
     return (<any>Object).assign({}, defaults, options);
@@ -10,6 +10,7 @@ class OptionsBootstrapSelect {
     enable?: boolean;
     subTextOption?: string;
     limitSubTextOption?: number;
+    showSubtext?: boolean;
 }
 
 var defaultsBootstrapSelect = {
@@ -17,7 +18,8 @@ var defaultsBootstrapSelect = {
     extraOption: "",
     enable: false,
     subTextOption: "",
-    limitSubTextOption: 0
+    limitSubTextOption: 0,
+    showSubtext: false
 };
 
 class OptionsGenerateBootbox {
