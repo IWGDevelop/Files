@@ -1,4 +1,4 @@
-//Version 4
+//Version 5
 var textComplete = "1";
 var onlyCode = "Code";
 var onlyDescription = "Description";
@@ -94,10 +94,10 @@ function getJsonForBootstrapSelect(url, options) {
                         extraText += ' data-subtext="' + obj + '"';
                     }
                 }
-                dropDown.append('<option value="' + val.Id + '"' + extraText + ' data-showsubtext="' + options.showSubtext + '" >' + val[options.text] + '</option>');
+                dropDown.append('<option value="' + val.Id + '"' + extraText + '>' + val[options.text] + '</option>');
             });
-            dropDown.val(options.value);
             dropDown.selectpicker('refresh');
+            dropDown.selectpicker('val', options.value + '');
             off();
         };
         for (var _i = 0, dropDowns_1 = dropDowns; _i < dropDowns_1.length; _i++) {

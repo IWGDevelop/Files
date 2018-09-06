@@ -1,4 +1,4 @@
-﻿//Version 4
+﻿//Version 5
 
 const textComplete: string = "1";
 const onlyCode: string = "Code";
@@ -85,10 +85,10 @@ function getJsonForBootstrapSelect(url: string, options: OptionsBootstrapSelect,
                             extraText += ' data-subtext="' + obj + '"';
                         }
                     }
-                    dropDown.append('<option value="' + val.Id + '"' + extraText + ' data-showsubtext="' + options.showSubtext + '" >' + val[options.text] + '</option>');
+                    dropDown.append('<option value="' + val.Id + '"' + extraText + '>' + val[options.text] + '</option>');
                 });
-                dropDown.val(options.value);
                 dropDown.selectpicker('refresh');
+                dropDown.selectpicker('val', options.value + '');
                 off();
             }
         })
