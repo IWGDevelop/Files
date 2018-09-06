@@ -1,4 +1,4 @@
-//Version 2
+//Version 4
 var textComplete = "1";
 var onlyCode = "Code";
 var onlyDescription = "Description";
@@ -94,8 +94,9 @@ function getJsonForBootstrapSelect(url, options) {
                         extraText += ' data-subtext="' + obj + '"';
                     }
                 }
-                dropDown.append('<option value="' + val.Id + '"' + extraText + '>' + val[options.text] + '</option>');
+                dropDown.append('<option value="' + val.Id + '"' + extraText + ' data-showsubtext="' + options.showSubtext + '" >' + val[options.text] + '</option>');
             });
+            dropDown.val(options.value);
             dropDown.selectpicker('refresh');
             off();
         };
