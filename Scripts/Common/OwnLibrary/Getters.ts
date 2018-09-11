@@ -1,4 +1,4 @@
-﻿//Version 5
+﻿//Version 6
 
 const textComplete: string = "1";
 const onlyCode: string = "Code";
@@ -127,12 +127,16 @@ function getDescription(url: string, editor: JQuery) {
     getProperty(url, editor, "Description");
 }
 
-function getProperty(url: string, editor: JQuery, property: string) {
+function getProperty(url: string, editor: JQuery, property?: string) {
     on();
     $.getJSON(url)
         .done(data => {
             if (data != null) {
-                editor.val(data[property]);
+                if (property != undefined && property != null && property != '') {
+                    editor.val(data[property]);
+                } else {
+                    editor.val(data);
+                }
             }
             off();
         })

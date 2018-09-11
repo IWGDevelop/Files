@@ -1,4 +1,4 @@
-//Version 5
+//Version 6
 var textComplete = "1";
 var onlyCode = "Code";
 var onlyDescription = "Description";
@@ -147,7 +147,12 @@ function getProperty(url, editor, property) {
     $.getJSON(url)
         .done(function (data) {
         if (data != null) {
-            editor.val(data[property]);
+            if (property != undefined && property != null && property != '') {
+                editor.val(data[property]);
+            }
+            else {
+                editor.val(data);
+            }
         }
         off();
     })
