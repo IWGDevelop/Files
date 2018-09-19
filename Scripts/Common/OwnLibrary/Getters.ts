@@ -1,4 +1,4 @@
-﻿//Version 6
+﻿//Version 7
 
 const textComplete: string = "1";
 const onlyCode: string = "Code";
@@ -129,8 +129,10 @@ function getDescription(url: string, editor: JQuery) {
 
 function getProperty(url: string, editor: JQuery, property?: string) {
     on();
-    $.getJSON(url)
-        .done(data => {
+    $.ajax({
+        url: url,
+        dataType: 'json',
+        success: data => {
             if (data != null) {
                 if (property != undefined && property != null && property != '') {
                     editor.val(data[property]);
@@ -139,13 +141,14 @@ function getProperty(url: string, editor: JQuery, property?: string) {
                 }
             }
             off();
-        })
-        .fail((jqxhr, textStatus, error) => {
+        },
+        error: (jqxhr, textStatus, error) => {
             let err = textStatus + ", " + error + ", " + jqxhr.responseJSON != null ? '' : jqxhr.responseJSON.MessageDetail;
             this.objCommon.showNotification("ERROR", "Respuesta fallida <br> Servicio: " + url + "<br>" + err, "Web API");
 
             off();
-        });
+        }
+    });
 }
 
 function getObject(url: string, params?: any): Object {

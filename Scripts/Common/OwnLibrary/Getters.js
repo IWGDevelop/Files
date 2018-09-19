@@ -1,4 +1,4 @@
-//Version 6
+//Version 7
 var textComplete = "1";
 var onlyCode = "Code";
 var onlyDescription = "Description";
@@ -144,22 +144,25 @@ function getDescription(url, editor) {
 function getProperty(url, editor, property) {
     var _this = this;
     on();
-    $.getJSON(url)
-        .done(function (data) {
-        if (data != null) {
-            if (property != undefined && property != null && property != '') {
-                editor.val(data[property]);
+    $.ajax({
+        url: url,
+        dataType: 'json',
+        success: function (data) {
+            if (data != null) {
+                if (property != undefined && property != null && property != '') {
+                    editor.val(data[property]);
+                }
+                else {
+                    editor.val(data);
+                }
             }
-            else {
-                editor.val(data);
-            }
+            off();
+        },
+        error: function (jqxhr, textStatus, error) {
+            var err = textStatus + ", " + error + ", " + jqxhr.responseJSON != null ? '' : jqxhr.responseJSON.MessageDetail;
+            _this.objCommon.showNotification("ERROR", "Respuesta fallida <br> Servicio: " + url + "<br>" + err, "Web API");
+            off();
         }
-        off();
-    })
-        .fail(function (jqxhr, textStatus, error) {
-        var err = textStatus + ", " + error + ", " + jqxhr.responseJSON != null ? '' : jqxhr.responseJSON.MessageDetail;
-        _this.objCommon.showNotification("ERROR", "Respuesta fallida <br> Servicio: " + url + "<br>" + err, "Web API");
-        off();
     });
 }
 function getObject(url, params) {
