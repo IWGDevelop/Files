@@ -1,4 +1,4 @@
-//Version 3
+//Version 4
 function on() {
     document.getElementById("overlay").style.display = "block";
     onQuantity++;
@@ -16,7 +16,8 @@ function saveObject(url, object, callback) {
     $.ajax({
         type: "POST",
         url: url,
-        data: object,
+        data: JSON.stringify(object),
+        contentType: 'application/json; charset=utf-8',
         dataType: "json",
         success: function (response) {
             callback(response);

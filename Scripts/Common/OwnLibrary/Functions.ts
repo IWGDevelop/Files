@@ -1,4 +1,4 @@
-﻿//Version 3
+﻿//Version 4
 
 function on() {
     document.getElementById("overlay").style.display = "block";
@@ -19,7 +19,8 @@ function saveObject(url: string, object, callback?) {
     $.ajax({
         type: "POST",
         url: url,
-        data: object,
+        data: JSON.stringify(object),
+        contentType: 'application/json; charset=utf-8',
         dataType: "json",
         success: (response) => {
             callback(response);
@@ -129,7 +130,7 @@ function generateBootbox(options: OptionsGenerateBootbox) {
                 objCommon.showNotification("ERROR", "Respuesta fallida: <br> Servicio: " + xhr.statusText, "View Modal");
             }
             off()
-        })
+        });
     });
 }
 
