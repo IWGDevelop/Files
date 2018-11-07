@@ -1,4 +1,4 @@
-﻿//Version 4
+﻿//Version 5
 
 function on() {
     document.getElementById("overlay").style.display = "block";
@@ -19,7 +19,7 @@ function saveObject(url: string, object, callback?) {
     $.ajax({
         type: "POST",
         url: url,
-        data: JSON.stringify(object),
+        data: object,
         contentType: 'application/json; charset=utf-8',
         dataType: "json",
         success: (response) => {
