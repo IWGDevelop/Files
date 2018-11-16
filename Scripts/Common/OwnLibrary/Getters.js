@@ -1,4 +1,4 @@
-//Version 7
+//Version 6
 var textComplete = "1";
 var onlyCode = "Code";
 var onlyDescription = "Description";
@@ -56,7 +56,6 @@ function getJsonForDropDrown(url, dropDown, textType, extraOption) {
     });
 }
 function getJsonForBootstrapSelect(url, options) {
-    var _this = this;
     var dropDowns = [];
     for (var _i = 2; _i < arguments.length; _i++) {
         dropDowns[_i - 2] = arguments[_i];
@@ -97,7 +96,29 @@ function getJsonForBootstrapSelect(url, options) {
                 dropDown.append('<option value="' + val.Id + '"' + extraText + '>' + val[options.text] + '</option>');
             });
             dropDown.selectpicker('refresh');
-            dropDown.selectpicker('val', options.value + '');
+            if (options.urlValues != '') {
+                $.ajax({
+                    url: options.urlValues,
+                    dataType: 'json',
+                    async: false,
+                    success: function (data) {
+                        var array = [];
+                        if (data != null) {
+                            var theObject = JSON.parse(data);
+                            for (var i = 0; i < theObject.length; i++) {
+                                array.push(theObject[i]['Id']);
+                            }
+                        }
+                        dropDown.selectpicker('val', array);
+                    },
+                    error: function (a, b, c) {
+                        alert('Error');
+                    }
+                });
+            }
+            else {
+                dropDown.selectpicker('val', options.value + '');
+            }
             off();
         };
         for (var _i = 0, dropDowns_1 = dropDowns; _i < dropDowns_1.length; _i++) {
@@ -107,7 +128,6 @@ function getJsonForBootstrapSelect(url, options) {
     })
         .fail(function (jqxhr, textStatus, error) {
         var err = textStatus + ", " + error + ", " + jqxhr.responseJSON != null ? '' : jqxhr.responseJSON.MessageDetail;
-        _this.objCommon.showNotification("ERROR", "Respuesta fallida <br> Servicio: " + url + "<br>" + err, "Web API");
         off();
     });
 }
@@ -144,25 +164,17 @@ function getDescription(url, editor) {
 function getProperty(url, editor, property) {
     var _this = this;
     on();
-    $.ajax({
-        url: url,
-        dataType: 'json',
-        success: function (data) {
-            if (data != null) {
-                if (property != undefined && property != null && property != '') {
-                    editor.val(data[property]);
-                }
-                else {
-                    editor.val(data);
-                }
-            }
-            off();
-        },
-        error: function (jqxhr, textStatus, error) {
-            var err = textStatus + ", " + error + ", " + jqxhr.responseJSON != null ? '' : jqxhr.responseJSON.MessageDetail;
-            _this.objCommon.showNotification("ERROR", "Respuesta fallida <br> Servicio: " + url + "<br>" + err, "Web API");
-            off();
+    $.getJSON(url)
+        .done(function (data) {
+        if (data != null) {
+            editor.val(data[property]);
         }
+        off();
+    })
+        .fail(function (jqxhr, textStatus, error) {
+        var err = textStatus + ", " + error + ", " + jqxhr.responseJSON != null ? '' : jqxhr.responseJSON.MessageDetail;
+        _this.objCommon.showNotification("ERROR", "Respuesta fallida <br> Servicio: " + url + "<br>" + err, "Web API");
+        off();
     });
 }
 function getObject(url, params) {

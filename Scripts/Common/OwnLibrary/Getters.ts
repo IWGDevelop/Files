@@ -1,4 +1,4 @@
-﻿//Version 7
+﻿//Version 6
 
 const textComplete: string = "1";
 const onlyCode: string = "Code";
@@ -88,13 +88,33 @@ function getJsonForBootstrapSelect(url: string, options: OptionsBootstrapSelect,
                     dropDown.append('<option value="' + val.Id + '"' + extraText + '>' + val[options.text] + '</option>');
                 });
                 dropDown.selectpicker('refresh');
-                dropDown.selectpicker('val', options.value + '');
+                if (options.urlValues != '') {
+                    $.ajax({
+                        url: options.urlValues,
+                        dataType: 'json',
+                        async: false,
+                        success: (data: string) => {
+                            let array = [];
+                            if (data != null) {
+                                var theObject = JSON.parse(data);
+                                for (let i = 0; i < theObject.length; i++) {
+                                    array.push(theObject[i]['Id']);
+                                }
+                            }
+                            dropDown.selectpicker('val', array);
+                        },
+                        error: (a, b, c) => {
+                            alert('Error');
+                        }
+                    });
+                } else {
+                    dropDown.selectpicker('val', options.value + '');
+                }
                 off();
             }
         })
         .fail((jqxhr, textStatus, error) => {
             let err = textStatus + ", " + error + ", " + jqxhr.responseJSON != null ? '' : jqxhr.responseJSON.MessageDetail;
-            this.objCommon.showNotification("ERROR", "Respuesta fallida <br> Servicio: " + url + "<br>" + err, "Web API");
             off();
         });
 }
@@ -127,28 +147,21 @@ function getDescription(url: string, editor: JQuery) {
     getProperty(url, editor, "Description");
 }
 
-function getProperty(url: string, editor: JQuery, property?: string) {
+function getProperty(url: string, editor: JQuery, property: string) {
     on();
-    $.ajax({
-        url: url,
-        dataType: 'json',
-        success: data => {
+    $.getJSON(url)
+        .done(data => {
             if (data != null) {
-                if (property != undefined && property != null && property != '') {
-                    editor.val(data[property]);
-                } else {
-                    editor.val(data);
-                }
+                editor.val(data[property]);
             }
             off();
-        },
-        error: (jqxhr, textStatus, error) => {
+        })
+        .fail((jqxhr, textStatus, error) => {
             let err = textStatus + ", " + error + ", " + jqxhr.responseJSON != null ? '' : jqxhr.responseJSON.MessageDetail;
             this.objCommon.showNotification("ERROR", "Respuesta fallida <br> Servicio: " + url + "<br>" + err, "Web API");
 
             off();
-        }
-    });
+        });
 }
 
 function getObject(url: string, params?: any): Object {
