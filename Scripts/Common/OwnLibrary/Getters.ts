@@ -88,7 +88,7 @@ function getJsonForBootstrapSelect(url: string, options: OptionsBootstrapSelect,
                     dropDown.append('<option value="' + val.Id + '"' + extraText + '>' + val[options.text] + '</option>');
                 });
                 dropDown.selectpicker('refresh');
-                if (options.urlValues != '') {
+                if (options.urlValues != undefined && options.urlValues != null &&options.urlValues != '') {
                     $.ajax({
                         url: options.urlValues,
                         dataType: 'json',
