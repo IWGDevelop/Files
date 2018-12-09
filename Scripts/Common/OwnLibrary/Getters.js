@@ -1,4 +1,4 @@
-//Version 7
+//Version 9
 var textComplete = "1";
 var onlyCode = "Code";
 var onlyDescription = "Description";
@@ -64,7 +64,11 @@ function getJsonForBootstrapSelect(url, options) {
     options = setDefaults(options, defaultsBootstrapSelect);
     on();
     var extraText = "";
-    $.getJSON(url)
+    $.ajax({
+        dataType: 'json',
+        url: url,
+        async: options.async
+    })
         .done(function (data) {
         var _loop_1 = function (dropDown) {
             if (options.enable) {
@@ -97,7 +101,7 @@ function getJsonForBootstrapSelect(url, options) {
                 dropDown.append('<option value="' + val.Id + '"' + extraText + '>' + val[options.text] + '</option>');
             });
             dropDown.selectpicker('refresh');
-            dropDown.selectpicker('val', options.value + '');
+            dropDown.selectpicker('val', options.value);
             off();
         };
         for (var _i = 0, dropDowns_1 = dropDowns; _i < dropDowns_1.length; _i++) {

@@ -1,4 +1,4 @@
-//Version 6
+//Version 8
 function setDefaults(options, defaults) {
     return Object.assign({}, defaults, options);
 }
@@ -14,7 +14,8 @@ var defaultsBootstrapSelect = {
     subTextOption: "",
     limitSubTextOption: 0,
     showSubtext: false,
-    value: 0
+    value: 0,
+    async: true
 };
 var OptionsGenerateBootbox = /** @class */ (function () {
     function OptionsGenerateBootbox() {

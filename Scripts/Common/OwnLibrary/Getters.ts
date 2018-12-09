@@ -1,4 +1,4 @@
-﻿//Version 7
+﻿//Version 9
 
 const textComplete: string = "1";
 const onlyCode: string = "Code";
@@ -57,7 +57,11 @@ function getJsonForBootstrapSelect(url: string, options: OptionsBootstrapSelect,
     options = setDefaults(options, defaultsBootstrapSelect);
     on();
     var extraText = "";
-    $.getJSON(url)
+    $.ajax({
+        dataType: 'json',
+        url: url,
+        async: options.async
+    })
         .done(data => {
             for (let dropDown of dropDowns) {
                 if (options.enable) {
@@ -88,7 +92,7 @@ function getJsonForBootstrapSelect(url: string, options: OptionsBootstrapSelect,
                     dropDown.append('<option value="' + val.Id + '"' + extraText + '>' + val[options.text] + '</option>');
                 });
                 dropDown.selectpicker('refresh');
-                dropDown.selectpicker('val', options.value + '');
+                dropDown.selectpicker('val', options.value);
                 off();
             }
         })

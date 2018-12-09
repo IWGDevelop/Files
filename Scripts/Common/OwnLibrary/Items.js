@@ -1,4 +1,4 @@
-//Version 2
+//Version 3
 function getCargoInfoItem(id, propertiesFreight, linerTerm, description, packing, length, height, width, measureDimentions, imoClass, volume, measureVolume, weight, measureWeight, quantity) {
     var cargoItem = {};
     var imagePacking = ' <img alt="" src="' + packing.find(':selected').attr('data-urlimage') + '" style="margin-right:16px; width: 64px; float: left; height: 64px;" /> ';
@@ -26,4 +26,20 @@ function getCargoInfoItem(id, propertiesFreight, linerTerm, description, packing
     piece["Quantity"] = quantity;
     cargoItem['cargo'] = piece;
     return cargoItem;
+}
+function createTrackingOrder(index, number, shipper, isProspect, incoterm, warehouse, dateWarehouse, trackingId, id) {
+    var trackingOrder = {};
+    trackingOrder['id'] = 'TrackingOrder' + index;
+    trackingOrder['html'] = '<div id="' + trackingOrder['id'] + '" class="tracking-order-panel"><div><hidden id="Hdn' + trackingOrder['id'] + '"></hidden><label style="font-family:roboto; font-size:22px; font-weight:600;">Pedido #' + number + ' / </label><i><label style="font-family:roboto; font-size:14px; font-eight:100;">' + shipper.find(':selected').text() + '</label></i><label style="float:right; font-family:roboto; font-size:42px; font-weight:600; margin-right:12px;">' + incoterm.find(':selected').text() + '</label></div><div><label style="font-family:roboto, cursive; font-ize:16px; font-weight:100;">El pedido ingresa al Warehouse <strong>' + warehouse + '</strong> el <strong>' + new Date(dateWarehouse.val()).toLocaleString() + '</strong></label></div><div id="trackingOrderCargoList"></div></div>';
+    var order = {};
+    order["Id"] = id;
+    order["TrackingId"] = trackingId;
+    order["OrderNumber"] = number;
+    order["ShipperId"] = shipper.val();
+    order["IncotermId"] = incoterm.val();
+    order["Warehouse"] = warehouse;
+    order["DateIngressWarehouse"] = dateWarehouse.val();
+    order["IsProspect"] = isProspect;
+    trackingOrder['order'] = order;
+    return trackingOrder;
 }
