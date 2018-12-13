@@ -370,50 +370,43 @@
 .primary-button {
     color: black;
     background-color: #9ab950;
-    border-width: thin;
-    border-color: black;
-    border-radius: 8px;
+    border-color: transparent;
+    border-radius: 4px;
     line-height: 1;
     font-weight: 300;
     padding: 8px 16px 8px 16px;
     margin: auto;
-    display: block;
 }
 
     .primary-button:hover {
         color: black;
         background-color: #6e833c;
-        border-color: #6e833c;
-		border-radius: 8px;
+		border-radius: 4px;
         line-height: 1;
         font-weight: 300;
         padding: 8px 16px 8px 16px;
         margin: auto;
-        display: block;
     }
 
 .secundary-button {
     color: black;
     background-color: #0096dc;
-    border-color: #0096dc;
-    border-radius: 0px;
+    border-color: transparent;
+    border-radius: 4px;
     line-height: 1;
     font-weight: 300;
     padding: 8px 16px 8px 16px;
     margin: auto;
-    display:block;
 }
 
     .secundary-button:hover {
         color: white;
         background-color: #006fa3;
-        border-color: #006fa3;
-        border-radius: 0px;
+		border-radius: 4px;
         line-height: 1;
         font-weight: 300;
         padding: 8px 16px 8px 16px;
         margin: auto;
-        display: block;
     }
 
 .ic_menu{
