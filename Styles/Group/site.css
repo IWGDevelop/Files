@@ -138,18 +138,21 @@
     background-color: #ebebeb;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, .04);
     border-width: 1px !important;
-    border-radius: 0px;
+	border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
     padding: 0px !important;
-	margin: 0px 9% !important;
+	margin: 0px 7% !important;
 	border-color: darkgray !important;
 }
 
 .panel-header {
 	background-color: #4b4b4b;
 	padding: 0px !important;
-	margin: 0px !important;
+	margin: -1px !important;
 	display: flow-root;
 	position: relative;
+	border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }
 
 .panel-header-text {
