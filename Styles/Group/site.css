@@ -404,69 +404,78 @@
 }
 
 .primary-button {
-    color:white;
-    background-color:#111111;
-    border-color:#000000;
-    border-radius:0px;
-    line-height:1;
-    border-width: 2px;
-    font-weight:300;
-    padding:8px 16px 8px 16px;
+	color: white;
+    background-color: #3a3a3a;
+    border-color: #000000;
+    border-radius: 4px;
+    line-height: 1;
+    border-width: 1px;
+    font-weight: 300;
+    padding: 8px 16px 8px 16px;
+	transition: .3s;
 }
 
 .primary-button:hover {
-    color:black;
-    background-color:#aaaaaa;
-    border-color:#000000;
-    border-radius:0px;
-    line-height:1;
-    border-width: 2px;
-    font-weight:300;
-    padding:8px 16px 8px 16px;
+    color: #020202;
+    background-color: #717171;
+    border-color: #000000;
+    border-radius: 4px;
+    line-height: 1;
+    border-width: 1px;
+    font-weight: 300;
+    padding: 8px 16px 8px 16px;
+    cursor: pointer;
+	transition: .3s;
 }
 
 .secundary-button {
-    color:black;
-    background-color:#e7e7e7;
+    color: black;
+    background-color: #e2e2e2;
     border-color: #000000;
-    border-radius: 0px;
-    line-height:1;
-    border-width: 2px;
-    font-weight:300;
-    padding:8px 16px 8px 16px;
+    border-radius: 4px;
+    line-height: 1;
+    border-width: 1px;
+    font-weight: 300;
+    padding: 8px 16px 8px 16px;
+	transition: .3s;
 }
 
 .secundary-button:hover {
-    color:white;
-    background-color:#555555;
-    border-color:#000000;
-    border-radius:0px;
-    line-height:1;
-    border-width:2px;
-    font-weight:300;
-    padding:8px 16px 8px 16px;
+    color: white;
+    background-color: #555555;
+    border-color: #000000;
+    border-radius: 4px;
+    line-height: 1;
+    border-width: 1px;
+    font-weight: 300;
+    padding: 8px 16px 8px 16px;
+    cursor: pointer;
+	transition: .3s;
 }
 
 .warning-button {
     color: black;
-    background-color: white;
+    background-color: #e6be63;
     border-color: #000000;
-    border-radius: 0px;
+    border-radius: 4px;
     line-height: 1;
-    border-width: 2px;
+    border-width: 1px;
     font-weight: 300;
     padding: 8px 16px 8px 16px;
+	transition: .3s;
 }
 
     .warning-button:hover {
-        color: black;
-        background-color: #e2e2e2;
-        border-color: #000000;
-        border-radius: 0px;
-        line-height: 1;
-        font-weight: 300;
-        border-width: 2px;
-        padding: 8px 16px 8px 16px;
+		color: white;
+		background-color: #a57319;
+		border-color: #000000;
+		border-radius: 4px;
+		line-height: 1;
+		font-weight: 300;
+		border-top-color: rgb(0, 0, 0);
+		border-width: 1px;
+		padding: 8px 16px 8px 16px;
+		transition: .3s;
     }
 
 .danger-button {
@@ -478,6 +487,7 @@
     border-width: 2px;
     font-weight: 300;
     padding: 8px 16px 8px 16px;
+	transition: .3s;
 }
 
     .danger-button:hover {
@@ -489,6 +499,7 @@
         font-weight: 300;
         border-width: 2px;
         padding: 8px 16px 8px 16px;
+		transition: .3s;
     }
 
 .toolbar-title {
