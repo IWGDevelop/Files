@@ -1,4 +1,3 @@
-//Version 9
 var textComplete = "1";
 var onlyCode = "Code";
 var onlyDescription = "Description";
@@ -100,8 +99,30 @@ function getJsonForBootstrapSelect(url, options) {
                 }
                 dropDown.append('<option value="' + val.Id + '"' + extraText + '>' + val[options.text] + '</option>');
             });
+            if (options.urlValues != undefined && options.urlValues != null && options.urlValues != '') {
+                $.ajax({
+                    url: options.urlValues,
+                    dataType: 'json',
+                    async: false,
+                    success: function (data) {
+                        var array = [];
+                        if (data != null) {
+                            var theObject = JSON.parse(data);
+                            for (var i = 0; i < theObject.length; i++) {
+                                array.push(theObject[i]['Id']);
+                            }
+                        }
+                        dropDown.selectpicker('val', array);
+                    },
+                    error: function (a, b, c) {
+                        alert('Error');
+                    }
+                });
+            }
+            else {
+                dropDown.selectpicker('val', options.value + '');
+            }
             dropDown.selectpicker('refresh');
-            dropDown.selectpicker('val', options.value);
             off();
         };
         for (var _i = 0, dropDowns_1 = dropDowns; _i < dropDowns_1.length; _i++) {
@@ -207,7 +228,6 @@ function getCurrentDate() {
     }
     return year + "-" + tMonth + "-" + tDay;
 }
-//Función para generar un consecutivo usando el servicio publicado de generación de consecutivos para un documento específico
 function getConsecutive(field, options) {
     on();
     options = setDefaults(options, defaultsConsecutive);

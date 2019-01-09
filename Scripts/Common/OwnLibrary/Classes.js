@@ -1,8 +1,7 @@
-//Version 8
 function setDefaults(options, defaults) {
     return Object.assign({}, defaults, options);
 }
-var OptionsBootstrapSelect = /** @class */ (function () {
+var OptionsBootstrapSelect = (function () {
     function OptionsBootstrapSelect() {
     }
     return OptionsBootstrapSelect;
@@ -15,9 +14,10 @@ var defaultsBootstrapSelect = {
     limitSubTextOption: 0,
     showSubtext: false,
     value: 0,
-    async: true
+    async: true,
+    urlValues: ''
 };
-var OptionsGenerateBootbox = /** @class */ (function () {
+var OptionsGenerateBootbox = (function () {
     function OptionsGenerateBootbox() {
     }
     return OptionsGenerateBootbox;
@@ -31,7 +31,7 @@ var defaultsGenerateBootbox = {
     big: false,
     type: 'confirm'
 };
-var OptionsConsecutive = /** @class */ (function () {
+var OptionsConsecutive = (function () {
     function OptionsConsecutive() {
     }
     return OptionsConsecutive;
