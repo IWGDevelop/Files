@@ -1,4 +1,4 @@
-﻿//Version 10
+﻿//Version 11
 
 const textComplete: string = "1";
 const onlyCode: string = "Code";
@@ -111,7 +111,7 @@ function getJsonForBootstrapSelect(url: string, options: OptionsBootstrapSelect,
                         }
                     });
                 } else {
-                    dropDown.selectpicker('val', options.value + '');
+                    dropDown.selectpicker('val', options.value);
                 }
                 dropDown.selectpicker('refresh');
                 off();

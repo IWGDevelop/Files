@@ -1,3 +1,4 @@
+//Version 11
 var textComplete = "1";
 var onlyCode = "Code";
 var onlyDescription = "Description";
@@ -120,7 +121,7 @@ function getJsonForBootstrapSelect(url, options) {
                 });
             }
             else {
-                dropDown.selectpicker('val', options.value + '');
+                dropDown.selectpicker('val', options.value);
             }
             dropDown.selectpicker('refresh');
             off();
@@ -228,6 +229,7 @@ function getCurrentDate() {
     }
     return year + "-" + tMonth + "-" + tDay;
 }
+//Función para generar un consecutivo usando el servicio publicado de generación de consecutivos para un documento específico
 function getConsecutive(field, options) {
     on();
     options = setDefaults(options, defaultsConsecutive);
