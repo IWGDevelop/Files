@@ -1,4 +1,4 @@
-//Version 11
+//Version 12
 var textComplete = "1";
 var onlyCode = "Code";
 var onlyDescription = "Description";
@@ -191,20 +191,23 @@ function getProperty(url, editor, property) {
         }
     });
 }
-function getObject(url, params) {
+/**
+ * @deprecated Usar el método getJson para evitar un llamado síncrono. El método getJson no retorna nada, en vez de eso recibe una función que se ejecuta cuando hay una respuesta satisfatoria y en este métdo debe escribirse lo que se ha de hacer con el objeto
+ */
+function getObject(url, data) {
     var object;
     $.ajax({
         url: url,
-        data: params,
+        data: data,
         dataType: 'json',
         async: false,
-        success: function (data) {
-            if (data != null) {
-                if (data.length == 1) {
-                    object = data[0];
+        success: function (response) {
+            if (response != null) {
+                if (response.length == 1) {
+                    object = response[0];
                 }
                 else {
-                    object = data;
+                    object = response;
                 }
             }
             else {
@@ -213,6 +216,23 @@ function getObject(url, params) {
         }
     });
     return object;
+}
+function getJson(url, data, evtDone) {
+    on();
+    $.ajax({
+        url: url,
+        data: data,
+        dataType: 'json',
+        type: 'GET',
+        success: function (response, status, jqXHR) {
+            evtDone(response, status, jqXHR);
+            off();
+        },
+        error: function (jqXHR, status, error) {
+            swal('Error', 'No se pudo obtener respuesta satisfactoria debido al error: ' + error, 'error');
+            off();
+        }
+    });
 }
 function getCurrentDate() {
     var date = new Date();

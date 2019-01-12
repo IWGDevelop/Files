@@ -1,31 +1,31 @@
-//Version 5
+//Version 6
 function on() {
-    document.getElementById("overlay").style.display = "block";
+    document.getElementById('overlay').style.display = 'block';
     onQuantity++;
 }
 function off() {
     if (onQuantity > 0) {
         onQuantity--;
         if (onQuantity == 0) {
-            document.getElementById("overlay").style.display = "none";
+            document.getElementById('overlay').style.display = 'none';
         }
     }
 }
 function saveObject(url, object, callback) {
     on();
     $.ajax({
-        type: "POST",
+        type: 'POST',
         url: url,
         data: object,
         contentType: 'application/json; charset=utf-8',
-        dataType: "json",
+        dataType: 'json',
         success: function (response) {
             callback(response);
             off();
         },
         error: function (xhr, status, error) {
             off();
-            swal("Error", "No hemos podido guardar el objeto.\n\nError: " + error, "error");
+            swal('Error', 'No hemos podido guardar el objeto.\n\nError: ' + error, 'error');
         },
     });
 }
@@ -35,15 +35,15 @@ function enableFields() {
         fields[_i] = arguments[_i];
     }
     for (var i = 0; i < fields.length; i++) {
-        if (fields[i].attr("type") == "checkbox") {
-            fields[i].bootstrapSwitch("disabled", false);
+        if (fields[i].attr('type') == 'checkbox') {
+            fields[i].bootstrapSwitch('disabled', false);
         }
         else {
             if (fields[i].data('kendoDatePicker') != undefined) {
                 fields[i].data('kendoDatePicker').enable(true);
             }
             else {
-                fields[i].removeAttr("disabled");
+                fields[i].removeAttr('disabled');
             }
         }
     }
@@ -55,7 +55,7 @@ function disableFields() {
         fields[_i] = arguments[_i];
     }
     for (var i = 0; i < fields.length; i++) {
-        if (fields[i].attr("type") == "checkbox") {
+        if (fields[i].attr('type') == 'checkbox') {
             fields[i].bootstrapSwitch('disabled', true);
         }
         else {
@@ -63,20 +63,20 @@ function disableFields() {
                 fields[i].data('kendoDatePicker').enable(false);
             }
             else {
-                fields[i].attr("disabled", "true");
+                fields[i].attr('disabled', 'true');
             }
         }
     }
     $('.selectpicker').selectpicker('refresh');
 }
 function expandAccordion(id) {
-    if ($("#" + id).hasClass("collapsed")) {
-        $("#" + id).click();
+    if ($('#' + id).hasClass('collapsed')) {
+        $('#' + id).click();
     }
 }
 function collapseAccordion(id) {
-    if (!$("#" + id).hasClass("collapsed")) {
-        $("#" + id).click();
+    if (!$('#' + id).hasClass('collapsed')) {
+        $('#' + id).click();
     }
 }
 function generateBootbox(options) {
@@ -88,7 +88,7 @@ function generateBootbox(options) {
         case 'alert':
             dialog = bootbox.alert({
                 title: options.title,
-                message: "<div id='bootboxWindow' style='display:none;'></div>",
+                message: '<div id="bootboxWindow" style="display:none;"></div>',
                 callback: options.bootboxCallback,
                 size: 'large',
                 className: className
@@ -97,7 +97,7 @@ function generateBootbox(options) {
         case 'confirm':
             dialog = bootbox.confirm({
                 title: options.title,
-                message: "<div id='bootboxWindow' style='display:none;'></div>",
+                message: '<div id="bootboxWindow" style="display:none;"></div>',
                 callback: options.bootboxCallback,
                 size: 'large',
                 className: className
@@ -106,7 +106,7 @@ function generateBootbox(options) {
         case 'dialog':
             dialog = bootbox.dialog({
                 title: options.title,
-                message: "<div id='bootboxWindow' style='display:none;'></div>",
+                message: '<div id="bootboxWindow" style="display:none;"></div>',
                 callback: options.bootboxCallback,
                 size: 'large',
                 className: className
@@ -114,17 +114,17 @@ function generateBootbox(options) {
             break;
     }
     dialog.init(function () {
-        $("#bootboxWindow").load(options.loadUrl, options.loadData, function (response, status, xhr) {
-            if (status == "success") {
-                $("#bootboxWindow").show('fade');
+        $('#bootboxWindow').load(options.loadUrl, options.loadData, function (response, status, xhr) {
+            if (status == 'success') {
+                $('#bootboxWindow').show('fade');
                 var h = '50%';
-                $("#bootboxWindow").height(h);
+                $('#bootboxWindow').height(h);
                 if (options.loadCallback != undefined) {
                     options.loadCallback(response);
                 }
             }
             else {
-                objCommon.showNotification("ERROR", "Respuesta fallida: <br> Servicio: " + xhr.statusText, "View Modal");
+                objCommon.showNotification('ERROR', 'Respuesta fallida: <br> Servicio: ' + xhr.statusText, 'View Modal');
             }
             off();
         });
@@ -142,17 +142,17 @@ function objectifyForm(form) {
 //Función para agregar una animación a un objeto SVG
 function animationSVG() {
     var arrow = $(this).find('#arrow');
-    if (arrow.hasClass("play")) {
-        arrow.addClass("reverse");
-        arrow.removeClass("play");
+    if (arrow.hasClass('play')) {
+        arrow.addClass('reverse');
+        arrow.removeClass('play');
     }
     else {
-        arrow.addClass("play");
-        arrow.removeClass("reverse");
+        arrow.addClass('play');
+        arrow.removeClass('reverse');
     }
 }
 function calculateDV(nit) {
-    if (nit != "") {
+    if (nit != '') {
         var i = void 0;
         var tmp = void 0;
         var check = 0;
@@ -169,6 +169,6 @@ function calculateDV(nit) {
         return (11 - mod).toString();
     }
     else {
-        return "";
+        return '';
     }
 }

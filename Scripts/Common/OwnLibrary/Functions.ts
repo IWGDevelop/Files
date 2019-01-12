@@ -1,7 +1,7 @@
-﻿//Version 5
+﻿//Version 6
 
 function on() {
-    document.getElementById("overlay").style.display = "block";
+    document.getElementById('overlay').style.display = 'block';
     onQuantity++;
 }
 
@@ -9,7 +9,7 @@ function off() {
     if (onQuantity > 0) {
         onQuantity--;
         if (onQuantity == 0) {
-            document.getElementById("overlay").style.display = "none";
+            document.getElementById('overlay').style.display = 'none';
         }
     }
 }
@@ -17,11 +17,11 @@ function off() {
 function saveObject(url: string, object, callback?) {
     on();
     $.ajax({
-        type: "POST",
+        type: 'POST',
         url: url,
         data: object,
         contentType: 'application/json; charset=utf-8',
-        dataType: "json",
+        dataType: 'json',
         success: (response) => {
             callback(response);
             off();
@@ -29,9 +29,9 @@ function saveObject(url: string, object, callback?) {
         error: (xhr, status, error) => {
             off();
             swal(
-                "Error",
-                "No hemos podido guardar el objeto.\n\nError: " + error,
-                "error"
+                'Error',
+                'No hemos podido guardar el objeto.\n\nError: ' + error,
+                'error'
             )
         },
     });
@@ -39,13 +39,13 @@ function saveObject(url: string, object, callback?) {
 
 function enableFields(...fields: JQuery[]) {
     for (var i = 0; i < fields.length; i++) {
-        if (fields[i].attr("type") == "checkbox") {
-            fields[i].bootstrapSwitch("disabled", false);
+        if (fields[i].attr('type') == 'checkbox') {
+            fields[i].bootstrapSwitch('disabled', false);
         } else {
             if (fields[i].data('kendoDatePicker') != undefined) {
                 fields[i].data('kendoDatePicker').enable(true);
             } else {
-                fields[i].removeAttr("disabled");
+                fields[i].removeAttr('disabled');
             }
         }
     }
@@ -54,13 +54,13 @@ function enableFields(...fields: JQuery[]) {
 
 function disableFields(...fields: JQuery[]) {
     for (var i = 0; i < fields.length; i++) {
-        if (fields[i].attr("type") == "checkbox") {
+        if (fields[i].attr('type') == 'checkbox') {
             fields[i].bootstrapSwitch('disabled', true);
         } else {
             if (fields[i].data('kendoDatePicker') != undefined) {
                 fields[i].data('kendoDatePicker').enable(false);
             } else {
-                fields[i].attr("disabled", "true");
+                fields[i].attr('disabled', 'true');
             }
         }
     }
@@ -68,14 +68,14 @@ function disableFields(...fields: JQuery[]) {
 }
 
 function expandAccordion(id: string) {
-    if ($("#" + id).hasClass("collapsed")) {
-        $("#" + id).click();
+    if ($('#' + id).hasClass('collapsed')) {
+        $('#' + id).click();
     }
 }
 
 function collapseAccordion(id: string) {
-    if (!$("#" + id).hasClass("collapsed")) {
-        $("#" + id).click();
+    if (!$('#' + id).hasClass('collapsed')) {
+        $('#' + id).click();
     }
 }
 
@@ -90,7 +90,7 @@ function generateBootbox(options: OptionsGenerateBootbox) {
         case 'alert':
             dialog = bootbox.alert({
                 title: options.title,
-                message: "<div id='bootboxWindow' style='display:none;'></div>",
+                message: '<div id="bootboxWindow" style="display:none;"></div>',
                 callback: options.bootboxCallback,
                 size: 'large',
                 className: className
@@ -99,7 +99,7 @@ function generateBootbox(options: OptionsGenerateBootbox) {
         case 'confirm':
             dialog = bootbox.confirm({
                 title: options.title,
-                message: "<div id='bootboxWindow' style='display:none;'></div>",
+                message: '<div id="bootboxWindow" style="display:none;"></div>',
                 callback: options.bootboxCallback,
                 size: 'large',
                 className: className
@@ -108,7 +108,7 @@ function generateBootbox(options: OptionsGenerateBootbox) {
         case 'dialog':
             dialog = bootbox.dialog({
                 title: options.title,
-                message: "<div id='bootboxWindow' style='display:none;'></div>",
+                message: '<div id="bootboxWindow" style="display:none;"></div>',
                 callback: options.bootboxCallback,
                 size: 'large',
                 className: className
@@ -117,17 +117,17 @@ function generateBootbox(options: OptionsGenerateBootbox) {
     }
 
     dialog.init(function () {
-        $("#bootboxWindow").load(options.loadUrl, options.loadData, function (response, status, xhr) {
-            if (status == "success") {
-                $("#bootboxWindow").show('fade');
+        $('#bootboxWindow').load(options.loadUrl, options.loadData, function (response, status, xhr) {
+            if (status == 'success') {
+                $('#bootboxWindow').show('fade');
                 var h = '50%';
-                $("#bootboxWindow").height(h);
+                $('#bootboxWindow').height(h);
                 if (options.loadCallback != undefined) {
                     options.loadCallback(response);
                 }
             }
             else {
-                objCommon.showNotification("ERROR", "Respuesta fallida: <br> Servicio: " + xhr.statusText, "View Modal");
+                objCommon.showNotification('ERROR', 'Respuesta fallida: <br> Servicio: ' + xhr.statusText, 'View Modal');
             }
             off()
         });
@@ -147,17 +147,17 @@ function objectifyForm(form: JQuery): Object {
 //Función para agregar una animación a un objeto SVG
 function animationSVG() {
     var arrow = $(this).find('#arrow');
-    if (arrow.hasClass("play")) {
-        arrow.addClass("reverse");
-        arrow.removeClass("play");
+    if (arrow.hasClass('play')) {
+        arrow.addClass('reverse');
+        arrow.removeClass('play');
     } else {
-        arrow.addClass("play");
-        arrow.removeClass("reverse");
+        arrow.addClass('play');
+        arrow.removeClass('reverse');
     }
 }
 
 function calculateDV(nit: string) {
-    if (nit != "") {
+    if (nit != '') {
         let i: number;
         let tmp;
         let check: number = 0;
@@ -175,6 +175,6 @@ function calculateDV(nit: string) {
         return (11 - mod).toString();
     }
     else {
-        return "";
+        return '';
     }
 }
