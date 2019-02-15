@@ -495,26 +495,26 @@
     }
 
 .danger-button {
-    color: black;
-    background-color: red;
+	color: white;
+    background-color: #b90000;
     border-color: #000000;
-    border-radius: 0px;
+    border-radius: 4px;
     line-height: 1;
-    border-width: 2px;
+    border-width: 1px;
     font-weight: 300;
     padding: 8px 16px 8px 16px;
-	transition: .3s;
+    transition: .3s;
 }
 
     .danger-button:hover {
-        color: white;
-        background-color: darkred;
-        border-color: #000000;
-        border-radius: 0px;
-        line-height: 1;
-        font-weight: 300;
-        border-width: 2px;
-        padding: 8px 16px 8px 16px;
+		color: white;
+		background-color: darkred;
+		border-color: #000000;
+		border-radius: 4px;
+		line-height: 1;
+		border-width: 1px;
+		font-weight: 300;
+		padding: 8px 16px 8px 16px;
 		transition: .3s;
     }
 
