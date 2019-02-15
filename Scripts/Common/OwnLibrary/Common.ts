@@ -1,4 +1,6 @@
-﻿const apiTransverse: string = localStorage.getItem("apiTransverse");
+﻿// Version 2
+
+const apiTransverse: string = localStorage.getItem("apiTransverse");
 const urlTransverse: string = localStorage.getItem("urlTransverse");
 const apiGroup: string = localStorage.getItem("apiGroup");
 const apiFreight: string = localStorage.getItem("apiFreight");
@@ -28,7 +30,6 @@ module CommonModule {
             this.typeError = $("#typeErrorH");
             this.titleError = $("#titleErrorH");
 
-            let self = this;
             this.validation.click(event => {
                 if (this.field.val() == "") {
                     this.output.html("El campo no puede estar vacío.");
@@ -64,6 +65,10 @@ module CommonModule {
                 "hideMethod": "fadeOut"
             }
 
+            this.autoNotification();
+        }
+
+        public autoNotification() {
             if (this.messageError.val() != '' && this.messageError.val() != undefined) {
                 this.showNotification(this.typeError.val(), this.messageError.val(), this.titleError.val());
             }
@@ -133,15 +138,3 @@ module CommonModule {
 }
 
 var objCommon: CommonModule.CommonMessage = new CommonModule.CommonMessage();
-
-function rowIndexGrid(dataItem, name) {
-    var data = $("#" + name).data("kendoGrid").dataSource.data();
-    return data.indexOf(dataItem);
-}
-
-function SetListOrder(output: JQuery) {
-    output.append('<option value="' + 1 + '">' + "1 - Gastos en Origen" + '</option>');
-    output.append('<option value="' + 2 + '">' + "2 - Flete" + '</option>');
-    output.append('<option value="' + 3 + '">' + "3 - Recargos" + '</option>');
-    output.append('<option value="' + 4 + '">' + "4 - Gastos en Destino" + '</option>');
-}

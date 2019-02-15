@@ -10,7 +10,7 @@ var rootPath = localStorage.getItem("rootPath");
 var onQuantity = 0;
 var CommonModule;
 (function (CommonModule) {
-    var CommonMessage = /** @class */ (function () {
+    var CommonMessage = (function () {
         function CommonMessage(fieldId, outputId, validationId) {
             var _this = this;
             this.field = $('#' + fieldId);
@@ -19,7 +19,6 @@ var CommonModule;
             this.messageError = $("#messageErrorH");
             this.typeError = $("#typeErrorH");
             this.titleError = $("#titleErrorH");
-            var self = this;
             this.validation.click(function (event) {
                 if (_this.field.val() == "") {
                     _this.output.html("El campo no puede estar vacío.");
@@ -54,10 +53,13 @@ var CommonModule;
                 "showMethod": "fadeIn",
                 "hideMethod": "fadeOut"
             };
+            this.autoNotification();
+        }
+        CommonMessage.prototype.autoNotification = function () {
             if (this.messageError.val() != '' && this.messageError.val() != undefined) {
                 this.showNotification(this.typeError.val(), this.messageError.val(), this.titleError.val());
             }
-        }
+        };
         CommonMessage.prototype.showNotification = function (type, message, title) {
             switch (type) {
                 case "OK":
@@ -77,10 +79,6 @@ var CommonModule;
                     break;
             }
         };
-        //Método de consulta Origenes y destinos con ventana modal
-        //title: Titulo de la ventana //param: Tipo de consulta (Puertos o Ciudades)
-        //output: 
-        //        
         CommonMessage.prototype.ModalOrigDest = function (title, param, output, output2, partialView) {
             var err = "errores: ";
             bootbox.confirm({
@@ -104,11 +102,7 @@ var CommonModule;
                 }
             });
             $(".contentAlert").load("../Common/" + partialView, function (response, status, xhr) {
-                //let form = $("#trafficForm");
-                //form.data('validator', null);
-                //$.validator.unobtrusive.parse(form);
                 if (status == "error") {
-                    //alert("Error al cargar data");
                     err += xhr.statusText;
                     objCommon.showNotification("ERROR", "Respuesta fallida: <br> Servicio: " + err, "View Modal" + title);
                 }
@@ -119,13 +113,3 @@ var CommonModule;
     CommonModule.CommonMessage = CommonMessage;
 })(CommonModule || (CommonModule = {}));
 var objCommon = new CommonModule.CommonMessage();
-function rowIndexGrid(dataItem, name) {
-    var data = $("#" + name).data("kendoGrid").dataSource.data();
-    return data.indexOf(dataItem);
-}
-function SetListOrder(output) {
-    output.append('<option value="' + 1 + '">' + "1 - Gastos en Origen" + '</option>');
-    output.append('<option value="' + 2 + '">' + "2 - Flete" + '</option>');
-    output.append('<option value="' + 3 + '">' + "3 - Recargos" + '</option>');
-    output.append('<option value="' + 4 + '">' + "4 - Gastos en Destino" + '</option>');
-}
