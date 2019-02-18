@@ -1,4 +1,4 @@
-//Version 12
+//Version 13
 var textComplete = "1";
 var onlyCode = "Code";
 var onlyDescription = "Description";
@@ -98,7 +98,9 @@ function getJsonForBootstrapSelect(url, options) {
                         extraText += ' data-subtext="' + obj + '"';
                     }
                 }
-                dropDown.append('<option value="' + val.Id + '"' + extraText + '>' + val[options.text] + '</option>');
+                if (val != null && val != undefined) {
+                    dropDown.append('<option value="' + val.Id + '"' + extraText + '>' + val[options.text] + '</option>');
+                }
             });
             if (options.urlValues != undefined && options.urlValues != null && options.urlValues != '') {
                 $.ajax({
