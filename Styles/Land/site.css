@@ -146,7 +146,7 @@
 }
 
 .panel-header {
-	background-color: #4b4b4b;
+	background-color: #984d00;
 	padding: 0px !important;
 	margin: -1px !important;
 	display: flow-root;
@@ -407,8 +407,8 @@
 }
 
 .primary-button {
-	color: white;
-    background-color: #3a3a3a;
+	color: black;
+    background-color: #df7700;
     border-color: #000000;
     border-radius: 4px;
     line-height: 1;
@@ -419,8 +419,8 @@
 }
 
 .primary-button:hover {
-    color: #020202;
-    background-color: #717171;
+    color: white;
+    background-color: #965001;
     border-color: #000000;
     border-radius: 4px;
     line-height: 1;
