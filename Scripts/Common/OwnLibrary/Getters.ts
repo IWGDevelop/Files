@@ -1,4 +1,4 @@
-﻿//Version 13
+//Version 14
 
 const textComplete: string = "1";
 const onlyCode: string = "Code";
@@ -47,7 +47,7 @@ function getJsonForDropDrown(url: string, dropDown: JQuery, textType: string, ex
             off();
         })
         .fail((jqxhr, textStatus, error) => {
-            let err = textStatus + ", " + error + ", " + jqxhr.responseJSON != null ? '' : jqxhr.responseJSON.MessageDetail;
+            const err = textStatus + ", " + error + ", " + jqxhr.responseJSON != null ? '' : jqxhr.responseJSON.MessageDetail;
             this.objCommon.showNotification("ERROR", "Respuesta fallida <br> Servicio: " + url + "<br>" + err, "Web API");
             off();
         });
@@ -74,9 +74,9 @@ function getJsonForBootstrapSelect(url: string, options: OptionsBootstrapSelect,
                         extraText += ' data-' + options.extraOption + '=' + val[options.extraOption];
                     }
                     if (options.subTextOption != "" && options.subTextOption != undefined && options.subTextOption != null) {
-                        var opts = options.subTextOption.split('.');
+                        const opts = options.subTextOption.split('.');
                         let obj: string = val;
-                        for (var i = 0; i < opts.length; i++) {
+                        for (let i = 0; i < opts.length; i++) {
                             obj = obj[opts[i]];
                         }
                         if (options.limitSubTextOption > 0) {
@@ -100,9 +100,9 @@ function getJsonForBootstrapSelect(url: string, options: OptionsBootstrapSelect,
                         dataType: 'json',
                         async: false,
                         success: (data: string) => {
-                            let array = [];
+                            const array = [];
                             if (data != null) {
-                                var theObject = JSON.parse(data);
+                                const theObject = JSON.parse(data);
                                 for (let i = 0; i < theObject.length; i++) {
                                     array.push(theObject[i]['Id']);
                                 }
@@ -114,14 +114,16 @@ function getJsonForBootstrapSelect(url: string, options: OptionsBootstrapSelect,
                         }
                     });
                 } else {
-                    dropDown.selectpicker('val', options.value);
+                    if (options.value != null && options.value != undefined && options.value != 0) {
+                        dropDown.selectpicker('val', options.value);
+                    }
                 }
                 dropDown.selectpicker('refresh');
                 off();
             }
         })
         .fail((jqxhr, textStatus, error) => {
-            let err = textStatus + ", " + error + ", " + jqxhr.responseJSON != null ? '' : jqxhr.responseJSON.MessageDetail;
+            const err = textStatus + ", " + error + ", " + jqxhr.responseJSON != null ? '' : jqxhr.responseJSON.MessageDetail;
             this.objCommon.showNotification("ERROR", "Respuesta fallida <br> Servicio: " + url + "<br>" + err, "Web API");
             off();
         });
@@ -131,17 +133,17 @@ function getJsonForMultiselect(url: string, ...multiselect: JQuery[]) {
     on();
     $.getJSON(url)
         .done(data => {
-            let listData = [];
+            const listData = [];
             $.each(data, (key, val) => {
                 listData.push(val);
             });
-            for (var i = 0; i < multiselect.length; i++) {
+            for (let i = 0; i < multiselect.length; i++) {
                 multiselect[i].data("kendoMultiSelect").setDataSource(new kendo.data.DataSource({ data: listData }));
             }
             off();
         })
         .fail((jqxhr, textStatus, error) => {
-            let err = textStatus + ", " + error + ", " + jqxhr.responseJSON != null ? '' : jqxhr.responseJSON.MessageDetail;
+            const err = textStatus + ", " + error + ", " + jqxhr.responseJSON != null ? '' : jqxhr.responseJSON.MessageDetail;
             this.objCommon.showNotification("ERROR", "Respuesta fallida <br> Servicio: " + url + "<br>" + err, "Web API");
             off();
         });
@@ -171,7 +173,7 @@ function getProperty(url: string, editor: JQuery, property?: string) {
             off();
         },
         error: (jqxhr, textStatus, error) => {
-            let err = textStatus + ", " + error + ", " + jqxhr.responseJSON != null ? '' : jqxhr.responseJSON.MessageDetail;
+            const err = textStatus + ", " + error + ", " + jqxhr.responseJSON != null ? '' : jqxhr.responseJSON.MessageDetail;
             this.objCommon.showNotification("ERROR", "Respuesta fallida <br> Servicio: " + url + "<br>" + err, "Web API");
 
             off();
@@ -225,20 +227,20 @@ function getJson(url: string, data?: any, evtDone?: Function) {
 }
 
 function getCurrentDate(): string {
-    var date = new Date();
+    const date = new Date();
 
-    var day = date.getDate();
-    var month = date.getMonth() + 1;
-    var year = date.getFullYear();
-    var tDay = day.toString();
-    var tMonth = month.toString();
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    let tDay = day.toString();
+    let tMonth = month.toString();
 
     if (day < 10) {
-        tDay = '0' + day
+        tDay = '0' + day;
     }
 
     if (month < 10) {
-        tMonth = '0' + month
+        tMonth = '0' + month;
     }
 
     return year + "-" + tMonth + "-" + tDay;

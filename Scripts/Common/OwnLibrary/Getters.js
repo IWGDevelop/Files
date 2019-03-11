@@ -1,4 +1,4 @@
-//Version 13
+//Version 14
 var textComplete = "1";
 var onlyCode = "Code";
 var onlyDescription = "Description";
@@ -123,7 +123,9 @@ function getJsonForBootstrapSelect(url, options) {
                 });
             }
             else {
-                dropDown.selectpicker('val', options.value);
+                if (options.value != null && options.value != undefined && options.value != 0) {
+                    dropDown.selectpicker('val', options.value);
+                }
             }
             dropDown.selectpicker('refresh');
             off();
