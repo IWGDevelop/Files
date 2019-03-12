@@ -114,7 +114,7 @@ function getJsonForBootstrapSelect(url: string, options: OptionsBootstrapSelect,
                         }
                     });
                 } else {
-                    if (options.value != null && options.value != undefined && options.value != 0) {
+                    if (options.value != null && options.value != undefined && options.value != 0 && options.value != '') {
                         dropDown.selectpicker('val', options.value);
                     }
                 }
