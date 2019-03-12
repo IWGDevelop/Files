@@ -123,7 +123,7 @@ function getJsonForBootstrapSelect(url, options) {
                 });
             }
             else {
-                if (options.value != null && options.value != undefined && options.value != 0) {
+                if (options.value != null && options.value != undefined && options.value != 0 && options.value != '') {
                     dropDown.selectpicker('val', options.value);
                 }
             }
