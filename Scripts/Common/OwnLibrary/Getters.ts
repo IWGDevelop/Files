@@ -71,10 +71,10 @@ function getJsonForBootstrapSelect(url: string, options: OptionsBootstrapSelect,
                 $.each(data, (key, val) => {
                     extraText = '';
                     if (options.extraOption != null && options.extraOption != undefined && options.extraOption !== '') {
-                        extraText += ' data-' + options.extraOption + '=' + val[options.extraOption];
+                        extraText += ' data-' + options.extraOption + '="' + val[options.extraOption] + '"';
                     }
                     if (options.extraOption2 != null && options.extraOption2 != undefined && options.extraOption2 !== '') {
-                        extraText += ' data-' + options.extraOption2 + '=' + val[options.extraOption2];
+                        extraText += ' data-' + options.extraOption2 + '="' + val[options.extraOption2] + '"';
                     }
                     if (options.subTextOption != null && options.subTextOption != undefined && options.subTextOption !== '') {
                         const opts = options.subTextOption.split('.');
