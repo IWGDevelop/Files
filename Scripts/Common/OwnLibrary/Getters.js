@@ -1,28 +1,27 @@
-//Version 14
-var textComplete = "1";
-var onlyCode = "Code";
-var onlyDescription = "Description";
-var onlyName = "Name";
+var textComplete = '1';
+var onlyCode = 'Code';
+var onlyDescription = 'Description';
+var onlyName = 'Name';
 function getJsonForDropDrown(url, dropDown, textType, extraOption) {
     var _this = this;
     on();
     $.getJSON(url)
         .done(function (data) {
-        dropDown.removeAttr("disabled");
+        dropDown.removeAttr('disabled');
         dropDown.empty();
         dropDown.append('<option value="">Seleccione</option>');
         $.each(data, function (key, val) {
             switch (textType) {
                 case textComplete:
-                    if (extraOption === "") {
-                        dropDown.append('<option value="' + val.Id + '">' + val.Code + " - " + val.Description + '</option>');
+                    if (extraOption === '') {
+                        dropDown.append('<option value="' + val.Id + '">' + val.Code + ' - ' + val.Description + '</option>');
                     }
                     else {
-                        dropDown.append('<option value="' + val.Id + '" data-' + extraOption + '=' + val[extraOption] + '>' + val.Code + " - " + val.Description + '</option>');
+                        dropDown.append('<option value="' + val.Id + '" data-' + extraOption + '=' + val[extraOption] + '>' + val.Code + ' - ' + val.Description + '</option>');
                     }
                     break;
                 case onlyCode:
-                    if (extraOption === "") {
+                    if (extraOption === '') {
                         dropDown.append('<option value="' + val.Id + '">' + val.Code + '</option>');
                     }
                     else {
@@ -30,15 +29,15 @@ function getJsonForDropDrown(url, dropDown, textType, extraOption) {
                     }
                     break;
                 case onlyDescription:
-                    if (extraOption === "") {
-                        dropDown.append('<option value="' + val.Id + '" data-cod="' + val.Code + '">' + val.Description + '</option>');
+                    if (extraOption === '') {
+                        dropDown.append('<option value="' + val.Id + ' data-cod="' + val.Code + '">' + val.Description + '</option>');
                     }
                     else {
-                        dropDown.append('<option value="' + val.Id + '" data-cod="' + val.Code + '" data-' + extraOption + '=' + val[extraOption] + '>' + val.Description + '</option>');
+                        dropDown.append('<option value="' + val.Id + ' data-cod="' + val.Code + '" data-' + extraOption + '=' + val[extraOption] + '>' + val.Description + '</option>');
                     }
                     break;
                 default:
-                    if (extraOption === "") {
+                    if (extraOption === '') {
                         dropDown.append('<option value="' + val.Id + '" data-cod="' + val.Code + '">' + val[textType] + '</option>');
                     }
                     else {
@@ -50,8 +49,8 @@ function getJsonForDropDrown(url, dropDown, textType, extraOption) {
         off();
     })
         .fail(function (jqxhr, textStatus, error) {
-        var err = textStatus + ", " + error + ", " + jqxhr.responseJSON != null ? '' : jqxhr.responseJSON.MessageDetail;
-        _this.objCommon.showNotification("ERROR", "Respuesta fallida <br> Servicio: " + url + "<br>" + err, "Web API");
+        var err = textStatus + ', ' + error + ', ' + jqxhr.responseJSON != null ? '' : jqxhr.responseJSON.MessageDetail;
+        _this.objCommon.showNotification('ERROR', 'Respuesta fallida <br> Servicio: ' + url + '<br>' + err, 'Web API');
         off();
     });
 }
@@ -61,9 +60,9 @@ function getJsonForBootstrapSelect(url, options) {
     for (var _i = 2; _i < arguments.length; _i++) {
         dropDowns[_i - 2] = arguments[_i];
     }
-    options = setDefaults(options, defaultsBootstrapSelect);
+    options = (setDefaults(options, defaultsBootstrapSelect));
     on();
-    var extraText = "";
+    var extraText = '';
     $.ajax({
         dataType: 'json',
         url: url,
@@ -72,15 +71,18 @@ function getJsonForBootstrapSelect(url, options) {
         .done(function (data) {
         var _loop_1 = function (dropDown) {
             if (options.enable) {
-                dropDown.removeAttr("disabled");
+                dropDown.removeAttr('disabled');
             }
             dropDown.empty();
             $.each(data, function (key, val) {
-                extraText = "";
-                if (options.extraOption != "" && options.extraOption != undefined && options.extraOption != null) {
+                extraText = '';
+                if (options.extraOption != null && options.extraOption != undefined && options.extraOption !== '') {
                     extraText += ' data-' + options.extraOption + '=' + val[options.extraOption];
                 }
-                if (options.subTextOption != "" && options.subTextOption != undefined && options.subTextOption != null) {
+                if (options.extraOption2 != null && options.extraOption2 != undefined && options.extraOption2 !== '') {
+                    extraText += ' data-' + options.extraOption2 + '=' + val[options.extraOption2];
+                }
+                if (options.subTextOption != null && options.subTextOption != undefined && options.subTextOption !== '') {
                     var opts = options.subTextOption.split('.');
                     var obj = val;
                     for (var i = 0; i < opts.length; i++) {
@@ -136,8 +138,8 @@ function getJsonForBootstrapSelect(url, options) {
         }
     })
         .fail(function (jqxhr, textStatus, error) {
-        var err = textStatus + ", " + error + ", " + jqxhr.responseJSON != null ? '' : jqxhr.responseJSON.MessageDetail;
-        _this.objCommon.showNotification("ERROR", "Respuesta fallida <br> Servicio: " + url + "<br>" + err, "Web API");
+        var err = textStatus + ', ' + error + ', ' + jqxhr.responseJSON != null ? '' : jqxhr.responseJSON.MessageDetail;
+        _this.objCommon.showNotification('ERROR', 'Respuesta fallida <br> Servicio: ' + url + '<br>' + err, 'Web API');
         off();
     });
 }
@@ -155,21 +157,21 @@ function getJsonForMultiselect(url) {
             listData.push(val);
         });
         for (var i = 0; i < multiselect.length; i++) {
-            multiselect[i].data("kendoMultiSelect").setDataSource(new kendo.data.DataSource({ data: listData }));
+            multiselect[i].data('kendoMultiSelect').setDataSource(new kendo.data.DataSource({ data: listData }));
         }
         off();
     })
         .fail(function (jqxhr, textStatus, error) {
-        var err = textStatus + ", " + error + ", " + jqxhr.responseJSON != null ? '' : jqxhr.responseJSON.MessageDetail;
-        _this.objCommon.showNotification("ERROR", "Respuesta fallida <br> Servicio: " + url + "<br>" + err, "Web API");
+        var err = textStatus + ', ' + error + ', ' + jqxhr.responseJSON != null ? '' : jqxhr.responseJSON.MessageDetail;
+        _this.objCommon.showNotification('ERROR', 'Respuesta fallida <br> Servicio: ' + url + '<br>' + err, 'Web API');
         off();
     });
 }
 function getCode(url, editor) {
-    getProperty(url, editor, "Code");
+    getProperty(url, editor, 'Code');
 }
 function getDescription(url, editor) {
-    getProperty(url, editor, "Description");
+    getProperty(url, editor, 'Description');
 }
 function getProperty(url, editor, property) {
     var _this = this;
@@ -189,15 +191,12 @@ function getProperty(url, editor, property) {
             off();
         },
         error: function (jqxhr, textStatus, error) {
-            var err = textStatus + ", " + error + ", " + jqxhr.responseJSON != null ? '' : jqxhr.responseJSON.MessageDetail;
-            _this.objCommon.showNotification("ERROR", "Respuesta fallida <br> Servicio: " + url + "<br>" + err, "Web API");
+            var err = textStatus + ', ' + error + ', ' + jqxhr.responseJSON != null ? '' : jqxhr.responseJSON.MessageDetail;
+            _this.objCommon.showNotification('ERROR', 'Respuesta fallida <br> Servicio: ' + url + '<br>' + err, 'Web API');
             off();
         }
     });
 }
-/**
- * @deprecated Usar el método getJson para evitar un llamado síncrono. El método getJson no retorna nada, en vez de eso recibe una función que se ejecuta cuando hay una respuesta satisfatoria y en este métdo debe escribirse lo que se ha de hacer con el objeto
- */
 function getObject(url, data) {
     var object;
     $.ajax({
@@ -251,14 +250,13 @@ function getCurrentDate() {
     if (month < 10) {
         tMonth = '0' + month;
     }
-    return year + "-" + tMonth + "-" + tDay;
+    return year + '-' + tMonth + '-' + tDay;
 }
-//Función para generar un consecutivo usando el servicio publicado de generación de consecutivos para un documento específico
 function getConsecutive(field, options) {
     on();
     options = setDefaults(options, defaultsConsecutive);
     $.ajax({
-        url: apiTransverse + "DocumentTypes/GetConsecutive",
+        url: apiTransverse + 'DocumentTypes/GetConsecutive',
         dataType: 'json',
         data: {
             idDocument: options.documentId,
@@ -273,7 +271,7 @@ function getConsecutive(field, options) {
             options.successEvent(data);
         }),
         error: (function (jqXHR, textStatus, error) {
-            swal("Error", "No hemos logrado conseguir un consecutivo para este documento.\n\nPor favor, inténtalo de nuevo en un momento y si el problema persiste contacta con el administrador", "error");
+            swal('Error', 'No hemos logrado conseguir un consecutivo para este documento.\n\nPor favor, inténtalo de nuevo en un momento y si el problema persiste contacta con el administrador', 'error');
             off();
         })
     });
