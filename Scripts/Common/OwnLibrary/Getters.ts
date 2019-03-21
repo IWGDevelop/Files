@@ -1,42 +1,42 @@
-//Version 14
+﻿//Version 15
 
-const textComplete: string = "1";
-const onlyCode: string = "Code";
-const onlyDescription: string = "Description";
-const onlyName: string = "Name";
+const textComplete: string = '1';
+const onlyCode: string = 'Code';
+const onlyDescription: string = 'Description';
+const onlyName: string = 'Name';
 
 function getJsonForDropDrown(url: string, dropDown: JQuery, textType: string, extraOption: string) {
     on();
     $.getJSON(url)
         .done(data => {
-            dropDown.removeAttr("disabled");
+            dropDown.removeAttr('disabled');
             dropDown.empty();
             dropDown.append('<option value="">Seleccione</option>');
             $.each(data, (key, val) => {
                 switch (textType) {
                     case textComplete:
-                        if (extraOption === "") {
-                            dropDown.append('<option value="' + val.Id + '">' + val.Code + " - " + val.Description + '</option>');
+                        if (extraOption === '') {
+                            dropDown.append('<option value="' + val.Id + '">' + val.Code + ' - ' + val.Description + '</option>');
                         } else {
-                            dropDown.append('<option value="' + val.Id + '" data-' + extraOption + '=' + val[extraOption] + '>' + val.Code + " - " + val.Description + '</option>');
+                            dropDown.append('<option value="' + val.Id + '" data-' + extraOption + '=' + val[extraOption] + '>' + val.Code + ' - ' + val.Description + '</option>');
                         }
                         break;
                     case onlyCode:
-                        if (extraOption === "") {
+                        if (extraOption === '') {
                             dropDown.append('<option value="' + val.Id + '">' + val.Code + '</option>');
                         } else {
                             dropDown.append('<option value="' + val.Id + '" data-' + extraOption + '=' + val[extraOption] + '>' + val.Code + '</option>');
                         }
                         break;
                     case onlyDescription:
-                        if (extraOption === "") {
-                            dropDown.append('<option value="' + val.Id + '" data-cod="' + val.Code + '">' + val.Description + '</option>');
+                        if (extraOption === '') {
+                            dropDown.append('<option value="' + val.Id + ' data-cod="' + val.Code + '">' + val.Description + '</option>');
                         } else {
-                            dropDown.append('<option value="' + val.Id + '" data-cod="' + val.Code + '" data-' + extraOption + '=' + val[extraOption] + '>' + val.Description + '</option>');
+                            dropDown.append('<option value="' + val.Id + ' data-cod="' + val.Code + '" data-' + extraOption + '=' + val[extraOption] + '>' + val.Description + '</option>');
                         }
                         break;
                     default:
-                        if (extraOption === "") {
+                        if (extraOption === '') {
                             dropDown.append('<option value="' + val.Id + '" data-cod="' + val.Code + '">' + val[textType] + '</option>');
                         } else {
                             dropDown.append('<option value="' + val.Id + '" data-cod="' + val.Code + '" data-' + extraOption + '=' + val[extraOption] + '>' + val[textType] + '</option>');
@@ -47,16 +47,16 @@ function getJsonForDropDrown(url: string, dropDown: JQuery, textType: string, ex
             off();
         })
         .fail((jqxhr, textStatus, error) => {
-            const err = textStatus + ", " + error + ", " + jqxhr.responseJSON != null ? '' : jqxhr.responseJSON.MessageDetail;
-            this.objCommon.showNotification("ERROR", "Respuesta fallida <br> Servicio: " + url + "<br>" + err, "Web API");
+            const err = textStatus + ', ' + error + ', ' + jqxhr.responseJSON != null ? '' : jqxhr.responseJSON.MessageDetail;
+            this.objCommon.showNotification('ERROR', 'Respuesta fallida <br> Servicio: ' + url + '<br>' + err, 'Web API');
             off();
         });
 }
 
 function getJsonForBootstrapSelect(url: string, options: OptionsBootstrapSelect, ...dropDowns: JQuery[]) {
-    options = setDefaults(options, defaultsBootstrapSelect);
+    options = <OptionsBootstrapSelect>(setDefaults(options, defaultsBootstrapSelect));
     on();
-    var extraText = "";
+    var extraText = '';
     $.ajax({
         dataType: 'json',
         url: url,
@@ -65,15 +65,18 @@ function getJsonForBootstrapSelect(url: string, options: OptionsBootstrapSelect,
         .done(data => {
             for (let dropDown of dropDowns) {
                 if (options.enable) {
-                    dropDown.removeAttr("disabled");
+                    dropDown.removeAttr('disabled');
                 }
                 dropDown.empty();
                 $.each(data, (key, val) => {
-                    extraText = "";
-                    if (options.extraOption != "" && options.extraOption != undefined && options.extraOption != null) {
-                        extraText += ' data-' + options.extraOption + '=' + val[options.extraOption];
+                    extraText = '';
+                    if (options.extraOption != null && options.extraOption != undefined && options.extraOption !== '') {
+                        extraText += ' data-' + options.extraOption + '="' + val[options.extraOption] + '"';
                     }
-                    if (options.subTextOption != "" && options.subTextOption != undefined && options.subTextOption != null) {
+                    if (options.extraOption2 != null && options.extraOption2 != undefined && options.extraOption2 !== '') {
+                        extraText += ' data-' + options.extraOption2 + '="' + val[options.extraOption2] + '"';
+                    }
+                    if (options.subTextOption != null && options.subTextOption != undefined && options.subTextOption !== '') {
                         const opts = options.subTextOption.split('.');
                         let obj: string = val;
                         for (let i = 0; i < opts.length; i++) {
@@ -123,8 +126,8 @@ function getJsonForBootstrapSelect(url: string, options: OptionsBootstrapSelect,
             }
         })
         .fail((jqxhr, textStatus, error) => {
-            const err = textStatus + ", " + error + ", " + jqxhr.responseJSON != null ? '' : jqxhr.responseJSON.MessageDetail;
-            this.objCommon.showNotification("ERROR", "Respuesta fallida <br> Servicio: " + url + "<br>" + err, "Web API");
+            const err = textStatus + ', ' + error + ', ' + jqxhr.responseJSON != null ? '' : jqxhr.responseJSON.MessageDetail;
+            this.objCommon.showNotification('ERROR', 'Respuesta fallida <br> Servicio: ' + url + '<br>' + err, 'Web API');
             off();
         });
 }
@@ -138,23 +141,23 @@ function getJsonForMultiselect(url: string, ...multiselect: JQuery[]) {
                 listData.push(val);
             });
             for (let i = 0; i < multiselect.length; i++) {
-                multiselect[i].data("kendoMultiSelect").setDataSource(new kendo.data.DataSource({ data: listData }));
+                multiselect[i].data('kendoMultiSelect').setDataSource(new kendo.data.DataSource({ data: listData }));
             }
             off();
         })
         .fail((jqxhr, textStatus, error) => {
-            const err = textStatus + ", " + error + ", " + jqxhr.responseJSON != null ? '' : jqxhr.responseJSON.MessageDetail;
-            this.objCommon.showNotification("ERROR", "Respuesta fallida <br> Servicio: " + url + "<br>" + err, "Web API");
+            const err = textStatus + ', ' + error + ', ' + jqxhr.responseJSON != null ? '' : jqxhr.responseJSON.MessageDetail;
+            this.objCommon.showNotification('ERROR', 'Respuesta fallida <br> Servicio: ' + url + '<br>' + err, 'Web API');
             off();
         });
 }
 
 function getCode(url: string, editor: JQuery) {
-    getProperty(url, editor, "Code");
+    getProperty(url, editor, 'Code');
 }
 
 function getDescription(url: string, editor: JQuery) {
-    getProperty(url, editor, "Description");
+    getProperty(url, editor, 'Description');
 }
 
 function getProperty(url: string, editor: JQuery, property?: string) {
@@ -173,8 +176,8 @@ function getProperty(url: string, editor: JQuery, property?: string) {
             off();
         },
         error: (jqxhr, textStatus, error) => {
-            const err = textStatus + ", " + error + ", " + jqxhr.responseJSON != null ? '' : jqxhr.responseJSON.MessageDetail;
-            this.objCommon.showNotification("ERROR", "Respuesta fallida <br> Servicio: " + url + "<br>" + err, "Web API");
+            const err = textStatus + ', ' + error + ', ' + jqxhr.responseJSON != null ? '' : jqxhr.responseJSON.MessageDetail;
+            this.objCommon.showNotification('ERROR', 'Respuesta fallida <br> Servicio: ' + url + '<br>' + err, 'Web API');
 
             off();
         }
@@ -243,7 +246,7 @@ function getCurrentDate(): string {
         tMonth = '0' + month;
     }
 
-    return year + "-" + tMonth + "-" + tDay;
+    return year + '-' + tMonth + '-' + tDay;
 }
 
 //Función para generar un consecutivo usando el servicio publicado de generación de consecutivos para un documento específico
@@ -251,7 +254,7 @@ function getConsecutive(field: JQuery, options: OptionsConsecutive) {
     on();
     options = setDefaults(options, defaultsConsecutive);
     $.ajax({
-        url: apiTransverse + "DocumentTypes/GetConsecutive",
+        url: apiTransverse + 'DocumentTypes/GetConsecutive',
         dataType: 'json',
         data: {
             idDocument: options.documentId,
@@ -266,7 +269,7 @@ function getConsecutive(field: JQuery, options: OptionsConsecutive) {
             options.successEvent(data);
         }),
         error: ((jqXHR, textStatus, error) => {
-            swal("Error", "No hemos logrado conseguir un consecutivo para este documento.\n\nPor favor, inténtalo de nuevo en un momento y si el problema persiste contacta con el administrador", "error");
+            swal('Error', 'No hemos logrado conseguir un consecutivo para este documento.\n\nPor favor, inténtalo de nuevo en un momento y si el problema persiste contacta con el administrador', 'error');
             off();
         })
     });

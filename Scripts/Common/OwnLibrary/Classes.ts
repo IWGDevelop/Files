@@ -1,5 +1,6 @@
-﻿//Version 10
+﻿//Version 11
 
+function setDefaults(options: any, defaults: any);
 function setDefaults(options, defaults) {
     return (<any>Object).assign({}, defaults, options);
 }
@@ -7,6 +8,7 @@ function setDefaults(options, defaults) {
 class OptionsBootstrapSelect {
     text?: string;
     extraOption?: string;
+    extraOption2?: string;
     enable?: boolean;
     subTextOption?: string;
     limitSubTextOption?: number;
@@ -17,10 +19,11 @@ class OptionsBootstrapSelect {
 }
 
 var defaultsBootstrapSelect = {
-    text: "Description",
-    extraOption: "",
+    text: 'Description',
+    extraOption: '',
+    extraOption2: '',
     enable: false,
-    subTextOption: "",
+    subTextOption: '',
     limitSubTextOption: 0,
     showSubtext: false,
     value: 0,
@@ -39,8 +42,8 @@ class OptionsGenerateBootbox {
 }
 
 var defaultsGenerateBootbox = {
-    title: "Bootbox",
-    loadUrl: "",
+    title: 'Bootbox',
+    loadUrl: '',
     loadData: {},
     loadCallback: (response) => { },
     bootboxCallback: () => { },

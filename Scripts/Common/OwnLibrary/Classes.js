@@ -7,10 +7,11 @@ var OptionsBootstrapSelect = (function () {
     return OptionsBootstrapSelect;
 }());
 var defaultsBootstrapSelect = {
-    text: "Description",
-    extraOption: "",
+    text: 'Description',
+    extraOption: '',
+    extraOption2: '',
     enable: false,
-    subTextOption: "",
+    subTextOption: '',
     limitSubTextOption: 0,
     showSubtext: false,
     value: 0,
@@ -23,8 +24,8 @@ var OptionsGenerateBootbox = (function () {
     return OptionsGenerateBootbox;
 }());
 var defaultsGenerateBootbox = {
-    title: "Bootbox",
-    loadUrl: "",
+    title: 'Bootbox',
+    loadUrl: '',
     loadData: {},
     loadCallback: function (response) { },
     bootboxCallback: function () { },
