@@ -1,0 +1,37 @@
+﻿body {
+    padding: 3% 10%;
+    background-color: white;
+    font-family: 'roboto', sans-serif;
+}
+
+span {
+    font-family: 'roboto', sans-serif;
+}
+
+b {
+    font-size: 18px;
+    font-family: 'roboto', sans-serif;
+}
+
+th {
+    padding: 8px;
+    background-color:cadetblue;
+    border-style: solid;
+    border-width: 1px;
+    border-color: dimgray;
+}
+
+td {
+    border-top-style: none !important;
+    border-bottom-style: solid !important;
+    border-right-style: solid !important;
+    border-left-style: solid !important;
+    border-width: 1px;
+    font-family: sans-serif;
+    border-color: dimgray !important;
+}
+
+table {
+    border-style:none !important;
+}
+

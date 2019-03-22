@@ -553,3 +553,7 @@
 		background-size: 100%;
 		transition: background 0s;
 	}
+	
+.form-group{
+	margin-bottom: 0px !important;
+}
