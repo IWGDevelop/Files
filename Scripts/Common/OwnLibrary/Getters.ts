@@ -1,10 +1,13 @@
-﻿//Version 15
+﻿//Version 16
 
 const textComplete: string = '1';
 const onlyCode: string = 'Code';
 const onlyDescription: string = 'Description';
 const onlyName: string = 'Name';
 
+/**
+ * @deprecated Este método está en deshuso todos los DropDown se están migrando a la libraría Bootstrap-select. Usar solo getJsonForBootstrapSelect.
+ */
 function getJsonForDropDrown(url: string, dropDown: JQuery, textType: string, extraOption: string) {
     on();
     $.getJSON(url)
@@ -132,6 +135,9 @@ function getJsonForBootstrapSelect(url: string, options: OptionsBootstrapSelect,
         });
 }
 
+/**
+ * @deprecated Este método está en deshuso ya que los componentes de Kendo están en deshuso. Usar solo getJsonForBootstrapSelect
+ */
 function getJsonForMultiselect(url: string, ...multiselect: JQuery[]) {
     on();
     $.getJSON(url)
@@ -217,7 +223,7 @@ function getJson(url: string, data?: any, evtDone?: Function) {
         url: url,
         data: data,
         dataType: 'json',
-        type: 'GET',
+        type: 'POST',
         success: (response, status, jqXHR) => {
             evtDone(response, status, jqXHR);
             off();
