@@ -236,7 +236,7 @@ function getJson(url, data, evtDone) {
         url: url,
         data: data,
         dataType: 'json',
-        type: 'POST',
+        type: 'GET',
         success: function (response, status, jqXHR) {
             evtDone(response, status, jqXHR);
             off();

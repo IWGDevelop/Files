@@ -223,7 +223,7 @@ function getJson(url: string, data?: any, evtDone?: Function) {
         url: url,
         data: data,
         dataType: 'json',
-        type: 'POST',
+        type: 'GET',
         success: (response, status, jqXHR) => {
             evtDone(response, status, jqXHR);
             off();
