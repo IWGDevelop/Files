@@ -1,4 +1,4 @@
-﻿//Version 16
+//Version 16
 
 const textComplete: string = '1';
 const onlyCode: string = 'Code';
@@ -203,7 +203,7 @@ function getObject(url: string, data?: any): Object {
         async: false,
         success: (response) => {
             if (response != null) {
-                if (response.length == 1) {
+                if (response.length === 1) {
                     object = response[0];
                 } else {
                     object = response;
