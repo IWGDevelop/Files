@@ -1,4 +1,4 @@
-//Version 16
+//Version 17
 var textComplete = '1';
 var onlyCode = 'Code';
 var onlyDescription = 'Description';
@@ -108,7 +108,7 @@ function getJsonForBootstrapSelect(url, options) {
                     dropDown.append('<option value="' + val.Id + '"' + extraText + '>' + val[options.text] + '</option>');
                 }
             });
-            if (options.urlValues != undefined && options.urlValues != null && options.urlValues != '') {
+            if (options.urlValues != undefined && options.urlValues != null && options.urlValues !== '') {
                 $.ajax({
                     url: options.urlValues,
                     dataType: 'json',
@@ -129,7 +129,7 @@ function getJsonForBootstrapSelect(url, options) {
                 });
             }
             else {
-                if (options.value != null && options.value != undefined && options.value != 0 && options.value != '') {
+                if (options.value != null && options.value != undefined && options.value !== 0 && options.value !== '') {
                     dropDown.selectpicker('val', options.value);
                 }
             }
@@ -142,7 +142,7 @@ function getJsonForBootstrapSelect(url, options) {
         }
     })
         .fail(function (jqxhr, textStatus, error) {
-        var err = textStatus + ', ' + error + ', ' + jqxhr.responseJSON != null ? '' : jqxhr.responseJSON.MessageDetail;
+        var err = jqxhr.responseJSON.MessageDetail;
         _this.objCommon.showNotification('ERROR', 'Respuesta fallida <br> Servicio: ' + url + '<br>' + err, 'Web API');
         off();
     });
@@ -169,7 +169,7 @@ function getJsonForMultiselect(url) {
         off();
     })
         .fail(function (jqxhr, textStatus, error) {
-        var err = textStatus + ', ' + error + ', ' + jqxhr.responseJSON != null ? '' : jqxhr.responseJSON.MessageDetail;
+        var err = jqxhr.responseJSON.MessageDetail;
         _this.objCommon.showNotification('ERROR', 'Respuesta fallida <br> Servicio: ' + url + '<br>' + err, 'Web API');
         off();
     });
@@ -198,7 +198,7 @@ function getProperty(url, editor, property) {
             off();
         },
         error: function (jqxhr, textStatus, error) {
-            var err = textStatus + ', ' + error + ', ' + jqxhr.responseJSON != null ? '' : jqxhr.responseJSON.MessageDetail;
+            var err = jqxhr.responseJSON.MessageDetail;
             _this.objCommon.showNotification('ERROR', 'Respuesta fallida <br> Servicio: ' + url + '<br>' + err, 'Web API');
             off();
         }
@@ -230,19 +230,24 @@ function getObject(url, data) {
     });
     return object;
 }
-function getJson(url, data, evtDone) {
+function getJson(url, data, evtDone, errorMessage) {
     on();
     $.ajax({
         url: url,
         data: data,
         dataType: 'json',
         type: 'GET',
-        success: function (response, status, jqXHR) {
-            evtDone(response, status, jqXHR);
+        success: function (response, status, jqXhr) {
+            evtDone(response, status, jqXhr);
             off();
         },
-        error: function (jqXHR, status, error) {
-            swal('Error', 'No se pudo obtener respuesta satisfactoria debido al error: ' + error, 'error');
+        error: function (jqXhr, status, error) {
+            if (errorMessage === undefined || errorMessage === null || errorMessage === '') {
+                swal('Error', 'No se pudo obtener respuesta satisfactoria debido al error: ' + error, 'error');
+            }
+            else {
+                swal('Error', errorMessage, 'error');
+            }
             off();
         }
     });
@@ -281,7 +286,7 @@ function getConsecutive(field, options) {
             off();
             options.successEvent(data);
         }),
-        error: (function (jqXHR, textStatus, error) {
+        error: (function (jqXhr, textStatus, error) {
             swal('Error', 'No hemos logrado conseguir un consecutivo para este documento.\n\nPor favor, inténtalo de nuevo en un momento y si el problema persiste contacta con el administrador', 'error');
             off();
         })
@@ -295,7 +300,7 @@ function getTextSelectedFields(dropDown, attribute) {
             fields += '|' + $(this).attr(attribute);
         }
     });
-    if (fields != '') {
+    if (fields !== '') {
         fields = fields.substr(1);
     }
     return fields;

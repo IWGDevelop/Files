@@ -1,4 +1,4 @@
-//Version 16
+//Version 17
 
 const textComplete: string = '1';
 const onlyCode: string = 'Code';
@@ -100,7 +100,7 @@ function getJsonForBootstrapSelect(url: string, options: OptionsBootstrapSelect,
                         dropDown.append('<option value="' + val.Id + '"' + extraText + '>' + val[options.text] + '</option>');
                     }
                 });
-                if (options.urlValues != undefined && options.urlValues != null && options.urlValues != '') {
+                if (options.urlValues != undefined && options.urlValues != null && options.urlValues !== '') {
                     $.ajax({
                         url: options.urlValues,
                         dataType: 'json',
@@ -120,7 +120,7 @@ function getJsonForBootstrapSelect(url: string, options: OptionsBootstrapSelect,
                         }
                     });
                 } else {
-                    if (options.value != null && options.value != undefined && options.value != 0 && options.value != '') {
+                    if (options.value != null && options.value != undefined && options.value !== 0 && options.value !== '') {
                         dropDown.selectpicker('val', options.value);
                     }
                 }
@@ -129,7 +129,7 @@ function getJsonForBootstrapSelect(url: string, options: OptionsBootstrapSelect,
             }
         })
         .fail((jqxhr, textStatus, error) => {
-            const err = textStatus + ', ' + error + ', ' + jqxhr.responseJSON != null ? '' : jqxhr.responseJSON.MessageDetail;
+            const err = jqxhr.responseJSON.MessageDetail;
             this.objCommon.showNotification('ERROR', 'Respuesta fallida <br> Servicio: ' + url + '<br>' + err, 'Web API');
             off();
         });
@@ -152,7 +152,7 @@ function getJsonForMultiselect(url: string, ...multiselect: JQuery[]) {
             off();
         })
         .fail((jqxhr, textStatus, error) => {
-            const err = textStatus + ', ' + error + ', ' + jqxhr.responseJSON != null ? '' : jqxhr.responseJSON.MessageDetail;
+            const err = jqxhr.responseJSON.MessageDetail;
             this.objCommon.showNotification('ERROR', 'Respuesta fallida <br> Servicio: ' + url + '<br>' + err, 'Web API');
             off();
         });
@@ -182,7 +182,7 @@ function getProperty(url: string, editor: JQuery, property?: string) {
             off();
         },
         error: (jqxhr, textStatus, error) => {
-            const err = textStatus + ', ' + error + ', ' + jqxhr.responseJSON != null ? '' : jqxhr.responseJSON.MessageDetail;
+            const err = jqxhr.responseJSON.MessageDetail;
             this.objCommon.showNotification('ERROR', 'Respuesta fallida <br> Servicio: ' + url + '<br>' + err, 'Web API');
 
             off();
@@ -217,19 +217,23 @@ function getObject(url: string, data?: any): Object {
     return object;
 }
 
-function getJson(url: string, data?: any, evtDone?: Function) {
+function getJson(url: string, data?: any, evtDone?: Function, errorMessage?: string) {
     on();
     $.ajax({
         url: url,
         data: data,
         dataType: 'json',
         type: 'GET',
-        success: (response, status, jqXHR) => {
-            evtDone(response, status, jqXHR);
+        success: (response, status, jqXhr) => {
+            evtDone(response, status, jqXhr);
             off();
         },
-        error: (jqXHR, status, error) => {
-            swal('Error', 'No se pudo obtener respuesta satisfactoria debido al error: ' + error, 'error');
+        error: (jqXhr, status, error) => {
+            if (errorMessage === undefined || errorMessage === null || errorMessage === '') {
+                swal('Error', 'No se pudo obtener respuesta satisfactoria debido al error: ' + error, 'error');
+            } else {
+                swal('Error', errorMessage, 'error');
+            }
             off();
         }
     });
@@ -274,7 +278,7 @@ function getConsecutive(field: JQuery, options: OptionsConsecutive) {
             off();
             options.successEvent(data);
         }),
-        error: ((jqXHR, textStatus, error) => {
+        error: ((jqXhr, textStatus, error) => {
             swal('Error', 'No hemos logrado conseguir un consecutivo para este documento.\n\nPor favor, inténtalo de nuevo en un momento y si el problema persiste contacta con el administrador', 'error');
             off();
         })
@@ -289,7 +293,7 @@ function getTextSelectedFields(dropDown: JQuery, attribute?: string) {
             fields += '|' + $(this).attr(attribute);
         }
     });
-    if (fields != '') {
+    if (fields !== '') {
         fields = fields.substr(1);
     }
     return fields;
