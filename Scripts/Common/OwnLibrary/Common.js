@@ -1,39 +1,40 @@
-var apiTransverse = localStorage.getItem("apiTransverse");
-var urlTransverse = localStorage.getItem("urlTransverse");
-var apiGroup = localStorage.getItem("apiGroup");
-var apiFreight = localStorage.getItem("apiFreight");
-var localApiTransverse = localStorage.getItem("localApiTransverse");
-var localUrlTransverse = localStorage.getItem("localUrlTransverse");
-var localApiGroup = localStorage.getItem("localApiGroup");
-var localApiFreight = localStorage.getItem("localApiFreight");
-var rootPath = localStorage.getItem("rootPath");
+// Version 3
+const apiTransverse = localStorage.getItem("apiTransverse");
+const urlTransverse = localStorage.getItem("urlTransverse");
+const apiGroup = localStorage.getItem("apiGroup");
+const apiFreight = localStorage.getItem("apiFreight");
+const localApiTransverse = localStorage.getItem("localApiTransverse");
+const localUrlTransverse = localStorage.getItem("localUrlTransverse");
+const localApiGroup = localStorage.getItem("localApiGroup");
+const localApiFreight = localStorage.getItem("localApiFreight");
+const rootPath = localStorage.getItem("rootPath");
 var onQuantity = 0;
 var CommonModule;
 (function (CommonModule) {
-    var CommonMessage = (function () {
-        function CommonMessage(fieldId, outputId, validationId) {
-            var _this = this;
+    class CommonMessage {
+        constructor(fieldId, outputId, validationId) {
             this.field = $('#' + fieldId);
             this.output = $('#' + outputId);
             this.validation = $('#' + validationId);
             this.messageError = $("#messageErrorH");
             this.typeError = $("#typeErrorH");
             this.titleError = $("#titleErrorH");
-            this.validation.click(function (event) {
-                if (_this.field.val() == "") {
-                    _this.output.html("El campo no puede estar vacío.");
+            const self = this;
+            this.validation.click(event => {
+                if (this.field.val() == "") {
+                    this.output.html("El campo no puede estar vacío.");
                 }
                 else {
-                    _this.output.html("");
+                    this.output.html("");
                 }
             });
-            this.field.focusout(function (event) {
-                if (_this.field.val() == "") {
-                    _this.output.html("El campo no puede estar vacío. ");
+            this.field.focusout(event => {
+                if (this.field.val() == "") {
+                    this.output.html("El campo no puede estar vacío. ");
                     event.preventDefault();
                 }
                 else {
-                    _this.output.html("");
+                    this.output.html("");
                 }
             });
             toastr.options = {
@@ -53,14 +54,11 @@ var CommonModule;
                 "showMethod": "fadeIn",
                 "hideMethod": "fadeOut"
             };
-            this.autoNotification();
-        }
-        CommonMessage.prototype.autoNotification = function () {
             if (this.messageError.val() != '' && this.messageError.val() != undefined) {
                 this.showNotification(this.typeError.val(), this.messageError.val(), this.titleError.val());
             }
-        };
-        CommonMessage.prototype.showNotification = function (type, message, title) {
+        }
+        showNotification(type, message, title) {
             switch (type) {
                 case "OK":
                     toastr.success(message, title);
@@ -78,18 +76,21 @@ var CommonModule;
                     toastr.info(message, title);
                     break;
             }
-        };
-        CommonMessage.prototype.ModalOrigDest = function (title, param, output, output2, partialView) {
-            var err = "errores: ";
+        }
+        //Método de consulta Origenes y destinos con ventana modal
+        //title: Titulo de la ventana //param: Tipo de consulta (Puertos o Ciudades)
+        //output: 
+        //        
+        modalOrigDest(title, param, output, output2, partialView) {
+            let err = "errores: ";
             bootbox.confirm({
                 title: "Filtro " + title + " " + param,
                 message: "<div class='contentAlert'></div>",
                 callback: function (result) {
                     if (result) {
-                        var dataD = $("#" + output).data("kendoMultiSelect").dataItems();
+                        const dataD = $("#" + output).data("kendoMultiSelect").dataItems();
                         if (output == "CityId") {
-                            for (var _i = 0, dataD_1 = dataD; _i < dataD_1.length; _i++) {
-                                var item = dataD_1[_i];
+                            for (let item of dataD) {
                                 item.DescriptionPort = item.CityName;
                             }
                         }
@@ -102,14 +103,17 @@ var CommonModule;
                 }
             });
             $(".contentAlert").load("../Common/" + partialView, function (response, status, xhr) {
+                //let form = $("#trafficForm");
+                //form.data('validator', null);
+                //$.validator.unobtrusive.parse(form);
                 if (status == "error") {
+                    //alert("Error al cargar data");
                     err += xhr.statusText;
                     objCommon.showNotification("ERROR", "Respuesta fallida: <br> Servicio: " + err, "View Modal" + title);
                 }
             });
-        };
-        return CommonMessage;
-    }());
+        }
+    }
     CommonModule.CommonMessage = CommonMessage;
 })(CommonModule || (CommonModule = {}));
 var objCommon = new CommonModule.CommonMessage();

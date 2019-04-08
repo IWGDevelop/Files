@@ -1,4 +1,4 @@
-﻿// Version 2
+// Version 3
 
 const apiTransverse: string = localStorage.getItem("apiTransverse");
 const urlTransverse: string = localStorage.getItem("urlTransverse");
@@ -30,6 +30,7 @@ module CommonModule {
             this.typeError = $("#typeErrorH");
             this.titleError = $("#titleErrorH");
 
+            const self = this;
             this.validation.click(event => {
                 if (this.field.val() == "") {
                     this.output.html("El campo no puede estar vacío.");
@@ -63,12 +64,8 @@ module CommonModule {
                 "hideEasing": "linear",
                 "showMethod": "fadeIn",
                 "hideMethod": "fadeOut"
-            }
+            };
 
-            this.autoNotification();
-        }
-
-        public autoNotification() {
             if (this.messageError.val() != '' && this.messageError.val() != undefined) {
                 this.showNotification(this.typeError.val(), this.messageError.val(), this.titleError.val());
             }
@@ -77,19 +74,19 @@ module CommonModule {
         public showNotification(type: string, message: string, title: string) {
             switch (type) {
                 case "OK":
-                    toastr.success(message, title)
+                    toastr.success(message, title);
                     break;
                 case "INFO":
-                    toastr.info(message, title)
+                    toastr.info(message, title);
                     break;
                 case "WARNING":
-                    toastr.warning(message, title)
+                    toastr.warning(message, title);
                     break;
                 case "ERROR":
-                    toastr.error(message, title)
+                    toastr.error(message, title);
                     break;
                 default:
-                    toastr.info(message, title)
+                    toastr.info(message, title);
                     break;
             }
         }
@@ -98,14 +95,14 @@ module CommonModule {
         //title: Titulo de la ventana //param: Tipo de consulta (Puertos o Ciudades)
         //output: 
         //        
-        public ModalOrigDest(title, param, output, output2: JQuery, partialView) {
+        public modalOrigDest(title, param, output, output2: JQuery, partialView) {
             let err = "errores: ";
             bootbox.confirm({
                 title: "Filtro " + title + " " + param,
                 message: "<div class='contentAlert'></div>",
                 callback: function (result) {
                     if (result) {
-                        let dataD = $("#" + output).data("kendoMultiSelect").dataItems();
+                        const dataD = $("#" + output).data("kendoMultiSelect").dataItems();
 
                         if (output == "CityId") {
                             for (let item of dataD) {
