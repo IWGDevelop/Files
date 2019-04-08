@@ -1,20 +1,19 @@
-//Version 17
-var textComplete = '1';
-var onlyCode = 'Code';
-var onlyDescription = 'Description';
-var onlyName = 'Name';
+//Version 18
+const textComplete = '1';
+const onlyCode = 'Code';
+const onlyDescription = 'Description';
+const onlyName = 'Name';
 /**
  * @deprecated Este método está en deshuso todos los DropDown se están migrando a la libraría Bootstrap-select. Usar solo getJsonForBootstrapSelect.
  */
 function getJsonForDropDrown(url, dropDown, textType, extraOption) {
-    var _this = this;
     on();
     $.getJSON(url)
-        .done(function (data) {
+        .done(data => {
         dropDown.removeAttr('disabled');
         dropDown.empty();
         dropDown.append('<option value="">Seleccione</option>');
-        $.each(data, function (key, val) {
+        $.each(data, (key, val) => {
             switch (textType) {
                 case textComplete:
                     if (extraOption === '') {
@@ -52,18 +51,13 @@ function getJsonForDropDrown(url, dropDown, textType, extraOption) {
         });
         off();
     })
-        .fail(function (jqxhr, textStatus, error) {
-        var err = textStatus + ', ' + error + ', ' + jqxhr.responseJSON != null ? '' : jqxhr.responseJSON.MessageDetail;
-        _this.objCommon.showNotification('ERROR', 'Respuesta fallida <br> Servicio: ' + url + '<br>' + err, 'Web API');
+        .fail((jqxhr, textStatus, error) => {
+        const err = textStatus + ', ' + error + ', ' + jqxhr.responseJSON != null ? '' : jqxhr.responseJSON.MessageDetail;
+        this.objCommon.showNotification('ERROR', 'Respuesta fallida <br> Servicio: ' + url + '<br>' + err, 'Web API');
         off();
     });
 }
-function getJsonForBootstrapSelect(url, options) {
-    var _this = this;
-    var dropDowns = [];
-    for (var _i = 2; _i < arguments.length; _i++) {
-        dropDowns[_i - 2] = arguments[_i];
-    }
+function getJsonForBootstrapSelect(url, options, ...dropDowns) {
     options = (setDefaults(options, defaultsBootstrapSelect));
     on();
     var extraText = '';
@@ -72,13 +66,13 @@ function getJsonForBootstrapSelect(url, options) {
         url: url,
         async: options.async
     })
-        .done(function (data) {
-        var _loop_1 = function (dropDown) {
+        .done(data => {
+        for (let dropDown of dropDowns) {
             if (options.enable) {
                 dropDown.removeAttr('disabled');
             }
             dropDown.empty();
-            $.each(data, function (key, val) {
+            $.each(data, (key, val) => {
                 extraText = '';
                 if (options.extraOption != null && options.extraOption != undefined && options.extraOption !== '') {
                     extraText += ' data-' + options.extraOption + '="' + val[options.extraOption] + '"';
@@ -87,9 +81,9 @@ function getJsonForBootstrapSelect(url, options) {
                     extraText += ' data-' + options.extraOption2 + '="' + val[options.extraOption2] + '"';
                 }
                 if (options.subTextOption != null && options.subTextOption != undefined && options.subTextOption !== '') {
-                    var opts = options.subTextOption.split('.');
-                    var obj = val;
-                    for (var i = 0; i < opts.length; i++) {
+                    const opts = options.subTextOption.split('.');
+                    let obj = val;
+                    for (let i = 0; i < opts.length; i++) {
                         obj = obj[opts[i]];
                     }
                     if (options.limitSubTextOption > 0) {
@@ -113,17 +107,17 @@ function getJsonForBootstrapSelect(url, options) {
                     url: options.urlValues,
                     dataType: 'json',
                     async: false,
-                    success: function (data) {
-                        var array = [];
-                        if (data != null) {
-                            var theObject = JSON.parse(data);
-                            for (var i = 0; i < theObject.length; i++) {
+                    success: (data2) => {
+                        const array = [];
+                        if (data2 != null) {
+                            const theObject = JSON.parse(data2);
+                            for (let i = 0; i < theObject.length; i++) {
                                 array.push(theObject[i]['Id']);
                             }
                         }
                         dropDown.selectpicker('val', array);
                     },
-                    error: function (a, b, c) {
+                    error: (a, b, c) => {
                         alert('Error');
                     }
                 });
@@ -135,42 +129,33 @@ function getJsonForBootstrapSelect(url, options) {
             }
             dropDown.selectpicker('refresh');
             off();
-        };
-        for (var _i = 0, dropDowns_1 = dropDowns; _i < dropDowns_1.length; _i++) {
-            var dropDown = dropDowns_1[_i];
-            _loop_1(dropDown);
         }
     })
-        .fail(function (jqxhr, textStatus, error) {
-        var err = jqxhr.responseJSON.MessageDetail;
-        _this.objCommon.showNotification('ERROR', 'Respuesta fallida <br> Servicio: ' + url + '<br>' + err, 'Web API');
+        .fail((jqxhr, textStatus, error) => {
+        const err = jqxhr.responseJSON.MessageDetail;
+        this.objCommon.showNotification('ERROR', 'Respuesta fallida <br> Servicio: ' + url + '<br>' + err, 'Web API');
         off();
     });
 }
 /**
  * @deprecated Este método está en deshuso ya que los componentes de Kendo están en deshuso. Usar solo getJsonForBootstrapSelect
  */
-function getJsonForMultiselect(url) {
-    var _this = this;
-    var multiselect = [];
-    for (var _i = 1; _i < arguments.length; _i++) {
-        multiselect[_i - 1] = arguments[_i];
-    }
+function getJsonForMultiselect(url, ...multiselect) {
     on();
     $.getJSON(url)
-        .done(function (data) {
-        var listData = [];
-        $.each(data, function (key, val) {
+        .done(data => {
+        const listData = [];
+        $.each(data, (key, val) => {
             listData.push(val);
         });
-        for (var i = 0; i < multiselect.length; i++) {
+        for (let i = 0; i < multiselect.length; i++) {
             multiselect[i].data('kendoMultiSelect').setDataSource(new kendo.data.DataSource({ data: listData }));
         }
         off();
     })
-        .fail(function (jqxhr, textStatus, error) {
-        var err = jqxhr.responseJSON.MessageDetail;
-        _this.objCommon.showNotification('ERROR', 'Respuesta fallida <br> Servicio: ' + url + '<br>' + err, 'Web API');
+        .fail((jqxhr, textStatus, error) => {
+        const err = jqxhr.responseJSON.MessageDetail;
+        this.objCommon.showNotification('ERROR', 'Respuesta fallida <br> Servicio: ' + url + '<br>' + err, 'Web API');
         off();
     });
 }
@@ -181,12 +166,11 @@ function getDescription(url, editor) {
     getProperty(url, editor, 'Description');
 }
 function getProperty(url, editor, property) {
-    var _this = this;
     on();
     $.ajax({
         url: url,
         dataType: 'json',
-        success: function (data) {
+        success: data => {
             if (data != null) {
                 if (property != undefined && property != null && property != '') {
                     editor.val(data[property]);
@@ -197,9 +181,9 @@ function getProperty(url, editor, property) {
             }
             off();
         },
-        error: function (jqxhr, textStatus, error) {
-            var err = jqxhr.responseJSON.MessageDetail;
-            _this.objCommon.showNotification('ERROR', 'Respuesta fallida <br> Servicio: ' + url + '<br>' + err, 'Web API');
+        error: (jqxhr, textStatus, error) => {
+            const err = jqxhr.responseJSON.MessageDetail;
+            this.objCommon.showNotification('ERROR', 'Respuesta fallida <br> Servicio: ' + url + '<br>' + err, 'Web API');
             off();
         }
     });
@@ -214,7 +198,7 @@ function getObject(url, data) {
         data: data,
         dataType: 'json',
         async: false,
-        success: function (response) {
+        success: (response) => {
             if (response != null) {
                 if (response.length === 1) {
                     object = response[0];
@@ -237,11 +221,11 @@ function getJson(url, data, evtDone, errorMessage) {
         data: data,
         dataType: 'json',
         type: 'GET',
-        success: function (response, status, jqXhr) {
+        success: (response, status, jqXhr) => {
             evtDone(response, status, jqXhr);
             off();
         },
-        error: function (jqXhr, status, error) {
+        error: (jqXhr, status, error) => {
             if (errorMessage === undefined || errorMessage === null || errorMessage === '') {
                 swal('Error', 'No se pudo obtener respuesta satisfactoria debido al error: ' + error, 'error');
             }
@@ -252,20 +236,33 @@ function getJson(url, data, evtDone, errorMessage) {
         }
     });
 }
-function getCurrentDate() {
-    var date = new Date();
-    var day = date.getDate();
-    var month = date.getMonth() + 1;
-    var year = date.getFullYear();
-    var tDay = day.toString();
-    var tMonth = month.toString();
-    if (day < 10) {
-        tDay = '0' + day;
+function getCurrentDate(withTime = false) {
+    return getFormatedDate(new Date(), withTime);
+}
+function getFormatedDate(date, withTime) {
+    const year = date.getFullYear();
+    let month = (date.getMonth() + 1).toString();
+    let day = date.getDate().toString();
+    if (date.getDate() < 10) {
+        day = '0' + day;
     }
-    if (month < 10) {
-        tMonth = '0' + month;
+    if (date.getMonth() < 9) {
+        month = '0' + month;
     }
-    return year + '-' + tMonth + '-' + tDay;
+    if (!withTime) {
+        return year + '-' + month + '-' + day;
+    }
+    else {
+        let hour = date.getHours().toString();
+        let minutes = date.getMinutes().toString();
+        if (date.getHours() < 10) {
+            hour = '0' + hour;
+        }
+        if (date.getMinutes() < 10) {
+            minutes = '0' + minutes;
+        }
+        return year + '-' + month + '-' + day + ' ' + hour + ':' + minutes;
+    }
 }
 //Función para generar un consecutivo usando el servicio publicado de generación de consecutivos para un documento específico
 function getConsecutive(field, options) {
@@ -281,12 +278,12 @@ function getConsecutive(field, options) {
             company: options.companyId,
             save: options.saveOp
         },
-        success: (function (data) {
+        success: (data => {
             field.val(data);
             off();
             options.successEvent(data);
         }),
-        error: (function (jqXhr, textStatus, error) {
+        error: ((jqXhr, textStatus, error) => {
             swal('Error', 'No hemos logrado conseguir un consecutivo para este documento.\n\nPor favor, inténtalo de nuevo en un momento y si el problema persiste contacta con el administrador', 'error');
             off();
         })
@@ -294,7 +291,7 @@ function getConsecutive(field, options) {
 }
 function getTextSelectedFields(dropDown, attribute) {
     var fields = '';
-    dropDown.find('option:selected').each(function () {
+    dropDown.find(':selected').each(function () {
         fields += ',' + $(this).text();
         if (attribute != undefined && $(this).attr(attribute) != undefined) {
             fields += '|' + $(this).attr(attribute);

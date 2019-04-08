@@ -1,4 +1,4 @@
-//Version 17
+//Version 18
 
 const textComplete: string = '1';
 const onlyCode: string = 'Code';
@@ -105,10 +105,10 @@ function getJsonForBootstrapSelect(url: string, options: OptionsBootstrapSelect,
                         url: options.urlValues,
                         dataType: 'json',
                         async: false,
-                        success: (data: string) => {
+                        success: (data2: string) => {
                             const array = [];
-                            if (data != null) {
-                                const theObject = JSON.parse(data);
+                            if (data2 != null) {
+                                const theObject = JSON.parse(data2);
                                 for (let i = 0; i < theObject.length; i++) {
                                     array.push(theObject[i]['Id']);
                                 }
@@ -239,24 +239,35 @@ function getJson(url: string, data?: any, evtDone?: Function, errorMessage?: str
     });
 }
 
-function getCurrentDate(): string {
-    const date = new Date();
+function getCurrentDate(withTime: boolean = false): string {
+    return getFormatedDate(new Date(), withTime);
+}
 
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
+function getFormatedDate(date: Date, withTime?: boolean): string {
     const year = date.getFullYear();
-    let tDay = day.toString();
-    let tMonth = month.toString();
+    let month = (date.getMonth() + 1).toString();
+    let day = date.getDate().toString();
 
-    if (day < 10) {
-        tDay = '0' + day;
+    if (date.getDate() < 10) {
+        day = '0' + day;
+    }
+    if (date.getMonth() < 9) {
+        month = '0' + month;
     }
 
-    if (month < 10) {
-        tMonth = '0' + month;
+    if (!withTime) {
+        return year + '-' + month + '-' + day;
+    } else {
+        let hour = date.getHours().toString();
+        let minutes = date.getMinutes().toString();
+        if (date.getHours() < 10) {
+            hour = '0' + hour;
+        }
+        if (date.getMinutes() < 10) {
+            minutes = '0' + minutes;
+        }
+        return year + '-' + month + '-' + day + ' ' + hour + ':' + minutes;
     }
-
-    return year + '-' + tMonth + '-' + tDay;
 }
 
 //Función para generar un consecutivo usando el servicio publicado de generación de consecutivos para un documento específico
@@ -287,7 +298,7 @@ function getConsecutive(field: JQuery, options: OptionsConsecutive) {
 
 function getTextSelectedFields(dropDown: JQuery, attribute?: string) {
     var fields = '';
-    dropDown.find('option:selected').each(function () {
+    dropDown.find(':selected').each(function () {
         fields += ',' + $(this).text();
         if (attribute != undefined && $(this).attr(attribute) != undefined) {
             fields += '|' + $(this).attr(attribute);
