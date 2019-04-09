@@ -2,14 +2,14 @@
 class Item {
 }
 function getCargoInfoItem(id, propertiesFreight, linerTerm, description, packing, length, height, width, measureDimentions, imoClass, volume, measureVolume, weight, measureWeight, quantity, typeOfCargo) {
-    weight = +weight.toFixed(3);
-    volume = +volume.toFixed(3);
-    width = +width.toFixed(3);
-    height = +height.toFixed(3);
-    length = +length.toFixed(3);
+    weight = parseFloat(weight).toFixed(3);
+    volume = parseFloat(volume).toFixed(3);
+    width = parseFloat(width).toFixed(3);
+    height = parseFloat(height).toFixed(3);
+    length = parseFloat(length).toFixed(3);
     let cargoItem = {};
-    let weightX = +(weight * quantity).toFixed(3);
-    let volumeX = +(volume * quantity).toFixed(3);
+    let weightX = (parseFloat(weight) * quantity).toFixed(3);
+    let volumeX = (parseFloat(volume) * quantity).toFixed(3);
     let linerTermHtml = linerTerm.find(':selected').text() !== 'Seleccione' ? '<em> <span style="font-size:12px;"> <span style="font-family:arial,helvetica,sans-serif; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; line-height: 16px; max-height: 32px; -webkit-line-clamp: 1; -webkit-box-orient: vertical;">' + linerTerm.find(':selected').text() + '</span> </span> </em>' : '';
     let dimentionsHtml = typeOfCargo !== 'FCL' ? length + ' x ' + height + ' x ' + width + ' ' + measureDimentions.find(':selected').text() : 'Sin dimensiones establecidas';
     let imagePacking = ' <img alt="" src="' + packing.find(':selected').attr('data-urlimage') + '" style="margin-right:16px; width: 64px; float: left; height: 64px;" /> ';
