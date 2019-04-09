@@ -1,4 +1,4 @@
-//Version 8
+//Version 9
 
 class Item {
     id: number;
@@ -9,10 +9,15 @@ class Item {
 
 function getCargoInfoItem(id: number, propertiesFreight: JQuery, linerTerm: JQuery, description: string, packing: JQuery, length: number, height: number, width: number, measureDimentions: JQuery, imoClass: JQuery, volume: number, measureVolume: JQuery, weight: number, measureWeight: JQuery, quantity: number, typeOfCargo: string): any {
 
-    let cargoItem = {};
+    weight = +weight.toFixed(3);
+    volume = +volume.toFixed(3);
+    width = +width.toFixed(3);
+    height = +height.toFixed(3);
+    length = +length.toFixed(3);
 
-    let weightX = weight * quantity;
-    let volumeX = volume * quantity;
+    let cargoItem = {};
+    let weightX = +(weight * quantity).toFixed(3);
+    let volumeX = +(volume * quantity).toFixed(3);
 
     let linerTermHtml = linerTerm.find(':selected').text() !== 'Seleccione' ? '<em> <span style="font-size:12px;"> <span style="font-family:arial,helvetica,sans-serif; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; line-height: 16px; max-height: 32px; -webkit-line-clamp: 1; -webkit-box-orient: vertical;">' + linerTerm.find(':selected').text() + '</span> </span> </em>' : '';
     let dimentionsHtml = typeOfCargo !== 'FCL' ? length + ' x ' + height + ' x ' + width + ' ' + measureDimentions.find(':selected').text() : 'Sin dimensiones establecidas';
@@ -24,7 +29,7 @@ function getCargoInfoItem(id: number, propertiesFreight: JQuery, linerTerm: JQue
     }
 
     cargoItem['id'] = 'CargoInfo' + id;
-    cargoItem['html'] = '<div id="' + cargoItem['id'] + '" class="panel-body col-md-6 item-cargo-info"> <hidden id="Hdn' + cargoItem['id'] + '"></hidden> <label style="font-size:22px; font-family:arial,helvetica,sans-serif;"> ' + propertiesFreight.find(':selected').text() + '&nbsp; </label> <button class="mdl-button mdl-js-button ripple" id="btnDelete' + cargoItem['id'] + '" type="button" style="float: right; padding: 4px !important; margin: 0px !important; min-width: 0px !important; line-height:0px !important; height:100% !important;"> <i class="material-icons">delete_forever</i> </button> <button class="mdl-button mdl-js-button ripple" id="btnEdit' + cargoItem['id'] + '" type="button" style="float: right; padding: 4px !important; margin: 0px !important; min-width: 0px !important; line-height:0px !important; height:100% !important;"> <i class="material-icons">edit</i> </button> <hr/> ' + linerTermHtml + ' <label style="font-family:arial,helvetica,sans-serif; font-size:14px; font-weight:100; margin-bottom:16px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; line-height: 16px; max-height: 32px; -webkit-line-clamp: 1; -webkit-box-orient: vertical;">' + description + '</label> <span style="font-size:40px; font-family:arial,helvetica,sans-serif; margin-left:16px; margin-right:48px; float:right;">x' + quantity + '</span> <div> ' + imagePacking + '<span style="font-size:12px;"> <span style="font-family:arial,helvetica,sans-serif; margin-left:16px;">' + dimentionsHtml + ' ' + imageClassImo + '</span> </span> </div><div> <span style="font-size:12px;"><span style="font-family:arial,helvetica,sans-serif; margin-left:16px;">' + volume + ' ' + measureVolume.find(':selected').text() + '<sup>3</sup> -> ' + volumeX + ' ' + measureVolume.find(':selected').text() + '<sup>3</sup></span> </span> </div><div> <span style="font-size:12px;"><span style="font-family:arial,helvetica,sans-serif; margin-left:16px;">' + weight + ' ' + measureWeight.find(':selected').text() + ' -> ' + weightX + ' ' + measureWeight.find(':selected').text() + '</span> </span> </div></div>';
+    cargoItem['html'] = '<div id="' + cargoItem['id'] + '" class="panel-body col-md-6 item-cargo-info"> <hidden id="Hdn' + cargoItem['id'] + '"></hidden> <label style="font-size:22px; font-family:arial,helvetica,sans-serif;"> ' + propertiesFreight.find(':selected').text() + '&nbsp; </label> <button class="mdl-button mdl-js-button ripple" id="btnDelete' + cargoItem['id'] + '" type="button" style="float: right; padding: 4px !important; margin: 0px !important; min-width: 0px !important; line-height:0px !important; height:100% !important;"> <i class="material-icons">delete_forever</i> </button> <button class="mdl-button mdl-js-button ripple" id="btnEdit' + cargoItem['id'] + '" type="button" style="float: right; padding: 4px !important; margin: 0px !important; min-width: 0px !important; line-height:0px !important; height:100% !important;"> <i class="material-icons">edit</i> </button> <hr/> ' + linerTermHtml + ' <label style="font-family:arial,helvetica,sans-serif; font-size:14px; font-weight:100; margin-bottom:16px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; line-height: 16px; max-height: 32px; -webkit-line-clamp: 1; -webkit-box-orient: vertical;">' + description + '</label> <span style="font-size:40px; font-family:arial,helvetica,sans-serif; margin-left:16px; margin-right:48px; float:right;">x' + quantity + '</span> <div> ' + imagePacking + '<span style="font-size:12px;"> <span style="font-family:arial,helvetica,sans-serif; margin-left:16px;">' + dimentionsHtml + ' ' + imageClassImo + '</span> </span> </div><div> <span style="font-size:12px;"><span style="font-family:arial,helvetica,sans-serif; margin-left:16px;">' + volume + ' ' + measureVolume.find(':selected').text() + ' -> ' + volumeX + ' ' + measureVolume.find(':selected').text() + '</span> </span> </div><div> <span style="font-size:12px;"><span style="font-family:arial,helvetica,sans-serif; margin-left:16px;">' + weight + ' ' + measureWeight.find(':selected').text() + ' -> ' + weightX + ' ' + measureWeight.find(':selected').text() + '</span> </span> </div></div>';
 
     let piece = {};
     piece["Id"] = id;
@@ -53,7 +58,7 @@ function createTrackingOrder(index: number, number: string, shipper: JQuery, isP
 
     const tNumber = number === '' ? 'Sin número de pedido' : 'Pedido #' + number;
     const tShipper = (shipper.val() === '' || shipper.val() == null) ? 'Sin shipper' : shipper.find(':selected').text();
-    const tWarehouse = warehouse === '' ? 'El Warehouse aun es desconocido.' : 'El pedido ingresa al Warehouse <strong>' + warehouse + ' </strong>.';
+    const tWarehouse = warehouse === '' ? 'El Warehouse aun es desconocido.' : 'El pedido ingresa bajo el número de warehouse <strong>' + warehouse + ' </strong>.';
     const tDateWarehouse = dateWarehouse.val() === '' ? 'La fecha de Ingreso es desconocida.' : 'Ingresó el <strong>' + new Date(dateWarehouse.val()).toLocaleString() + '</strong>.';
 
     trackingOrder['id'] = 'TrackingOrder' + index;
