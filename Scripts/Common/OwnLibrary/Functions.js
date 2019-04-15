@@ -1,4 +1,4 @@
-//Version 6
+//Version 7
 function on() {
     document.getElementById('overlay').style.display = 'block';
     onQuantity++;
@@ -6,7 +6,7 @@ function on() {
 function off() {
     if (onQuantity > 0) {
         onQuantity--;
-        if (onQuantity == 0) {
+        if (onQuantity === 0) {
             document.getElementById('overlay').style.display = 'none';
         }
     }
@@ -35,7 +35,7 @@ function enableFields() {
         fields[_i] = arguments[_i];
     }
     for (var i = 0; i < fields.length; i++) {
-        if (fields[i].attr('type') == 'checkbox') {
+        if (fields[i].attr('type') === 'checkbox') {
             fields[i].bootstrapSwitch('disabled', false);
         }
         else {
@@ -55,7 +55,7 @@ function disableFields() {
         fields[_i] = arguments[_i];
     }
     for (var i = 0; i < fields.length; i++) {
-        if (fields[i].attr('type') == 'checkbox') {
+        if (fields[i].attr('type') === 'checkbox') {
             fields[i].bootstrapSwitch('disabled', true);
         }
         else {
@@ -81,7 +81,7 @@ function collapseAccordion(id) {
 }
 function generateBootbox(options) {
     on();
-    options = setDefaults(options, defaultsGenerateBootbox);
+    options = (setDefaults(options, defaultsGenerateBootbox));
     var className = options.big ? 'IWG_Modal' : '';
     var dialog;
     switch (options.type) {
@@ -115,7 +115,7 @@ function generateBootbox(options) {
     }
     dialog.init(function () {
         $('#bootboxWindow').load(options.loadUrl, options.loadData, function (response, status, xhr) {
-            if (status == 'success') {
+            if (status === 'success') {
                 $('#bootboxWindow').show('fade');
                 var h = '50%';
                 $('#bootboxWindow').height(h);
@@ -140,7 +140,7 @@ function objectifyForm(form) {
     return returnArray;
 }
 //Función para agregar una animación a un objeto SVG
-function animationSVG() {
+function animationSvg() {
     var arrow = $(this).find('#arrow');
     if (arrow.hasClass('play')) {
         arrow.addClass('reverse');
@@ -151,19 +151,17 @@ function animationSVG() {
         arrow.removeClass('reverse');
     }
 }
-function calculateDV(nit) {
-    if (nit != '') {
-        var i = void 0;
+function calculateDv(nit) {
+    if (nit !== '') {
         var tmp = void 0;
         var check = 0;
-        var mod = void 0;
         var weights = [3, 7, 13, 17, 19, 23, 29, 37, 41, 43, 47, 53, 59, 67, 71];
-        for (i = 0; i < nit.length; i++) {
+        for (var i = 0; i < nit.length; i++) {
             tmp = nit.substring(nit.length - (i + 1), nit.length - i);
-            check += (tmp * weights[i]);
+            check += (+tmp * weights[i]);
         }
-        mod = check % 11;
-        if (mod == 0 || mod == 1) {
+        var mod = check % 11;
+        if (mod === 0 || mod === 1) {
             return mod.toString();
         }
         return (11 - mod).toString();

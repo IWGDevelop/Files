@@ -1,4 +1,4 @@
-﻿//Version 6
+﻿//Version 7
 
 function on() {
     document.getElementById('overlay').style.display = 'block';
@@ -8,7 +8,7 @@ function on() {
 function off() {
     if (onQuantity > 0) {
         onQuantity--;
-        if (onQuantity == 0) {
+        if (onQuantity === 0) {
             document.getElementById('overlay').style.display = 'none';
         }
     }
@@ -32,14 +32,14 @@ function saveObject(url: string, object, callback?) {
                 'Error',
                 'No hemos podido guardar el objeto.\n\nError: ' + error,
                 'error'
-            )
+            );
         },
     });
 }
 
 function enableFields(...fields: JQuery[]) {
-    for (var i = 0; i < fields.length; i++) {
-        if (fields[i].attr('type') == 'checkbox') {
+    for (let i = 0; i < fields.length; i++) {
+        if (fields[i].attr('type') === 'checkbox') {
             fields[i].bootstrapSwitch('disabled', false);
         } else {
             if (fields[i].data('kendoDatePicker') != undefined) {
@@ -53,8 +53,8 @@ function enableFields(...fields: JQuery[]) {
 }
 
 function disableFields(...fields: JQuery[]) {
-    for (var i = 0; i < fields.length; i++) {
-        if (fields[i].attr('type') == 'checkbox') {
+    for (let i = 0; i < fields.length; i++) {
+        if (fields[i].attr('type') === 'checkbox') {
             fields[i].bootstrapSwitch('disabled', true);
         } else {
             if (fields[i].data('kendoDatePicker') != undefined) {
@@ -82,9 +82,9 @@ function collapseAccordion(id: string) {
 function generateBootbox(options: OptionsGenerateBootbox) {
     on();
 
-    options = setDefaults(options, defaultsGenerateBootbox);
+    options = ((setDefaults(options, defaultsGenerateBootbox)) as OptionsGenerateBootbox);
 
-    let className = options.big ? 'IWG_Modal' : '';
+    const className = options.big ? 'IWG_Modal' : '';
     let dialog;
     switch (options.type) {
         case 'alert':
@@ -116,11 +116,11 @@ function generateBootbox(options: OptionsGenerateBootbox) {
             break;
     }
 
-    dialog.init(function () {
-        $('#bootboxWindow').load(options.loadUrl, options.loadData, function (response, status, xhr) {
-            if (status == 'success') {
+    dialog.init(() => {
+        $('#bootboxWindow').load(options.loadUrl, options.loadData, (response, status, xhr) => {
+            if (status === 'success') {
                 $('#bootboxWindow').show('fade');
-                var h = '50%';
+                const h = '50%';
                 $('#bootboxWindow').height(h);
                 if (options.loadCallback != undefined) {
                     options.loadCallback(response);
@@ -129,24 +129,24 @@ function generateBootbox(options: OptionsGenerateBootbox) {
             else {
                 objCommon.showNotification('ERROR', 'Respuesta fallida: <br> Servicio: ' + xhr.statusText, 'View Modal');
             }
-            off()
+            off();
         });
     });
 }
 
 //Función para convertir los datos de un formulario a un objeto
 function objectifyForm(form: JQuery): Object {
-    var returnArray = {};
-    var array = form.serializeArray();
-    for (var i = 0; i < array.length; i++) {
+    const returnArray = {};
+    const array = form.serializeArray();
+    for (let i = 0; i < array.length; i++) {
         returnArray[array[i]['name']] = array[i]['value'];
     }
     return returnArray;
 }
 
 //Función para agregar una animación a un objeto SVG
-function animationSVG() {
-    var arrow = $(this).find('#arrow');
+function animationSvg() {
+    const arrow = $(this).find('#arrow');
     if (arrow.hasClass('play')) {
         arrow.addClass('reverse');
         arrow.removeClass('play');
@@ -156,22 +156,22 @@ function animationSVG() {
     }
 }
 
-function calculateDV(nit: string) {
-    if (nit != '') {
-        let i: number;
-        let tmp;
+function calculateDv(nit: string) {
+    if (nit !== '') {
+        let tmp: string;
         let check: number = 0;
-        let mod: number;
-        let weights: number[] = [3, 7, 13, 17, 19, 23, 29, 37, 41, 43, 47, 53, 59, 67, 71];
+        const weights: number[] = [3, 7, 13, 17, 19, 23, 29, 37, 41, 43, 47, 53, 59, 67, 71];
 
-        for (i = 0; i < nit.length; i++) {
+        for (let i = 0; i < nit.length; i++) {
             tmp = nit.substring(nit.length - (i + 1), nit.length - i);
-            check += (tmp * weights[i]);
+            check += (+tmp * weights[i]);
         }
-        mod = check % 11;
-        if (mod == 0 || mod == 1) {
+
+        const mod = check % 11;
+        if (mod === 0 || mod === 1) {
             return mod.toString();
         }
+
         return (11 - mod).toString();
     }
     else {
