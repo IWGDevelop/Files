@@ -1,4 +1,4 @@
-//Version 18
+//Version 19
 const textComplete = '1';
 const onlyCode = 'Code';
 const onlyDescription = 'Description';
@@ -52,7 +52,7 @@ function getJsonForDropDrown(url, dropDown, textType, extraOption) {
         off();
     })
         .fail((jqxhr, textStatus, error) => {
-        const err = textStatus + ', ' + error + ', ' + jqxhr.responseJSON != null ? '' : jqxhr.responseJSON.MessageDetail;
+        const err = jqxhr.responseJSON.MessageDetail;
         this.objCommon.showNotification('ERROR', 'Respuesta fallida <br> Servicio: ' + url + '<br>' + err, 'Web API');
         off();
     });
@@ -98,10 +98,11 @@ function getJsonForBootstrapSelect(url, options, ...dropDowns) {
                         extraText += ' data-subtext="' + obj + '"';
                     }
                 }
-                if (val != null && val != undefined) {
+                if (val != null) {
                     dropDown.append('<option value="' + val.Id + '"' + extraText + '>' + val[options.text] + '</option>');
                 }
             });
+            dropDown.selectpicker('refresh');
             if (options.urlValues != undefined && options.urlValues != null && options.urlValues !== '') {
                 $.ajax({
                     url: options.urlValues,
@@ -127,7 +128,6 @@ function getJsonForBootstrapSelect(url, options, ...dropDowns) {
                     dropDown.selectpicker('val', options.value);
                 }
             }
-            dropDown.selectpicker('refresh');
             off();
         }
     })
