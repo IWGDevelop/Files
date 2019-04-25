@@ -5,57 +5,6 @@ const onlyCode: string = 'Code';
 const onlyDescription: string = 'Description';
 const onlyName: string = 'Name';
 
-/**
- * @deprecated Este método está en deshuso todos los DropDown se están migrando a la libraría Bootstrap-select. Usar solo getJsonForBootstrapSelect.
- */
-function getJsonForDropDrown(url: string, dropDown: JQuery, textType: string, extraOption: string) {
-    on();
-    $.getJSON(url)
-        .done(data => {
-            dropDown.removeAttr('disabled');
-            dropDown.empty();
-            dropDown.append('<option value="">Seleccione</option>');
-            $.each(data, (key, val) => {
-                switch (textType) {
-                    case textComplete:
-                        if (extraOption === '') {
-                            dropDown.append('<option value="' + val.Id + '">' + val.Code + ' - ' + val.Description + '</option>');
-                        } else {
-                            dropDown.append('<option value="' + val.Id + '" data-' + extraOption + '=' + val[extraOption] + '>' + val.Code + ' - ' + val.Description + '</option>');
-                        }
-                        break;
-                    case onlyCode:
-                        if (extraOption === '') {
-                            dropDown.append('<option value="' + val.Id + '">' + val.Code + '</option>');
-                        } else {
-                            dropDown.append('<option value="' + val.Id + '" data-' + extraOption + '=' + val[extraOption] + '>' + val.Code + '</option>');
-                        }
-                        break;
-                    case onlyDescription:
-                        if (extraOption === '') {
-                            dropDown.append('<option value="' + val.Id + ' data-cod="' + val.Code + '">' + val.Description + '</option>');
-                        } else {
-                            dropDown.append('<option value="' + val.Id + ' data-cod="' + val.Code + '" data-' + extraOption + '=' + val[extraOption] + '>' + val.Description + '</option>');
-                        }
-                        break;
-                    default:
-                        if (extraOption === '') {
-                            dropDown.append('<option value="' + val.Id + '" data-cod="' + val.Code + '">' + val[textType] + '</option>');
-                        } else {
-                            dropDown.append('<option value="' + val.Id + '" data-cod="' + val.Code + '" data-' + extraOption + '=' + val[extraOption] + '>' + val[textType] + '</option>');
-                        }
-                        break;
-                }
-            });
-            off();
-        })
-        .fail((jqxhr, textStatus, error) => {
-            const err = jqxhr.responseJSON.MessageDetail;
-            this.objCommon.showNotification('ERROR', 'Respuesta fallida <br> Servicio: ' + url + '<br>' + err, 'Web API');
-            off();
-        });
-}
-
 function getJsonForBootstrapSelect(url: string, options: OptionsBootstrapSelect, ...dropDowns: JQuery[]) {
     options = <OptionsBootstrapSelect>(setDefaults(options, defaultsBootstrapSelect));
     on();
@@ -64,8 +13,7 @@ function getJsonForBootstrapSelect(url: string, options: OptionsBootstrapSelect,
         dataType: 'json',
         url: url,
         async: options.async
-    })
-        .done(data => {
+    }).done(data => {
             for (let dropDown of dropDowns) {
                 if (options.enable) {
                     dropDown.removeAttr('disabled');
@@ -127,6 +75,12 @@ function getJsonForBootstrapSelect(url: string, options: OptionsBootstrapSelect,
                         dropDown.selectpicker('val', options.value);
                     }
                 }
+
+                if (data.length === 1) {
+                    dropDown.selectpicker()[0].selectedIndex = 0;
+                    dropDown.selectpicker('refresh');
+                    dropDown.change();
+                }
                 off();
             }
         })
@@ -137,28 +91,6 @@ function getJsonForBootstrapSelect(url: string, options: OptionsBootstrapSelect,
         });
 }
 
-/**
- * @deprecated Este método está en deshuso ya que los componentes de Kendo están en deshuso. Usar solo getJsonForBootstrapSelect
- */
-function getJsonForMultiselect(url: string, ...multiselect: JQuery[]) {
-    on();
-    $.getJSON(url)
-        .done(data => {
-            const listData = [];
-            $.each(data, (key, val) => {
-                listData.push(val);
-            });
-            for (let i = 0; i < multiselect.length; i++) {
-                multiselect[i].data('kendoMultiSelect').setDataSource(new kendo.data.DataSource({ data: listData }));
-            }
-            off();
-        })
-        .fail((jqxhr, textStatus, error) => {
-            const err = jqxhr.responseJSON.MessageDetail;
-            this.objCommon.showNotification('ERROR', 'Respuesta fallida <br> Servicio: ' + url + '<br>' + err, 'Web API');
-            off();
-        });
-}
 
 function getCode(url: string, editor: JQuery) {
     getProperty(url, editor, 'Code');

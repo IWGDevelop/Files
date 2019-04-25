@@ -1,4 +1,4 @@
-//Version 9
+//Version 10
 
 class Item {
     id: number;
@@ -53,13 +53,13 @@ function getCargoInfoItem(id: number, propertiesFreight: JQuery, linerTerm: JQue
     return cargoItem;
 }
 
-function createTrackingOrder(index: number, number: string, shipper: JQuery, isProspect: boolean, incoterm: JQuery, warehouse: string, dateWarehouse: JQuery, trackingId: number, id?: number): any {
+function createTrackingOrder(index: number, number: string, shipper: JQuery, isProspect: boolean, incoterm: JQuery, warehouse: string, dateWarehouse: Flatpickr, trackingId: number, id?: number): any {
     const trackingOrder = {};
 
     const tNumber = number === '' ? 'Sin número de pedido' : 'Pedido #' + number;
     const tShipper = (shipper.val() === '' || shipper.val() == null) ? 'Sin shipper' : shipper.find(':selected').text();
     const tWarehouse = warehouse === '' ? 'El Warehouse aun es desconocido.' : 'El pedido ingresa bajo el número de warehouse <strong>' + warehouse + ' </strong>.';
-    const tDateWarehouse = dateWarehouse.val() === '' ? 'La fecha de Ingreso es desconocida.' : 'Ingresó el <strong>' + new Date(dateWarehouse.val()).toLocaleString() + '</strong>.';
+    const tDateWarehouse = dateWarehouse.selectedDates.length === 0 ? 'La fecha de Ingreso es desconocida.' : 'Ingresó el <strong>' + getFormatedDate(dateWarehouse.selectedDates[0], true) + '</strong>.';
 
     trackingOrder['id'] = 'TrackingOrder' + index;
     trackingOrder['html'] = '<div id="' + trackingOrder['id'] + '" class="tracking-order-panel"> <div> <hidden id="Hdn' + trackingOrder['id'] + '"></hidden> <label style="font-family:roboto; font-size:22px; font-weight:600;">' + tNumber + ' / </label> <i> <label style="font-family:roboto; font-size:14px; font-weight:100">' + tShipper + '</label> </i> <img id="imgShipperInfo' + trackingOrder['id'] + '" src="https://raw.githubusercontent.com/IWGDevelop/Images/master/icons/ic_info.png" style="width:20px; height:20px; margin:0px"><button class="mdl-button mdl-js-button ripple" id="btnDelete' + trackingOrder['id'] + '" type="button" style="float: right; padding: 4px !important; margin: 0px !important; min-width: 0px !important; line-height:0px !important; height:100% !important;"> <i class="material-icons">delete_forever</i> </button> <button class="mdl-button mdl-js-button ripple" id="btnEdit' + trackingOrder['id'] + '" type="button" style="float: right; padding: 4px !important; margin: 0px !important; min-width: 0px !important; line-height:0px !important; height:100% !important;"> <i class="material-icons">edit</i> </button> <hr/> <label style="float:right; font-family:roboto; font-size:42px; font-weight:600; margin-right:12px;">' + incoterm.find(':selected').text() + '</label> </div><div> <label style="font-family:roboto, cursive; font-size:16px; font-weight:100;">' + tWarehouse + ' ' + tDateWarehouse + '</label> </div><div id="trackingOrderCargoList"> </div></div>';
@@ -71,7 +71,7 @@ function createTrackingOrder(index: number, number: string, shipper: JQuery, isP
     order["ShipperId"] = shipper.val();
     order["IncotermId"] = incoterm.val();
     order["Warehouse"] = warehouse;
-    order["DateIngressWarehouse"] = dateWarehouse.val();
+    order["DateIngressWarehouse"] = dateWarehouse.selectedDates[0];
     order["IsProspect"] = isProspect;
 
     trackingOrder['order'] = order;
