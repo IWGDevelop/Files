@@ -557,3 +557,7 @@
 .form-group{
 	margin-bottom: 0px !important;
 }
+
+.flatpickr-input[readonly] {
+	background-color: white;
+}

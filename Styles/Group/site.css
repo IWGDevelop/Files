@@ -6,7 +6,6 @@
     width: 100%;
 }
 
-
 #page-wrapper {
     padding: 0 15px;
     background-color: #ffffff;
@@ -640,3 +639,7 @@
 		background-size: 100%;
 		transition: background 0s;
 	}
+	
+.flatpickr-input[readonly] {
+	background-color: white;
+}
