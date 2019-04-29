@@ -2,6 +2,10 @@
     background-color: #2A3F54;
 }
 
+a {
+	color: #0066CC !important;
+}
+
 #wrapper {
     width: 100%;
 }
