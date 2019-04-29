@@ -1,4 +1,4 @@
-//Version 19
+//Version 20
 
 const textComplete: string = '1';
 const onlyCode: string = 'Code';
@@ -10,44 +10,57 @@ function getJsonForBootstrapSelect(url: string, options: OptionsBootstrapSelect,
     on();
     var extraText = '';
     $.ajax({
-        dataType: 'json',
-        url: url,
-        async: options.async
-    }).done(data => {
+            dataType: 'json',
+            url: url,
+            async: options.async
+        }).done(data => {
             for (let dropDown of dropDowns) {
                 if (options.enable) {
                     dropDown.removeAttr('disabled');
                 }
                 dropDown.empty();
-                $.each(data, (key, val) => {
-                    extraText = '';
-                    if (options.extraOption != null && options.extraOption != undefined && options.extraOption !== '') {
-                        extraText += ' data-' + options.extraOption + '="' + val[options.extraOption] + '"';
-                    }
-                    if (options.extraOption2 != null && options.extraOption2 != undefined && options.extraOption2 !== '') {
-                        extraText += ' data-' + options.extraOption2 + '="' + val[options.extraOption2] + '"';
-                    }
-                    if (options.subTextOption != null && options.subTextOption != undefined && options.subTextOption !== '') {
-                        const opts = options.subTextOption.split('.');
-                        let obj: string = val;
-                        for (let i = 0; i < opts.length; i++) {
-                            obj = obj[opts[i]];
+                $.each(data,
+                    (key, val) => {
+                        extraText = '';
+                        if (options.extraOption != null &&
+                            options.extraOption != undefined &&
+                            options.extraOption !== '') {
+                            extraText += ' data-' + options.extraOption + '="' + val[options.extraOption] + '"';
                         }
-                        if (options.limitSubTextOption > 0) {
-                            if (obj.length < options.limitSubTextOption) {
-                                extraText += ' data-subtext="' + obj + '"';
-                            } else {
-                                extraText += ' data-subtext="' + obj.substr(0, options.limitSubTextOption) + '..."';
+                        if (options.extraOption2 != null &&
+                            options.extraOption2 != undefined &&
+                            options.extraOption2 !== '') {
+                            extraText += ' data-' + options.extraOption2 + '="' + val[options.extraOption2] + '"';
+                        }
+                        if (options.subTextOption != null &&
+                            options.subTextOption != undefined &&
+                            options.subTextOption !== '') {
+                            const opts = options.subTextOption.split('.');
+                            let obj: string = val;
+                            for (let i = 0; i < opts.length; i++) {
+                                obj = obj[opts[i]];
                             }
-                        } else {
-                            extraText += ' data-subtext="' + obj + '"';
+                            if (options.limitSubTextOption > 0) {
+                                if (obj.length < options.limitSubTextOption) {
+                                    extraText += ' data-subtext="' + obj + '"';
+                                } else {
+                                    extraText += ' data-subtext="' + obj.substr(0, options.limitSubTextOption) + '..."';
+                                }
+                            } else {
+                                extraText += ' data-subtext="' + obj + '"';
+                            }
                         }
-                    }
 
-                    if (val != null) {
-                        dropDown.append('<option value="' + val.Id + '"' + extraText + '>' + val[options.text] + '</option>');
-                    }
-                });
+                        if (val != null) {
+                            dropDown.append('<option value="' +
+                                val.Id +
+                                '"' +
+                                extraText +
+                                '>' +
+                                val[options.text] +
+                                '</option>');
+                        }
+                    });
 
                 dropDown.selectpicker('refresh');
 
@@ -71,22 +84,33 @@ function getJsonForBootstrapSelect(url: string, options: OptionsBootstrapSelect,
                         }
                     });
                 } else {
-                    if (options.value != null && options.value != undefined && options.value !== 0 && options.value !== '') {
+                    if (options.value != null &&
+                        options.value != undefined &&
+                        options.value !== 0 &&
+                        options.value !== '') {
                         dropDown.selectpicker('val', options.value);
+                    } else {
+                        if (data.length === 1) {
+                            if (dropDown.selectpicker()[0].length === 2) {
+                                dropDown.selectpicker()[0].selectedIndex = 1;
+
+                            } else {
+                                dropDown.selectpicker()[0].selectedIndex = 0;
+                            }
+                            dropDown.change();
+                        }
                     }
                 }
 
-                if (data.length === 1) {
-                    dropDown.selectpicker()[0].selectedIndex = 0;
-                    dropDown.selectpicker('refresh');
-                    dropDown.change();
-                }
+                dropDown.selectpicker('refresh');
                 off();
             }
         })
         .fail((jqxhr, textStatus, error) => {
             const err = jqxhr.responseJSON.MessageDetail;
-            this.objCommon.showNotification('ERROR', 'Respuesta fallida <br> Servicio: ' + url + '<br>' + err, 'Web API');
+            this.objCommon.showNotification('ERROR',
+                'Respuesta fallida <br> Servicio: ' + url + '<br>' + err,
+                'Web API');
             off();
         });
 }
@@ -117,7 +141,9 @@ function getProperty(url: string, editor: JQuery, property?: string) {
         },
         error: (jqxhr, textStatus, error) => {
             const err = jqxhr.responseJSON.MessageDetail;
-            this.objCommon.showNotification('ERROR', 'Respuesta fallida <br> Servicio: ' + url + '<br>' + err, 'Web API');
+            this.objCommon.showNotification('ERROR',
+                'Respuesta fallida <br> Servicio: ' + url + '<br>' + err,
+                'Web API');
 
             off();
         }
@@ -224,7 +250,9 @@ function getConsecutive(field: JQuery, options: OptionsConsecutive) {
             options.successEvent(data);
         }),
         error: ((jqXhr, textStatus, error) => {
-            swal('Error', 'No hemos logrado conseguir un consecutivo para este documento.\n\nPor favor, inténtalo de nuevo en un momento y si el problema persiste contacta con el administrador', 'error');
+            swal('Error',
+                'No hemos logrado conseguir un consecutivo para este documento.\n\nPor favor, inténtalo de nuevo en un momento y si el problema persiste contacta con el administrador',
+                'error');
             off();
         })
     });
@@ -232,7 +260,7 @@ function getConsecutive(field: JQuery, options: OptionsConsecutive) {
 
 function getTextSelectedFields(dropDown: JQuery, attribute?: string) {
     var fields = '';
-    dropDown.find(':selected').each(function () {
+    dropDown.find(':selected').each(function() {
         fields += ',' + $(this).text();
         if (attribute != undefined && $(this).attr(attribute) != undefined) {
             fields += '|' + $(this).attr(attribute);

@@ -1,4 +1,4 @@
-//Version 19
+//Version 20
 const textComplete = '1';
 const onlyCode = 'Code';
 const onlyDescription = 'Description';
@@ -19,13 +19,19 @@ function getJsonForBootstrapSelect(url, options, ...dropDowns) {
             dropDown.empty();
             $.each(data, (key, val) => {
                 extraText = '';
-                if (options.extraOption != null && options.extraOption != undefined && options.extraOption !== '') {
+                if (options.extraOption != null &&
+                    options.extraOption != undefined &&
+                    options.extraOption !== '') {
                     extraText += ' data-' + options.extraOption + '="' + val[options.extraOption] + '"';
                 }
-                if (options.extraOption2 != null && options.extraOption2 != undefined && options.extraOption2 !== '') {
+                if (options.extraOption2 != null &&
+                    options.extraOption2 != undefined &&
+                    options.extraOption2 !== '') {
                     extraText += ' data-' + options.extraOption2 + '="' + val[options.extraOption2] + '"';
                 }
-                if (options.subTextOption != null && options.subTextOption != undefined && options.subTextOption !== '') {
+                if (options.subTextOption != null &&
+                    options.subTextOption != undefined &&
+                    options.subTextOption !== '') {
                     const opts = options.subTextOption.split('.');
                     let obj = val;
                     for (let i = 0; i < opts.length; i++) {
@@ -44,7 +50,13 @@ function getJsonForBootstrapSelect(url, options, ...dropDowns) {
                     }
                 }
                 if (val != null) {
-                    dropDown.append('<option value="' + val.Id + '"' + extraText + '>' + val[options.text] + '</option>');
+                    dropDown.append('<option value="' +
+                        val.Id +
+                        '"' +
+                        extraText +
+                        '>' +
+                        val[options.text] +
+                        '</option>');
                 }
             });
             dropDown.selectpicker('refresh');
@@ -69,15 +81,25 @@ function getJsonForBootstrapSelect(url, options, ...dropDowns) {
                 });
             }
             else {
-                if (options.value != null && options.value != undefined && options.value !== 0 && options.value !== '') {
+                if (options.value != null &&
+                    options.value != undefined &&
+                    options.value !== 0 &&
+                    options.value !== '') {
                     dropDown.selectpicker('val', options.value);
                 }
+                else {
+                    if (data.length === 1) {
+                        if (dropDown.selectpicker()[0].length === 2) {
+                            dropDown.selectpicker()[0].selectedIndex = 1;
+                        }
+                        else {
+                            dropDown.selectpicker()[0].selectedIndex = 0;
+                        }
+                        dropDown.change();
+                    }
+                }
             }
-            if (data.length === 1) {
-                dropDown.selectpicker()[0].selectedIndex = 0;
-                dropDown.selectpicker('refresh');
-                dropDown.change();
-            }
+            dropDown.selectpicker('refresh');
             off();
         }
     })
