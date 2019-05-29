@@ -33,3 +33,24 @@ td {
 table {
     border-style:none !important;
 }
+
+ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li { 
+    padding-left: 16px; 
+}
+
+li:before {
+    content: "-";
+    padding-right: 8px;
+}
