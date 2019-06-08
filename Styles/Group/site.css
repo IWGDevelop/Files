@@ -558,7 +558,7 @@
 }
 
 .background-general {
-    background-image: url(https://raw.githubusercontent.com/IWGDevelop/Images/master/Images/bg_general.png);
+    background-image: url(https://raw.githubusercontent.com/IWGDevelop/Files/master/Images/Images/bg_general.png);
     background-position: right bottom;
     background-repeat: no-repeat;
     background-size: 40%;
@@ -623,7 +623,7 @@
 	padding: 4px;
 	width: 36px;
 	height: 36px;
-	content: url(https://raw.githubusercontent.com/IWGDevelop/Images/master/Images/icons/ic_save_white.png);
+	content: url(https://raw.githubusercontent.com/IWGDevelop/Files/master/Images/Icons/ic_save_white.png);
 	background-size: contain;
 	border: none !important;
 	cursor: pointer;
