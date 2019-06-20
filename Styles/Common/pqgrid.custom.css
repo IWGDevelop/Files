@@ -1,0 +1,24 @@
+div.pq-grid * {
+	font-family: Roboto;
+	font-size: 12px;
+	line-height: unset !important;
+	margin: 0;
+}
+.pq-grid td.pq-grid-cell {
+	padding: 8px !important;
+}
+table.pq-grid-header-table div.pq-td-div {
+	padding: 8px !important;
+	font-family: Roboto !important;
+	font-weight: 600 !important;
+	font-size: 16px !important;
+}
+.pq-header-outer {
+	height: 38px !important;
+}
+.pq-grid-oddRow {
+	background: aliceblue;
+}
+.ui-state-highlight {
+	background: lightgrey !important;
+}
