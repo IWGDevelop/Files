@@ -643,3 +643,37 @@
 .flatpickr-input[readonly] {
 	background-color: white;
 }
+
+.input-percentage {
+	border: 1px solid #cccccc;
+	display: flex;
+}
+
+	.input-percentage > input {
+		border: 0px;
+		margin: 0px;
+		padding: 0px;
+		outline: none;
+	}
+
+	.input-percentage:after {
+		padding: 8px;
+		content: '%';
+	}
+
+.input-dollars {
+	border: 1px solid #cccccc;
+	display: flex;
+}
+
+	.input-dollars > input {
+		border: 0px;
+		margin: 0px;
+		padding: 0px;
+		outline: none;
+	}
+
+	.input-dollars:after {
+		padding: 8px;
+		content: 'USD';
+	}
