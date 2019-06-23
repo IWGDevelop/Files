@@ -364,6 +364,8 @@
 }
 .control-label-full {
     width:100%;
+	padding-top: 7px;
+	padding-bottom: 0px;
 }
 
 .primary-button {
