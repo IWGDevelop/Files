@@ -594,3 +594,55 @@
 		padding: 8px;
 		content: 'USD';
 	}
+
+.igsi-notification {
+	padding: 8px;
+	background-color: white;
+	width: 400px;
+	display: flex;
+	transition: .3s;
+}
+
+	.igsi-notification:hover {
+		padding: 8px;
+		background-color: whitesmoke;
+		width: 400px;
+		display: flex;
+		transition: .3s;
+		cursor: pointer;
+	}
+
+	.igsi-notification:active {
+		padding: 8px;
+		background-color: lightgray;
+		width: 400px;
+		display: flex;
+		transition: .3s;
+		cursor: pointer;
+	}
+
+.igsi-notification-unwatched {
+	padding: 8px;
+	background-color: aliceblue;
+	width: 400px;
+	display: flex;
+	transition: .3s;
+}
+
+	.igsi-notification-unwatched:hover {
+		padding: 8px;
+		background-color: whitesmoke;
+		width: 400px;
+		display: flex;
+		transition: .3s;
+		cursor: pointer;
+	}
+
+	.igsi-notification-unwatched:active {
+		padding: 8px;
+		background-color: lightgray;
+		width: 400px;
+		display: flex;
+		transition: .3s;
+		cursor: pointer;
+	}
