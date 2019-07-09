@@ -1,4 +1,4 @@
-// Version 3
+// Version 4
 const apiTransverse = localStorage.getItem("apiTransverse");
 const urlTransverse = localStorage.getItem("urlTransverse");
 const apiGroup = localStorage.getItem("apiGroup");
@@ -7,7 +7,7 @@ const localApiTransverse = localStorage.getItem("localApiTransverse");
 const localUrlTransverse = localStorage.getItem("localUrlTransverse");
 const localApiGroup = localStorage.getItem("localApiGroup");
 const localApiFreight = localStorage.getItem("localApiFreight");
-const rootPath = localStorage.getItem("rootPath");
+const rootPath = window.location.origin + '/' + (window.location.pathname.indexOf('IWGFreight') !== -1 ? 'IWGFreight' : '') + '/';
 var onQuantity = 0;
 var CommonModule;
 (function (CommonModule) {
@@ -86,7 +86,7 @@ var CommonModule;
             bootbox.confirm({
                 title: "Filtro " + title + " " + param,
                 message: "<div class='contentAlert'></div>",
-                callback: function (result) {
+                callback(result) {
                     if (result) {
                         const dataD = $("#" + output).data("kendoMultiSelect").dataItems();
                         if (output == "CityId") {
@@ -102,7 +102,7 @@ var CommonModule;
                     }
                 }
             });
-            $(".contentAlert").load("../Common/" + partialView, function (response, status, xhr) {
+            $(".contentAlert").load("../Common/" + partialView, (response, status, xhr) => {
                 //let form = $("#trafficForm");
                 //form.data('validator', null);
                 //$.validator.unobtrusive.parse(form);

@@ -67,18 +67,6 @@ function disableFields(...fields: JQuery[]) {
     $('.selectpicker').selectpicker('refresh');
 }
 
-function expandAccordion(id: string) {
-    if ($('#' + id).hasClass('collapsed')) {
-        $('#' + id).click();
-    }
-}
-
-function collapseAccordion(id: string) {
-    if (!$('#' + id).hasClass('collapsed')) {
-        $('#' + id).click();
-    }
-}
-
 function generateBootbox(options: OptionsGenerateBootbox) {
     on();
 
@@ -174,7 +162,6 @@ function calculateDv(nit: string) {
 
         return (11 - mod).toString();
     }
-    else {
-        return '';
-    }
+
+    return '';
 }

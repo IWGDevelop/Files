@@ -19,22 +19,18 @@ function saveObject(url, object, callback) {
         data: object,
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
-        success: function (response) {
+        success: (response) => {
             callback(response);
             off();
         },
-        error: function (xhr, status, error) {
+        error: (xhr, status, error) => {
             off();
             swal('Error', 'No hemos podido guardar el objeto.\n\nError: ' + error, 'error');
         },
     });
 }
-function enableFields() {
-    var fields = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        fields[_i] = arguments[_i];
-    }
-    for (var i = 0; i < fields.length; i++) {
+function enableFields(...fields) {
+    for (let i = 0; i < fields.length; i++) {
         if (fields[i].attr('type') === 'checkbox') {
             fields[i].bootstrapSwitch('disabled', false);
         }
@@ -49,12 +45,8 @@ function enableFields() {
     }
     $('.selectpicker').selectpicker('refresh');
 }
-function disableFields() {
-    var fields = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        fields[_i] = arguments[_i];
-    }
-    for (var i = 0; i < fields.length; i++) {
+function disableFields(...fields) {
+    for (let i = 0; i < fields.length; i++) {
         if (fields[i].attr('type') === 'checkbox') {
             fields[i].bootstrapSwitch('disabled', true);
         }
@@ -69,21 +61,11 @@ function disableFields() {
     }
     $('.selectpicker').selectpicker('refresh');
 }
-function expandAccordion(id) {
-    if ($('#' + id).hasClass('collapsed')) {
-        $('#' + id).click();
-    }
-}
-function collapseAccordion(id) {
-    if (!$('#' + id).hasClass('collapsed')) {
-        $('#' + id).click();
-    }
-}
 function generateBootbox(options) {
     on();
     options = (setDefaults(options, defaultsGenerateBootbox));
-    var className = options.big ? 'IWG_Modal' : '';
-    var dialog;
+    const className = options.big ? 'IWG_Modal' : '';
+    let dialog;
     switch (options.type) {
         case 'alert':
             dialog = bootbox.alert({
@@ -113,11 +95,11 @@ function generateBootbox(options) {
             });
             break;
     }
-    dialog.init(function () {
-        $('#bootboxWindow').load(options.loadUrl, options.loadData, function (response, status, xhr) {
+    dialog.init(() => {
+        $('#bootboxWindow').load(options.loadUrl, options.loadData, (response, status, xhr) => {
             if (status === 'success') {
                 $('#bootboxWindow').show('fade');
-                var h = '50%';
+                const h = '50%';
                 $('#bootboxWindow').height(h);
                 if (options.loadCallback != undefined) {
                     options.loadCallback(response);
@@ -132,16 +114,16 @@ function generateBootbox(options) {
 }
 //Función para convertir los datos de un formulario a un objeto
 function objectifyForm(form) {
-    var returnArray = {};
-    var array = form.serializeArray();
-    for (var i = 0; i < array.length; i++) {
+    const returnArray = {};
+    const array = form.serializeArray();
+    for (let i = 0; i < array.length; i++) {
         returnArray[array[i]['name']] = array[i]['value'];
     }
     return returnArray;
 }
 //Función para agregar una animación a un objeto SVG
 function animationSvg() {
-    var arrow = $(this).find('#arrow');
+    const arrow = $(this).find('#arrow');
     if (arrow.hasClass('play')) {
         arrow.addClass('reverse');
         arrow.removeClass('play');
@@ -153,20 +135,18 @@ function animationSvg() {
 }
 function calculateDv(nit) {
     if (nit !== '') {
-        var tmp = void 0;
-        var check = 0;
-        var weights = [3, 7, 13, 17, 19, 23, 29, 37, 41, 43, 47, 53, 59, 67, 71];
-        for (var i = 0; i < nit.length; i++) {
+        let tmp;
+        let check = 0;
+        const weights = [3, 7, 13, 17, 19, 23, 29, 37, 41, 43, 47, 53, 59, 67, 71];
+        for (let i = 0; i < nit.length; i++) {
             tmp = nit.substring(nit.length - (i + 1), nit.length - i);
             check += (+tmp * weights[i]);
         }
-        var mod = check % 11;
+        const mod = check % 11;
         if (mod === 0 || mod === 1) {
             return mod.toString();
         }
         return (11 - mod).toString();
     }
-    else {
-        return '';
-    }
+    return '';
 }
