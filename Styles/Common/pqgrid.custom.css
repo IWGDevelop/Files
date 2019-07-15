@@ -8,7 +8,7 @@ div.pq-grid * {
 	padding: 8px !important;
 }
 table.pq-grid-header-table div.pq-td-div {
-	padding: 8px !important;
+	padding: 4px !important;
 	font-family: Roboto !important;
 	font-weight: 600 !important;
 	font-size: 14px !important;
@@ -21,4 +21,25 @@ table.pq-grid-header-table div.pq-td-div {
 }
 .ui-state-highlight {
 	background: lightgrey !important;
+}
+.pq-pager{
+    font-size: 14px;
+}
+.pq-grid-bottom {
+    padding: 8px;
+}
+.pq-pager{
+	font-size: 14px !important;
+}
+.pq-grid-bottom {
+	padding: 8px !important;
+}
+span.pq-page-placeholder input {    
+	width: 2% !important;
+	height: 1.6rem !important;
+	font-size: 14px !important;
+	margin: 0 !important;
+}
+input.pq-search-txt {
+	height: 1.6rem !important;
 }
