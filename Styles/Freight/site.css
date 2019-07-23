@@ -129,7 +129,7 @@
 .panel {
 	background-color: #ebebeb;
     padding: 0px !important;
-    margin: 0px 7% !important;
+    margin: 2% 7% !important;
     border-color: darkgray !important;
     border-width: 1px !important;
     border-style: solid !important;
@@ -646,6 +646,13 @@
 		cursor: pointer;
 	}
 
+
+.footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+}
+	
 .principal-footer {
 	background-color: #616161 !important;
 	width: 100%;
