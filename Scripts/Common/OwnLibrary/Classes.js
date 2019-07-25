@@ -1,11 +1,9 @@
+//Version 12
 function setDefaults(options, defaults) {
     return Object.assign({}, defaults, options);
 }
-var OptionsBootstrapSelect = (function () {
-    function OptionsBootstrapSelect() {
-    }
-    return OptionsBootstrapSelect;
-}());
+class OptionsBootstrapSelect {
+}
 var defaultsBootstrapSelect = {
     text: 'Description',
     extraOption: '',
@@ -16,32 +14,27 @@ var defaultsBootstrapSelect = {
     showSubtext: false,
     value: 0,
     async: true,
-    urlValues: ''
+    urlValues: '',
+    autoSelect: true
 };
-var OptionsGenerateBootbox = (function () {
-    function OptionsGenerateBootbox() {
-    }
-    return OptionsGenerateBootbox;
-}());
+class OptionsGenerateBootbox {
+}
 var defaultsGenerateBootbox = {
     title: 'Bootbox',
     loadUrl: '',
     loadData: {},
-    loadCallback: function (response) { },
-    bootboxCallback: function () { },
+    loadCallback: (response) => { },
+    bootboxCallback: () => { },
     big: false,
     type: 'confirm'
 };
-var OptionsConsecutive = (function () {
-    function OptionsConsecutive() {
-    }
-    return OptionsConsecutive;
-}());
+class OptionsConsecutive {
+}
 var defaultsConsecutive = {
     documentId: 0,
     businessUnitId: 0,
     serviceTypeId: 0,
     companyId: 1,
     saveOp: false,
-    successEvent: function (data) { }
+    successEvent: (data) => { }
 };

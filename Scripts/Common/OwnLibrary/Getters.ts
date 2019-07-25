@@ -1,4 +1,4 @@
-//Version 20
+﻿//Version 21
 
 const textComplete: string = '1';
 const onlyCode: string = 'Code';
@@ -10,102 +10,102 @@ function getJsonForBootstrapSelect(url: string, options: OptionsBootstrapSelect,
     on();
     var extraText = '';
     $.ajax({
-            dataType: 'json',
-            url: url,
-            async: options.async
-        }).done(data => {
-            for (let dropDown of dropDowns) {
-                if (options.enable) {
-                    dropDown.removeAttr('disabled');
-                }
-                dropDown.empty();
-                $.each(data,
-                    (key, val) => {
-                        extraText = '';
-                        if (options.extraOption != null &&
-                            options.extraOption != undefined &&
-                            options.extraOption !== '') {
-                            extraText += ' data-' + options.extraOption + '="' + val[options.extraOption] + '"';
+        dataType: 'json',
+        url: url,
+        async: options.async
+    }).done(data => {
+        for (let dropDown of dropDowns) {
+            if (options.enable) {
+                dropDown.removeAttr('disabled');
+            }
+            dropDown.empty();
+            $.each(data,
+                (key, val) => {
+                    extraText = '';
+                    if (options.extraOption != null &&
+                        options.extraOption != undefined &&
+                        options.extraOption !== '') {
+                        extraText += ' data-' + options.extraOption + '="' + val[options.extraOption] + '"';
+                    }
+                    if (options.extraOption2 != null &&
+                        options.extraOption2 != undefined &&
+                        options.extraOption2 !== '') {
+                        extraText += ' data-' + options.extraOption2 + '="' + val[options.extraOption2] + '"';
+                    }
+                    if (options.subTextOption != null &&
+                        options.subTextOption != undefined &&
+                        options.subTextOption !== '') {
+                        const opts = options.subTextOption.split('.');
+                        let obj: string = val;
+                        for (let i = 0; i < opts.length; i++) {
+                            obj = obj[opts[i]];
                         }
-                        if (options.extraOption2 != null &&
-                            options.extraOption2 != undefined &&
-                            options.extraOption2 !== '') {
-                            extraText += ' data-' + options.extraOption2 + '="' + val[options.extraOption2] + '"';
-                        }
-                        if (options.subTextOption != null &&
-                            options.subTextOption != undefined &&
-                            options.subTextOption !== '') {
-                            const opts = options.subTextOption.split('.');
-                            let obj: string = val;
-                            for (let i = 0; i < opts.length; i++) {
-                                obj = obj[opts[i]];
-                            }
-                            if (options.limitSubTextOption > 0) {
-                                if (obj.length < options.limitSubTextOption) {
-                                    extraText += ' data-subtext="' + obj + '"';
-                                } else {
-                                    extraText += ' data-subtext="' + obj.substr(0, options.limitSubTextOption) + '..."';
-                                }
-                            } else {
+                        if (options.limitSubTextOption > 0) {
+                            if (obj.length < options.limitSubTextOption) {
                                 extraText += ' data-subtext="' + obj + '"';
-                            }
-                        }
-
-                        if (val != null) {
-                            dropDown.append('<option value="' +
-                                val.Id +
-                                '"' +
-                                extraText +
-                                '>' +
-                                val[options.text] +
-                                '</option>');
-                        }
-                    });
-
-                dropDown.selectpicker('refresh');
-
-                if (options.urlValues != undefined && options.urlValues != null && options.urlValues !== '') {
-                    $.ajax({
-                        url: options.urlValues,
-                        dataType: 'json',
-                        async: false,
-                        success: (data2: string) => {
-                            const array = [];
-                            if (data2 != null) {
-                                const theObject = JSON.parse(data2);
-                                for (let i = 0; i < theObject.length; i++) {
-                                    array.push(theObject[i]['Id']);
-                                }
-                            }
-                            dropDown.selectpicker('val', array);
-                        },
-                        error: (a, b, c) => {
-                            alert('Error');
-                        }
-                    });
-                } else {
-                    if (options.value != null &&
-                        options.value != undefined &&
-                        options.value !== 0 &&
-                        options.value !== '') {
-                        dropDown.selectpicker('val', options.value);
-                    } else {
-                        if (data.length === 1) {
-                            if (dropDown.selectpicker()[0].length === 2) {
-                                dropDown.selectpicker()[0].selectedIndex = 1;
-
                             } else {
-                                dropDown.selectpicker()[0].selectedIndex = 0;
+                                extraText += ' data-subtext="' + obj.substr(0, options.limitSubTextOption) + '..."';
                             }
-                            dropDown.change();
+                        } else {
+                            extraText += ' data-subtext="' + obj + '"';
                         }
                     }
-                }
 
-                dropDown.selectpicker('refresh');
-                off();
+                    if (val != null) {
+                        dropDown.append('<option value="' +
+                            val.Id +
+                            '"' +
+                            extraText +
+                            '>' +
+                            val[options.text] +
+                            '</option>');
+                    }
+                });
+
+            dropDown.selectpicker('refresh');
+
+            if (options.urlValues != undefined && options.urlValues != null && options.urlValues !== '') {
+                $.ajax({
+                    url: options.urlValues,
+                    dataType: 'json',
+                    async: false,
+                    success: (data2: string) => {
+                        const array = [];
+                        if (data2 != null) {
+                            const theObject = JSON.parse(data2);
+                            for (let i = 0; i < theObject.length; i++) {
+                                array.push(theObject[i]['Id']);
+                            }
+                        }
+                        dropDown.selectpicker('val', array);
+                    },
+                    error: (a, b, c) => {
+                        alert('Error');
+                    }
+                });
+            } else {
+                if (options.value != null &&
+                    options.value != undefined &&
+                    options.value !== 0 &&
+                    options.value !== '') {
+                    dropDown.selectpicker('val', options.value);
+                } else {
+                    if (data.length === 1 && options.autoSelect) {
+                        if (dropDown.selectpicker()[0].length === 2) {
+                            dropDown.selectpicker()[0].selectedIndex = 1;
+
+                        } else {
+                            dropDown.selectpicker()[0].selectedIndex = 0;
+                        }
+                        dropDown.change();
+                    }
+                }
             }
-        })
+
+            dropDown.selectpicker('refresh');
+            off();
+        }
+    })
         .fail((jqxhr, textStatus, error) => {
             const err = jqxhr.responseJSON.MessageDetail;
             this.objCommon.showNotification('ERROR',
@@ -260,7 +260,7 @@ function getConsecutive(field: JQuery, options: OptionsConsecutive) {
 
 function getTextSelectedFields(dropDown: JQuery, attribute?: string) {
     var fields = '';
-    dropDown.find(':selected').each(function() {
+    dropDown.find(':selected').each(function () {
         fields += ',' + $(this).text();
         if (attribute != undefined && $(this).attr(attribute) != undefined) {
             fields += '|' + $(this).attr(attribute);

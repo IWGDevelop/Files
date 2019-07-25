@@ -1,4 +1,4 @@
-//Version 20
+//Version 21
 const textComplete = '1';
 const onlyCode = 'Code';
 const onlyDescription = 'Description';
@@ -88,7 +88,7 @@ function getJsonForBootstrapSelect(url, options, ...dropDowns) {
                     dropDown.selectpicker('val', options.value);
                 }
                 else {
-                    if (data.length === 1) {
+                    if (data.length === 1 && options.autoSelect) {
                         if (dropDown.selectpicker()[0].length === 2) {
                             dropDown.selectpicker()[0].selectedIndex = 1;
                         }

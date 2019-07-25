@@ -1,7 +1,6 @@
-﻿//Version 11
+﻿//Version 12
 
-function setDefaults(options: any, defaults: any);
-function setDefaults(options, defaults) {
+function setDefaults(options: any, defaults: any) {
     return (<any>Object).assign({}, defaults, options);
 }
 
@@ -16,6 +15,7 @@ class OptionsBootstrapSelect {
     value?: any;
     async?: boolean;
     urlValues?: string;
+    autoSelect?: boolean;
 }
 
 var defaultsBootstrapSelect = {
@@ -28,7 +28,8 @@ var defaultsBootstrapSelect = {
     showSubtext: false,
     value: 0,
     async: true,
-    urlValues: ''
+    urlValues: '',
+    autoSelect: true
 };
 
 class OptionsGenerateBootbox {
