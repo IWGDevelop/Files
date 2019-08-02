@@ -17,7 +17,7 @@ function getCargoInfoItem(cargo) {
             cargo.LinerTerm +
             '</span> </span> </em>'
         : '';
-    let dimentionsHtml = cargo.CargoHandling !== false
+    let dimentionsHtml = cargo.CargoHandling === false
         ? cargo.Length + ' x ' + cargo.Width + ' x ' + cargo.Height + ' ' + cargo.MeasureDimentions
         : 'Sin dimensiones establecidas';
     let imagePacking = ' <img alt="" src="' +
