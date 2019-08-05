@@ -1,4 +1,4 @@
-﻿//Version 12
+//Version 13
 
 function setDefaults(options: any, defaults: any) {
     return (<any>Object).assign({}, defaults, options);
@@ -32,24 +32,28 @@ var defaultsBootstrapSelect = {
     autoSelect: true
 };
 
-class OptionsGenerateBootbox {
-    title?: string;
+class OptionsModal {
+    title: string;
+    type: 'partialView' | 'grid' | 'html';
     loadUrl?: string;
     loadData?: string | Object;
     loadCallback?: Function;
-    bootboxCallback?: any;
-    big?: boolean;
-    type?: 'alert' | 'confirm' | 'dialog';
+    closeCallback?: any;
+    html?: string;
+    gridOptions?: PqGridUtilitiesOptions;
 }
 
-var defaultsGenerateBootbox = {
-    title: 'Bootbox',
+var defaultsModal = {
+    title: 'Modal',
+    type: 'partialView',
     loadUrl: '',
     loadData: {},
-    loadCallback: (response) => { },
-    bootboxCallback: () => { },
-    big: false,
-    type: 'confirm'
+    loadCallback: (response) => {
+    },
+    closeCallback: (response) => {
+    },
+    html: '',
+    gridOptions: {}
 };
 
 
@@ -68,5 +72,6 @@ var defaultsConsecutive = {
     serviceTypeId: 0,
     companyId: 1,
     saveOp: false,
-    successEvent: (data) => { }
+    successEvent: (data) => {
+    }
 };

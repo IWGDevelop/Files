@@ -1,4 +1,4 @@
-﻿//Version 7
+//Version 9
 
 function on() {
     document.getElementById('overlay').style.display = 'block';
@@ -67,59 +67,38 @@ function disableFields(...fields: JQuery[]) {
     $('.selectpicker').selectpicker('refresh');
 }
 
-function generateBootbox(options: OptionsGenerateBootbox) {
+function generateModal(options: OptionsModal) {
     on();
-
-    options = ((setDefaults(options, defaultsGenerateBootbox)) as OptionsGenerateBootbox);
-
-    const className = options.big ? 'IWG_Modal' : '';
-    let dialog;
+    options = ((setDefaults(options, defaultsModal)) as OptionsModal);
+    let modal = M.Modal.init(document.querySelectorAll('.modal'), {inDuration: 300, dismissible: true, onCloseEnd: options.closeCallback })[0];
+    $('#divModalContent')
+        .html('<h4>' + options.title + '</h4><hr\><div id="divModalBody"></div>');
+    let body = $('#divModalBody');
+    
     switch (options.type) {
-        case 'alert':
-            dialog = bootbox.alert({
-                title: options.title,
-                message: '<div id="bootboxWindow" style="display:none;"></div>',
-                callback: options.bootboxCallback,
-                size: 'large',
-                className: className
+        case "partialView":
+            body.load(options.loadUrl, options.loadData, (response, status, xhr) => {
+                if (status === 'success') {
+                    modal.open();
+
+                    if (options.loadCallback != undefined) {
+                        options.loadCallback(response);
+                    }
+                } else {
+                    objCommon.showNotification('ERROR', 'Respuesta fallida: <br> Servicio: ' + xhr.statusText, 'View Modal');
+                }
+                off();
             });
             break;
-        case 'confirm':
-            dialog = bootbox.confirm({
-                title: options.title,
-                message: '<div id="bootboxWindow" style="display:none;"></div>',
-                callback: options.bootboxCallback,
-                size: 'large',
-                className: className
-            });
+        case "grid":
+            createBasicGrid(body, options.gridOptions);
+            modal.open();
             break;
-        case 'dialog':
-            dialog = bootbox.dialog({
-                title: options.title,
-                message: '<div id="bootboxWindow" style="display:none;"></div>',
-                callback: options.bootboxCallback,
-                size: 'large',
-                className: className
-            });
+        case "html":
+            body.html(options.html);
+            modal.open();
             break;
     }
-
-    dialog.init(() => {
-        $('#bootboxWindow').load(options.loadUrl, options.loadData, (response, status, xhr) => {
-            if (status === 'success') {
-                $('#bootboxWindow').show('fade');
-                const h = '50%';
-                $('#bootboxWindow').height(h);
-                if (options.loadCallback != undefined) {
-                    options.loadCallback(response);
-                }
-            }
-            else {
-                objCommon.showNotification('ERROR', 'Respuesta fallida: <br> Servicio: ' + xhr.statusText, 'View Modal');
-            }
-            off();
-        });
-    });
 }
 
 //Función para convertir los datos de un formulario a un objeto
@@ -130,18 +109,6 @@ function objectifyForm(form: JQuery): Object {
         returnArray[array[i]['name']] = array[i]['value'];
     }
     return returnArray;
-}
-
-//Función para agregar una animación a un objeto SVG
-function animationSvg() {
-    const arrow = $(this).find('#arrow');
-    if (arrow.hasClass('play')) {
-        arrow.addClass('reverse');
-        arrow.removeClass('play');
-    } else {
-        arrow.addClass('play');
-        arrow.removeClass('reverse');
-    }
 }
 
 function calculateDv(nit: string) {
@@ -161,7 +128,7 @@ function calculateDv(nit: string) {
         }
 
         return (11 - mod).toString();
+    } else {
+        return '';
     }
-
-    return '';
 }

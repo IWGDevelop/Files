@@ -1,4 +1,4 @@
-//Version 12
+//Version 13
 function setDefaults(options, defaults) {
     return Object.assign({}, defaults, options);
 }
@@ -17,16 +17,19 @@ var defaultsBootstrapSelect = {
     urlValues: '',
     autoSelect: true
 };
-class OptionsGenerateBootbox {
+class OptionsModal {
 }
-var defaultsGenerateBootbox = {
-    title: 'Bootbox',
+var defaultsModal = {
+    title: 'Modal',
+    type: 'partialView',
     loadUrl: '',
     loadData: {},
-    loadCallback: (response) => { },
-    bootboxCallback: () => { },
-    big: false,
-    type: 'confirm'
+    loadCallback: (response) => {
+    },
+    closeCallback: (response) => {
+    },
+    html: '',
+    gridOptions: {}
 };
 class OptionsConsecutive {
 }
@@ -36,5 +39,6 @@ var defaultsConsecutive = {
     serviceTypeId: 0,
     companyId: 1,
     saveOp: false,
-    successEvent: (data) => { }
+    successEvent: (data) => {
+    }
 };
