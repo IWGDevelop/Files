@@ -157,7 +157,8 @@
 .panel-header-text {
 	color: white;
 	font-family: 'roboto';
-	font-size: small;
+	font-size: small; 
+	margin: auto;
 }
 	
 .panel-body{
