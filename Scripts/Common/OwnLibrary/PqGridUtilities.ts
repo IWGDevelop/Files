@@ -1,85 +1,167 @@
-﻿// Version 1
+// Version 14
 
 function createBasicGrid(grid: JQuery, options: PqGridUtilitiesOptions) {
-    let showToolbar: boolean = false;
-    let columns: PqGridColumn[] = [];
-    let toolbar: PqGridToolbar = { items: [] };
+    on();
+    let columns: PqGridColumn[] = generateColumns(options.columns, options.onCheck != undefined);
+    let obj: PqGridOptions = generateBasicOptions(options, columns);
+    return grid.pqGrid(obj);
+}
 
-    for (let column of options.columns) {
+function createDetailsGrid(grid: JQuery, options: PqGridUtilitiesOptions, detailsOptions: PqGridUtilitiesOptions) {
+    on();
+    let columns = generateColumns(options.columns, options.onCheck != undefined, true);
+    let obj: PqGridOptions = generateBasicOptions(options, columns);
+    obj.detailModel = {
+        cache: true,
+        collapseIcon: 'ui-icon-plus',
+        expandIcon: 'ui-icon-minus',
+        init: (ui) => {
+            if (detailsOptions.onOpenDetail !== undefined) {
+                detailsOptions.onOpenDetail(ui.rowData, detailsOptions);
+            }
+            return createBasicGrid($('<div id="grdDetails"></div>'), detailsOptions);
+        }
+    };
+
+    return grid.pqGrid(obj);
+}
+
+
+// Métodos de ayuda
+
+function generateColumns(optionColumns: PqGridUtilitiesColumn[], check: boolean, details: boolean = false): PqGridColumn[] {
+    let columns: PqGridColumn[] = [];
+
+    if (details) {
+        columns.push({ title: '', maxWidth: 30, minWidth: 30, type: 'detail', resizable: false, editable: false });
+    }
+
+    if (check) {
+        columns.push(
+            {
+                title: '', dataIndx: 'state1', maxWidth: 30, minWidth: 30, align: 'center', resizable: false,
+                type: 'checkBoxSelection', cls: 'ui-state-default', sortable: false, editable: false,
+                cb: { all: false, header: true }
+            });
+    }
+
+    for (let column of optionColumns) {
         columns.push({
             title: column.title,
-            dataType: column.type,
+            dataType: column.dataType,
+            type: column.type,
+            cb: column.cb,
             dataIndx: column.columnName.split('|')[0],
-            render: (ui) => {
+            editor: column.editor,
+            editable: column.editor !== undefined,
+            render: column.render != undefined ? column.render : (ui) => {
                 if (ui.cellData === null && column.columnName.split('|').length > 1) {
                     ui.cellData = ui.rowData[column.columnName.split('|')[1]];
                 }
 
-                if (column.type === 'date') {
+                if (column.dataType === 'date') {
                     return getFormatedDate(new Date(parseInt(ui.cellData.substr(6))), true);
                 }
 
                 return ui.cellData;
-            }
+            },
+            filter: { type: 'textbox', condition: 'contain', listeners: ['keyup'] }
         });
     }
 
-    if (options.toolbarItems != undefined) {
-        for (let item of options.toolbarItems) {
-            let theType = '';
-            switch (item.type) {
-            case 'newButton':
-                theType = '<button class="primary-button">Nuevo</button>';
+    return columns;
+}
+
+function generateToolbar(optionsToolbarItems: PqGridUtilitiesToolbarItem[]): PqGridToolbar{
+    let toolbar: PqGridToolbar = { items: [] };
+
+    for (let item of optionsToolbarItems) {
+        let theType = '';
+        switch (item.type) {
+            case 'button':
+                theType = '<button class="primary-button" style="margin: 0 16px 0 0">' + item.text + '</button>';
                 break;
             default:
                 break;
-            }
-            toolbar.items.push({
-                type: theType,
-                listeners: [{ click: item.listener }]
-            });
-
-            showToolbar = true;
         }
+        toolbar.items.push({
+            type: theType,
+            listeners: [{ click: item.listener }]
+        });
     }
 
-    let obj: PqGridOptions = {
+    return toolbar;
+}
+
+function generateBasicOptions(options: PqGridUtilitiesOptions, columns: PqGridColumn[]) {
+    let showToolbar: boolean = false;
+    let toolbar: PqGridToolbar = { items: [] };
+
+    if (options.toolbarItems != undefined) {
+        toolbar = generateToolbar(options.toolbarItems);
+        showToolbar = true;
+    }
+
+    let basicOptions: PqGridOptions = {
         scrollModel: { autoFit: true },
         width: '100%',
-        height: 400,
+        height: options.height === undefined ? 400 : options.height,
         flex: false,
+        filterModel: {
+            on: true, mode: "AND", header: true, type: 'local' },
         collapsible: true,
         draggable: false,
-        editable: false,
+        editable: true,
         numberCell: { show: false },
-        pageModel: { type: 'local', rPP: 20, strRpp: '{0}', strDisplay: '{0} a {1} de {2}' },
+        pageModel: { type: 'local', rPP: 50, strRpp: '{0}', strDisplay: '{0} a {1} de {2}' },
         toolbar: toolbar,
+        showToolbar: showToolbar,
         rowBorders: false,
         showTitle: false,
-        showToolbar: showToolbar,
         stripeRows: true,
+        check: options.onCheck !== undefined ? options.onCheck.check : (event, ui) => {
+            return false;
+        },
+        unCheck: options.onCheck !== undefined ? options.onCheck.unCheck : (event, ui) => {
+            return false;
+        },
+        change: options.change !== undefined ? options.change : (event, ui) => {
+        },
         selectionModel: {
-            type: 'row',
+            type: options.onCheck === undefined ? 'row' : null,
             fireSelectChange: false,
-            mode: 'single'
+            mode: options.onCheck === undefined ? 'single' : null
         },
         rowDblClick: (event, ui) => {
-            if (options.actionToClick === undefined) {
+            if (options.actionToDoubleClick !== undefined) {
                 on();
-                window.location.href = rootPath + options.controller + '/' + options.actionToClick + '/' + ui.rowData['Id'];
+                if (typeof options.actionToDoubleClick == 'string') {
+                    window.location.href = getRootUrl() +
+                        options.controller +
+                        '/' +
+                        options.actionToDoubleClick +
+                        '/' +
+                        ui.rowData['Id'];
+                } else {
+                    options.actionToDoubleClick(event, ui);
+                    off();
+                }
             }
         },
         load: (event, ui) => {
             if (options.actionLoaded != undefined) {
                 options.actionLoaded(event, ui);
             }
+            off();
         },
         dataModel: {
             location: 'remote',
-            url: rootPath + options.controller + '/' + options.actionGetData,
+            sorting: "local",
+            sortDir: "up",
+            url: options.urlLoad === undefined ? getRootUrl() + options.controller + '/' + options.actionGetData : options.urlLoad,
             postData: options.dataParams,
             dataType: 'JSON',
-            method: 'POST',
+            method: 'GET',
             getData: (dataJson, status, jqXhr) => {
                 return { curPage: 1, totalRecords: dataJson.length, data: dataJson }
             }
@@ -87,26 +169,57 @@ function createBasicGrid(grid: JQuery, options: PqGridUtilitiesOptions) {
         colModel: columns
     };
 
-    grid.pqGrid(obj);
+    return basicOptions;
 }
 
-class PqGridUtilitiesOptions {
+// Clases y tipos
+
+type FunctionType = (event: any, ui: any) => void;
+type StringType = 'Details' | 'Edit' | 'Create';
+
+interface PqGridUtilitiesOptions {
     controller: string;
-    actionToClick?: 'Details' | 'Edit' | 'Create' = null;
+    urlLoad?: string;
+    actionToDoubleClick?: StringType | FunctionType;
+
     actionLoaded?(event: any, ui: any): void;
+
+    change?(event: any, ui: any): void;
+
     actionGetData: string;
     dataParams?: any;
     columns: PqGridUtilitiesColumn[];
-    toolbarItems?: PqGridUtilitiesToolbarItem[] = [];
+    toolbarItems?: PqGridUtilitiesToolbarItem[];
+    onCheck?: OnCheck;
+    onOpenDetail?(rowData: any, detailsOptions: PqGridUtilitiesOptions): void;
+    height?: number;
 }
 
-class PqGridUtilitiesColumn {
+interface PqGridUtilitiesColumn {
     title: string;
     columnName: string;
-    type?: 'string' | 'integer' | 'float' | 'date' | Function = 'string';
+    dataType?: 'string' | 'integer' | 'float' | 'date' | Function;
+    type?: 'checkBoxSelection';
+    cb?: any;
+    editor?: Editor;
+    render?(ui): string;
 }
 
-class PqGridUtilitiesToolbarItem {
-    type: 'newButton';
-    listener: any;
+interface PqGridUtilitiesToolbarItem {
+    type: string;
+    text: string;
+    listener: Function;
+}
+
+interface Editor {
+    type: 'textbox' | 'textarea' | 'contenteditable' | 'select' | 'checkbox' | Function;
+    mapIndices?: any;
+    labelIndx?: string;
+    valueIndx?: string;
+    options?: any;
+}
+
+interface OnCheck {
+    check(event: any, ui: any): boolean;
+    unCheck(event: any, ui: any): boolean;
 }

@@ -1,9 +1,13 @@
-//Version 21
-const textComplete = '1';
-const onlyCode = 'Code';
-const onlyDescription = 'Description';
-const onlyName = 'Name';
-function getJsonForBootstrapSelect(url, options, ...dropDowns) {
+var textComplete = '1';
+var onlyCode = 'Code';
+var onlyDescription = 'Description';
+var onlyName = 'Name';
+function getJsonForBootstrapSelect(url, options) {
+    var _this = this;
+    var dropDowns = [];
+    for (var _i = 2; _i < arguments.length; _i++) {
+        dropDowns[_i - 2] = arguments[_i];
+    }
     options = (setDefaults(options, defaultsBootstrapSelect));
     on();
     var extraText = '';
@@ -11,13 +15,13 @@ function getJsonForBootstrapSelect(url, options, ...dropDowns) {
         dataType: 'json',
         url: url,
         async: options.async
-    }).done(data => {
-        for (let dropDown of dropDowns) {
+    }).done(function (data) {
+        var _loop_1 = function (dropDown) {
             if (options.enable) {
                 dropDown.removeAttr('disabled');
             }
             dropDown.empty();
-            $.each(data, (key, val) => {
+            $.each(data, function (key, val) {
                 extraText = '';
                 if (options.extraOption != null &&
                     options.extraOption != undefined &&
@@ -32,9 +36,9 @@ function getJsonForBootstrapSelect(url, options, ...dropDowns) {
                 if (options.subTextOption != null &&
                     options.subTextOption != undefined &&
                     options.subTextOption !== '') {
-                    const opts = options.subTextOption.split('.');
-                    let obj = val;
-                    for (let i = 0; i < opts.length; i++) {
+                    var opts = options.subTextOption.split('.');
+                    var obj = val;
+                    for (var i = 0; i < opts.length; i++) {
                         obj = obj[opts[i]];
                     }
                     if (options.limitSubTextOption > 0) {
@@ -65,17 +69,17 @@ function getJsonForBootstrapSelect(url, options, ...dropDowns) {
                     url: options.urlValues,
                     dataType: 'json',
                     async: false,
-                    success: (data2) => {
-                        const array = [];
+                    success: function (data2) {
+                        var array = [];
                         if (data2 != null) {
-                            const theObject = JSON.parse(data2);
-                            for (let i = 0; i < theObject.length; i++) {
+                            var theObject = JSON.parse(data2);
+                            for (var i = 0; i < theObject.length; i++) {
                                 array.push(theObject[i]['Id']);
                             }
                         }
                         dropDown.selectpicker('val', array);
                     },
-                    error: (a, b, c) => {
+                    error: function (a, b, c) {
                         alert('Error');
                     }
                 });
@@ -100,12 +104,17 @@ function getJsonForBootstrapSelect(url, options, ...dropDowns) {
                 }
             }
             dropDown.selectpicker('refresh');
+            options.callback();
             off();
+        };
+        for (var _i = 0, dropDowns_1 = dropDowns; _i < dropDowns_1.length; _i++) {
+            var dropDown = dropDowns_1[_i];
+            _loop_1(dropDown);
         }
     })
-        .fail((jqxhr, textStatus, error) => {
-        const err = jqxhr.responseJSON.MessageDetail;
-        this.objCommon.showNotification('ERROR', 'Respuesta fallida <br> Servicio: ' + url + '<br>' + err, 'Web API');
+        .fail(function (jqxhr, textStatus, error) {
+        var err = jqxhr.responseJSON.MessageDetail;
+        _this.objCommon.showNotification('ERROR', 'Respuesta fallida <br> Servicio: ' + url + '<br>' + err, 'Web API');
         off();
     });
 }
@@ -116,11 +125,12 @@ function getDescription(url, editor) {
     getProperty(url, editor, 'Description');
 }
 function getProperty(url, editor, property) {
+    var _this = this;
     on();
     $.ajax({
         url: url,
         dataType: 'json',
-        success: data => {
+        success: function (data) {
             if (data != null) {
                 if (property != undefined && property != null && property != '') {
                     editor.val(data[property]);
@@ -131,16 +141,13 @@ function getProperty(url, editor, property) {
             }
             off();
         },
-        error: (jqxhr, textStatus, error) => {
-            const err = jqxhr.responseJSON.MessageDetail;
-            this.objCommon.showNotification('ERROR', 'Respuesta fallida <br> Servicio: ' + url + '<br>' + err, 'Web API');
+        error: function (jqxhr, textStatus, error) {
+            var err = jqxhr.responseJSON.MessageDetail;
+            _this.objCommon.showNotification('ERROR', 'Respuesta fallida <br> Servicio: ' + url + '<br>' + err, 'Web API');
             off();
         }
     });
 }
-/**
- * @deprecated Usar el método getJson para evitar un llamado síncrono. El método getJson no retorna nada, en vez de eso recibe una función que se ejecuta cuando hay una respuesta satisfatoria y en este métdo debe escribirse lo que se ha de hacer con el objeto
- */
 function getObject(url, data) {
     var object;
     $.ajax({
@@ -148,7 +155,7 @@ function getObject(url, data) {
         data: data,
         dataType: 'json',
         async: false,
-        success: (response) => {
+        success: function (response) {
             if (response != null) {
                 if (response.length === 1) {
                     object = response[0];
@@ -171,11 +178,11 @@ function getJson(url, data, evtDone, errorMessage) {
         data: data,
         dataType: 'json',
         type: 'GET',
-        success: (response, status, jqXhr) => {
+        success: function (response, status, jqXhr) {
             evtDone(response, status, jqXhr);
             off();
         },
-        error: (jqXhr, status, error) => {
+        error: function (jqXhr, status, error) {
             if (errorMessage === undefined || errorMessage === null || errorMessage === '') {
                 swal('Error', 'No se pudo obtener respuesta satisfactoria debido al error: ' + error, 'error');
             }
@@ -186,13 +193,14 @@ function getJson(url, data, evtDone, errorMessage) {
         }
     });
 }
-function getCurrentDate(withTime = false) {
+function getCurrentDate(withTime) {
+    if (withTime === void 0) { withTime = false; }
     return getFormatedDate(new Date(), withTime);
 }
 function getFormatedDate(date, withTime) {
-    const year = date.getFullYear();
-    let month = (date.getMonth() + 1).toString();
-    let day = date.getDate().toString();
+    var year = date.getFullYear();
+    var month = (date.getMonth() + 1).toString();
+    var day = date.getDate().toString();
     if (date.getDate() < 10) {
         day = '0' + day;
     }
@@ -203,8 +211,8 @@ function getFormatedDate(date, withTime) {
         return year + '-' + month + '-' + day;
     }
     else {
-        let hour = date.getHours().toString();
-        let minutes = date.getMinutes().toString();
+        var hour = date.getHours().toString();
+        var minutes = date.getMinutes().toString();
         if (date.getHours() < 10) {
             hour = '0' + hour;
         }
@@ -214,7 +222,6 @@ function getFormatedDate(date, withTime) {
         return year + '-' + month + '-' + day + ' ' + hour + ':' + minutes;
     }
 }
-//Función para generar un consecutivo usando el servicio publicado de generación de consecutivos para un documento específico
 function getConsecutive(field, options) {
     on();
     options = setDefaults(options, defaultsConsecutive);
@@ -228,12 +235,12 @@ function getConsecutive(field, options) {
             company: options.companyId,
             save: options.saveOp
         },
-        success: (data => {
+        success: (function (data) {
             field.val(data);
             off();
             options.successEvent(data);
         }),
-        error: ((jqXhr, textStatus, error) => {
+        error: (function (jqXhr, textStatus, error) {
             swal('Error', 'No hemos logrado conseguir un consecutivo para este documento.\n\nPor favor, inténtalo de nuevo en un momento y si el problema persiste contacta con el administrador', 'error');
             off();
         })

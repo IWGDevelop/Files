@@ -1,9 +1,11 @@
-//Version 13
 function setDefaults(options, defaults) {
     return Object.assign({}, defaults, options);
 }
-class OptionsBootstrapSelect {
-}
+var OptionsBootstrapSelect = (function () {
+    function OptionsBootstrapSelect() {
+    }
+    return OptionsBootstrapSelect;
+}());
 var defaultsBootstrapSelect = {
     text: 'Description',
     extraOption: '',
@@ -15,30 +17,37 @@ var defaultsBootstrapSelect = {
     value: 0,
     async: true,
     urlValues: '',
-    autoSelect: true
+    autoSelect: true,
+    callback: function () { }
 };
-class OptionsModal {
-}
+var OptionsModal = (function () {
+    function OptionsModal() {
+    }
+    return OptionsModal;
+}());
 var defaultsModal = {
     title: 'Modal',
     type: 'partialView',
     loadUrl: '',
     loadData: {},
-    loadCallback: (response) => {
+    loadCallback: function (response) {
     },
-    closeCallback: (response) => {
+    closeCallback: function (response) {
     },
     html: '',
     gridOptions: {}
 };
-class OptionsConsecutive {
-}
+var OptionsConsecutive = (function () {
+    function OptionsConsecutive() {
+    }
+    return OptionsConsecutive;
+}());
 var defaultsConsecutive = {
     documentId: 0,
     businessUnitId: 0,
     serviceTypeId: 0,
     companyId: 1,
     saveOp: false,
-    successEvent: (data) => {
+    successEvent: function (data) {
     }
 };

@@ -1,4 +1,4 @@
-//Version 13
+//Version 14
 
 function setDefaults(options: any, defaults: any) {
     return (<any>Object).assign({}, defaults, options);
@@ -16,6 +16,7 @@ class OptionsBootstrapSelect {
     async?: boolean;
     urlValues?: string;
     autoSelect?: boolean;
+    callback?: () => void;
 }
 
 var defaultsBootstrapSelect = {
@@ -29,7 +30,8 @@ var defaultsBootstrapSelect = {
     value: 0,
     async: true,
     urlValues: '',
-    autoSelect: true
+    autoSelect: true,
+    callback: () => { }
 };
 
 class OptionsModal {
