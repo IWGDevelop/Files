@@ -96,8 +96,8 @@ function generateModal(options: OptionsModal) {
             off();
             break;
         case 'localgrid':
-            createBasicLocalGrid($('#divModalBody'), options.gridOptions, options.gridData);
             modal.open();
+            createBasicLocalGrid($('#divModalBody'), options.gridOptions, options.gridData);
             off();
             break;
         case 'html':
