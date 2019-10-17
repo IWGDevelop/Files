@@ -1,4 +1,4 @@
-//Version 9
+//Version 10
 
 function on() {
     document.getElementById('overlay').style.display = 'block';
@@ -70,13 +70,13 @@ function disableFields(...fields: JQuery[]) {
 function generateModal(options: OptionsModal) {
     on();
     options = ((setDefaults(options, defaultsModal)) as OptionsModal);
-    let modal = M.Modal.init(document.querySelectorAll('.modal'), {inDuration: 300, dismissible: true, onCloseEnd: options.closeCallback })[0];
+    let modal = M.Modal.init(document.querySelectorAll('.modal'), { inDuration: 300, dismissible: true, onCloseEnd: options.closeCallback })[0];
     $('#divModalContent')
         .html('<h4>' + options.title + '</h4><hr\><div id="divModalBody"></div>');
     let body = $('#divModalBody');
-    
+
     switch (options.type) {
-        case "partialView":
+        case 'partialView':
             body.load(options.loadUrl, options.loadData, (response, status, xhr) => {
                 if (status === 'success') {
                     modal.open();
@@ -90,13 +90,20 @@ function generateModal(options: OptionsModal) {
                 off();
             });
             break;
-        case "grid":
-            createBasicGrid(body, options.gridOptions);
+        case 'grid':
+            createBasicGrid($('#divModalBody'), options.gridOptions);
             modal.open();
+            off();
             break;
-        case "html":
+        case 'localgrid':
+            createBasicLocalGrid($('#divModalBody'), options.gridOptions, options.gridData);
+            modal.open();
+            off();
+            break;
+        case 'html':
             body.html(options.html);
             modal.open();
+            off();
             break;
     }
 }

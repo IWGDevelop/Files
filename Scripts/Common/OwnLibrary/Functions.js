@@ -1,4 +1,3 @@
-//Version 9
 function on() {
     document.getElementById('overlay').style.display = 'block';
     onQuantity++;
@@ -19,18 +18,22 @@ function saveObject(url, object, callback) {
         data: object,
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
-        success: (response) => {
+        success: function (response) {
             callback(response);
             off();
         },
-        error: (xhr, status, error) => {
+        error: function (xhr, status, error) {
             off();
             swal('Error', 'No hemos podido guardar el objeto.\n\nError: ' + error, 'error');
         },
     });
 }
-function enableFields(...fields) {
-    for (let i = 0; i < fields.length; i++) {
+function enableFields() {
+    var fields = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        fields[_i] = arguments[_i];
+    }
+    for (var i = 0; i < fields.length; i++) {
         if (fields[i].attr('type') === 'checkbox') {
             fields[i].bootstrapSwitch('disabled', false);
         }
@@ -45,8 +48,12 @@ function enableFields(...fields) {
     }
     $('.selectpicker').selectpicker('refresh');
 }
-function disableFields(...fields) {
-    for (let i = 0; i < fields.length; i++) {
+function disableFields() {
+    var fields = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        fields[_i] = arguments[_i];
+    }
+    for (var i = 0; i < fields.length; i++) {
         if (fields[i].attr('type') === 'checkbox') {
             fields[i].bootstrapSwitch('disabled', true);
         }
@@ -64,13 +71,13 @@ function disableFields(...fields) {
 function generateModal(options) {
     on();
     options = (setDefaults(options, defaultsModal));
-    let modal = M.Modal.init(document.querySelectorAll('.modal'), { inDuration: 300, dismissible: true, onCloseEnd: options.closeCallback })[0];
+    var modal = M.Modal.init(document.querySelectorAll('.modal'), { inDuration: 300, dismissible: true, onCloseEnd: options.closeCallback })[0];
     $('#divModalContent')
         .html('<h4>' + options.title + '</h4><hr\><div id="divModalBody"></div>');
-    let body = $('#divModalBody');
+    var body = $('#divModalBody');
     switch (options.type) {
-        case "partialView":
-            body.load(options.loadUrl, options.loadData, (response, status, xhr) => {
+        case 'partialView':
+            body.load(options.loadUrl, options.loadData, function (response, status, xhr) {
                 if (status === 'success') {
                     modal.open();
                     if (options.loadCallback != undefined) {
@@ -83,35 +90,41 @@ function generateModal(options) {
                 off();
             });
             break;
-        case "grid":
-            createBasicGrid(body, options.gridOptions);
+        case 'grid':
+            createBasicGrid($('#divModalBody'), options.gridOptions);
             modal.open();
+            off();
             break;
-        case "html":
+        case 'localgrid':
+            createBasicLocalGrid($('#divModalBody'), options.gridOptions, options.gridData);
+            modal.open();
+            off();
+            break;
+        case 'html':
             body.html(options.html);
             modal.open();
+            off();
             break;
     }
 }
-//Función para convertir los datos de un formulario a un objeto
 function objectifyForm(form) {
-    const returnArray = {};
-    const array = form.serializeArray();
-    for (let i = 0; i < array.length; i++) {
+    var returnArray = {};
+    var array = form.serializeArray();
+    for (var i = 0; i < array.length; i++) {
         returnArray[array[i]['name']] = array[i]['value'];
     }
     return returnArray;
 }
 function calculateDv(nit) {
     if (nit !== '') {
-        let tmp;
-        let check = 0;
-        const weights = [3, 7, 13, 17, 19, 23, 29, 37, 41, 43, 47, 53, 59, 67, 71];
-        for (let i = 0; i < nit.length; i++) {
+        var tmp = void 0;
+        var check = 0;
+        var weights = [3, 7, 13, 17, 19, 23, 29, 37, 41, 43, 47, 53, 59, 67, 71];
+        for (var i = 0; i < nit.length; i++) {
             tmp = nit.substring(nit.length - (i + 1), nit.length - i);
             check += (+tmp * weights[i]);
         }
-        const mod = check % 11;
+        var mod = check % 11;
         if (mod === 0 || mod === 1) {
             return mod.toString();
         }
