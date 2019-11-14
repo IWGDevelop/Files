@@ -19,7 +19,12 @@ function saveObject(url, object, callback) {
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         success: function (response) {
-            callback(response);
+            if (callback !== undefined) {
+                callback(response);
+            }
+            else {
+                swal('Guardado', 'El objeto se ha guardado correctamente', 'success');
+            }
             off();
         },
         error: function (xhr, status, error) {

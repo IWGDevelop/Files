@@ -1,4 +1,4 @@
-//Version 10
+﻿//Version 11
 
 function on() {
     document.getElementById('overlay').style.display = 'block';
@@ -23,7 +23,15 @@ function saveObject(url: string, object, callback?) {
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         success: (response) => {
-            callback(response);
+            if (callback !== undefined) {
+                callback(response);
+            } else {
+                swal(
+                    'Guardado',
+                    'El objeto se ha guardado correctamente',
+                    'success'
+                );
+            }
             off();
         },
         error: (xhr, status, error) => {
