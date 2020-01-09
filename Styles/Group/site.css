@@ -417,32 +417,30 @@
     padding: 8px 16px 8px 16px !important;
 	transition: .3s;
 }
-
-.primary-button:hover {
-    color: #020202;
-    background-color: #717171;
-    border-color: #000000;
-    border-radius: 4px;
-    line-height: 1;
-    border-width: 1px;
-    font-weight: 300;
-    padding: 8px 16px 8px 16px !important;
-    cursor: pointer;
-	transition: .3s;
-}
-
-.primary-button:disabled {
-    color: #676565;
-    background-color: #949292;
-    border-color: #827e7e;
-    border-radius: 4px;
-    line-height: 1;
-    border-width: 1px;
-    font-weight: 300;
-    padding: 8px 16px 8px 16px !important;
-	cursor:not-allowed !important;
-    transition: .3s;
-}
+	.primary-button:hover {
+		color: #020202;
+		background-color: #717171;
+		border-color: #000000;
+		border-radius: 4px;
+		line-height: 1;
+		border-width: 1px;
+		font-weight: 300;
+		padding: 8px 16px 8px 16px !important;
+		cursor: pointer;
+		transition: .3s;
+	}
+	.primary-button:disabled {
+		color: #676565;
+		background-color: #949292;
+		border-color: #827e7e;
+		border-radius: 4px;
+		line-height: 1;
+		border-width: 1px;
+		font-weight: 300;
+		padding: 8px 16px 8px 16px !important;
+		cursor:not-allowed !important;
+		transition: .3s;
+	}
 
 .secundary-button {
     color: black;
@@ -455,19 +453,30 @@
     padding: 8px 16px 8px 16px !important;
 	transition: .3s;
 }
-
-.secundary-button:hover {
-    color: white;
-    background-color: #555555;
-    border-color: #000000;
-    border-radius: 4px;
-    line-height: 1;
-    border-width: 1px;
-    font-weight: 300;
-    padding: 8px 16px 8px 16px !important;
-    cursor: pointer;
-	transition: .3s;
-}
+	.secundary-button:hover {
+		color: white;
+		background-color: #555555;
+		border-color: #000000;
+		border-radius: 4px;
+		line-height: 1;
+		border-width: 1px;
+		font-weight: 300;
+		padding: 8px 16px 8px 16px !important;
+		cursor: pointer;
+		transition: .3s;
+	}
+	.secundary-button:disabled {
+		color: #676565;
+		background-color: #949292;
+		border-color: #827e7e;
+		border-radius: 4px;
+		line-height: 1;
+		border-width: 1px;
+		font-weight: 300;
+		padding: 8px 16px 8px 16px !important;
+		cursor:not-allowed !important;
+		transition: .3s;
+	}
 
 .warning-button {
     color: black;
