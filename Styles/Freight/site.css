@@ -375,7 +375,6 @@
     border-radius: 4px;
 	line-height: 1;
     font-weight: 300;
-    border-width: 1px;
     padding: 8px 16px 8px 16px !important;
     margin: auto !important;
 	transition: .3s;
@@ -386,7 +385,6 @@
 		border-radius: 4px;
         font-weight: 300;
 		line-height: 1;
-		border-width: 1px;
         padding: 8px 16px 8px 16px !important;
         margin: auto !important;
 		transition: .3s;
@@ -394,10 +392,8 @@
 	.primary-button:disabled {
 		color: #4a4949;
 		background-color: #c0cca6;
-		border-color: #827e7e;
 		border-radius: 4px;
 		line-height: 1;
-		border-width: 1px;
 		font-weight: 300;
 		padding: 8px 16px 8px 16px !important;
 		cursor:not-allowed !important;
@@ -413,6 +409,7 @@
     font-weight: 300;
     padding: 8px 16px 8px 16px;
     margin: auto;
+	transition: .3s;
 }
 
     .secundary-button:hover {
@@ -423,6 +420,7 @@
         font-weight: 300;
         padding: 8px 16px 8px 16px;
         margin: auto;
+		transition: .3s;
     }
 
 .danger-button {
