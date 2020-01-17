@@ -1,4 +1,4 @@
-//Version 22
+//Version 24
 
 const textComplete: string = '1';
 const onlyCode: string = 'Code';
@@ -103,15 +103,13 @@ function getJsonForBootstrapSelect(url: string, options: OptionsBootstrapSelect,
             }
 
             dropDown.selectpicker('refresh');
-            options.callback();
             off();
         }
+
+        options.callback();
     })
         .fail((jqxhr, textStatus, error) => {
-            const err = jqxhr.responseJSON.MessageDetail;
-            this.objCommon.showNotification('ERROR',
-                'Respuesta fallida <br> Servicio: ' + url + '<br>' + err,
-                'Web API');
+            swal('Error', 'Ha ocurrido unn error al obtener los datos del servicio ' + url + '. Comunícate con el administrador del sistema. [Función GetJsonForBootstrapSelect]', 'error');
             off();
         });
 }
@@ -141,11 +139,7 @@ function getProperty(url: string, editor: JQuery, property?: string) {
             off();
         },
         error: (jqxhr, textStatus, error) => {
-            const err = jqxhr.responseJSON.MessageDetail;
-            this.objCommon.showNotification('ERROR',
-                'Respuesta fallida <br> Servicio: ' + url + '<br>' + err,
-                'Web API');
-
+            swal('Error', 'Ha ocurrido unn error al obtener los datos del servicio ' + url + '. Comunícate con el administrador del sistema. [Función GetProperty]', 'error');
             off();
         }
     });
