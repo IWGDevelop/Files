@@ -406,55 +406,38 @@
 	margin: 0px;
 }
 
+
 .primary-button {
-	color: black;
-    background-color: #df7700;
-    border-color: #000000;
-    border-radius: 4px;
-    line-height: 1;
-    border-width: 1px;
-    font-weight: 300;
-    padding: 8px 16px 8px 16px;
-	transition: .3s;
-}
-
-.primary-button:hover {
-    color: white;
-    background-color: #965001;
-    border-color: #000000;
-    border-radius: 4px;
-    line-height: 1;
-    border-width: 1px;
-    font-weight: 300;
-    padding: 8px 16px 8px 16px;
-    cursor: pointer;
-	transition: .3s;
-}
-
-.primary-button:disabled {
-    color: #676565;
-    background-color: #949292;
-    border-color: #827e7e;
-    border-radius: 4px;
-    line-height: 1;
-    border-width: 1px;
-    font-weight: 300;
-    padding: 8px 16px 8px 16px;
-	cursor:not-allowed !important;
-    transition: .3s;
-}
-
-.secundary-button {
     color: black;
-    background-color: #e2e2e2;
-    border-color: #000000;
+    background-color: #df7700;
+    border-color: transparent;
     border-radius: 4px;
-    line-height: 1;
-    border-width: 1px;
+	line-height: 1;
     font-weight: 300;
-    padding: 8px 16px 8px 16px;
+    padding: 8px 16px 8px 16px !important;
+    margin: auto !important;
 	transition: .3s;
 }
+    .primary-button:hover {
+        color: black;
+		background-color: #965001;
+		border-radius: 4px;
+        font-weight: 300;
+		line-height: 1;
+        padding: 8px 16px 8px 16px !important;
+        margin: auto !important;
+		transition: .3s;
+    }
+	.primary-button:disabled {
+		color: #4a4949;
+		background-color: #949292;
+		border-radius: 4px;
+		line-height: 1;
+		font-weight: 300;
+		padding: 8px 16px 8px 16px !important;
+		cursor:not-allowed !important;
+		transition: .3s;
+	}
 
 .secundary-button:hover {
     color: white;
