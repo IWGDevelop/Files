@@ -6,7 +6,6 @@
     width: 100%;
 }
 
-
 #page-wrapper {
     padding: 0 15px;
     background-color: #ffffff;
@@ -643,4 +642,31 @@
 	
 .flatpickr-input[readonly] {
 	background-color: white;
+}
+
+.footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+}
+	
+.principal-footer {
+	background-color: #DF7700 !important;
+	width: 100%;
+	padding-right: 20%;
+	padding-left: 20%;
+	padding-top: 24px;
+	padding-bottom: 64px;
+	display: flex;
+}
+
+.secondary-footer {
+	height: 50px;
+	background-color: #984d00 !important;
+	width: 100%;
+	padding-right: 20%;
+	padding-left: 20%;
+	padding-top: 16px;
+	padding-bottom: 16px;
+	text-align: center;
 }
