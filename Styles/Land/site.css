@@ -135,23 +135,23 @@
 
 .panel {
     background-color: #ebebeb;
-    box-shadow: 0 0 4px 0 rgba(0, 0, 0, .04);
-    border-width: 1px !important;
-	border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
     padding: 0px !important;
-	margin: 0px 7% !important;
-	border-color: darkgray !important;
+    margin: 2% 7% !important;
+    border-color: darkgray !important;
+    border-width: 1px !important;
+    border-style: solid !important;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 .panel-header {
 	background-color: #984d00;
-	padding: 0px !important;
-	margin: -1px !important;
-	display: flow-root;
-	position: relative;
-	border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
+    padding: 0px !important;
+    margin: -1px !important;
+    display: flow-root;
+    position: relative;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 .panel-header-text {
@@ -557,17 +557,6 @@
     border-radius: 0px;
 }
 
-.background-general {
-    background-image: url(https://raw.githubusercontent.com/IWGDevelop/Images/master/Images/bg_general.png);
-    background-position: right bottom;
-    background-repeat: no-repeat;
-    background-size: 40%;
-	padding-top:80px;
-	padding-bottom:80px;
-	overflow: auto;
-	display: block;
-}
-
 .bootstrap-switch, .bootstrap-switch .bootstrap-switch-handle-on {
     border-radius: 0px;
 	border-color: lightgray !important;
@@ -643,6 +632,58 @@
 .flatpickr-input[readonly] {
 	background-color: white;
 }
+
+.igsi-notification {
+	padding: 8px;
+	background-color: white;
+	width: 400px;
+	display: flex;
+	transition: .3s;
+}
+
+	.igsi-notification:hover {
+		padding: 8px;
+		background-color: whitesmoke;
+		width: 400px;
+		display: flex;
+		transition: .3s;
+		cursor: pointer;
+	}
+
+	.igsi-notification:active {
+		padding: 8px;
+		background-color: lightgray;
+		width: 400px;
+		display: flex;
+		transition: .3s;
+		cursor: pointer;
+	}
+
+.igsi-notification-unwatched {
+	padding: 8px;
+	background-color: aliceblue;
+	width: 400px;
+	display: flex;
+	transition: .3s;
+}
+
+	.igsi-notification-unwatched:hover {
+		padding: 8px;
+		background-color: whitesmoke;
+		width: 400px;
+		display: flex;
+		transition: .3s;
+		cursor: pointer;
+	}
+
+	.igsi-notification-unwatched:active {
+		padding: 8px;
+		background-color: lightgray;
+		width: 400px;
+		display: flex;
+		transition: .3s;
+		cursor: pointer;
+	}
 
 .footer {
 	position: absolute;
