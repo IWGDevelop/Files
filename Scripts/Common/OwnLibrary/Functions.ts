@@ -1,4 +1,4 @@
-﻿//Version 11
+﻿//Version 14
 
 function on() {
     document.getElementById('overlay').style.display = 'block';
@@ -20,8 +20,6 @@ function saveObject(url: string, object, callback?) {
         type: 'POST',
         url: url,
         data: object,
-        contentType: 'application/json; charset=utf-8',
-        dataType: 'json',
         success: (response) => {
             if (callback !== undefined) {
                 callback(response);
@@ -75,20 +73,23 @@ function disableFields(...fields: JQuery[]) {
     $('.selectpicker').selectpicker('refresh');
 }
 
-function generateModal(options: OptionsModal) {
+function generateModal(options: OptionsModal): M.Modal {
     on();
     options = ((setDefaults(options, defaultsModal)) as OptionsModal);
     let modal = M.Modal.init(document.querySelectorAll('.modal'), { inDuration: 300, dismissible: true, onCloseEnd: options.closeCallback })[0];
-    $('#divModalContent')
-        .html('<h4>' + options.title + '</h4><hr\><div id="divModalBody"></div>');
+    $('#divModalContent').html('<h4>' + options.title + '</h4><hr\><div id="divModalBody"></div>');
+
     let body = $('#divModalBody');
+
+    if (options.size === 'big') {
+        $('#modal').css('width', '90%');
+    }
 
     switch (options.type) {
         case 'partialView':
+            modal.open();
             body.load(options.loadUrl, options.loadData, (response, status, xhr) => {
                 if (status === 'success') {
-                    modal.open();
-
                     if (options.loadCallback != undefined) {
                         options.loadCallback(response);
                     }
@@ -114,6 +115,8 @@ function generateModal(options: OptionsModal) {
             off();
             break;
     }
+
+    return modal;
 }
 
 //Función para convertir los datos de un formulario a un objeto
