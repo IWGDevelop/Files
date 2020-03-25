@@ -122,7 +122,12 @@ function getProperty(url, editor, property) {
         success: data => {
             if (data != null) {
                 if (property != undefined && property != null && property != '') {
-                    editor.val(data[property]);
+                    let properties = property.split('.');
+                    let value = data;
+                    for (let prop of properties) {
+                        value = value[prop];
+                    }
+                    editor.val(value);
                 }
                 else {
                     editor.val(data);
